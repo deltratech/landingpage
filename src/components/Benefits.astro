@@ -42,7 +42,7 @@ const benefits = [
 
 <style>
   .benefits {
-    background: #f0ede6;
+    background: var(--color-tint);
     padding: 64px 32px;
   }
 
@@ -65,18 +65,14 @@ const benefits = [
     align-items: center;
     font-size: 12px;
     font-weight: 700;
-    color: #192B5E;
-    background: rgba(25, 43, 94, 0.08);
-    border: 1px solid rgba(25, 43, 94, 0.15);
+    color: var(--color-primary);
+    background: rgba(15, 28, 46, 0.07);
+    border: 1px solid rgba(15, 28, 46, 0.14);
     border-radius: 30px;
     padding: 5px 14px;
   }
 
-  .section-title {
-    font-size: 28px;
-    font-weight: 700;
-    color: #192B5E;
-  }
+  .section-title { color: var(--color-heading); }
 
   .benefits-grid {
     display: grid;
@@ -96,14 +92,13 @@ const benefits = [
   }
 
   .benefit-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: #2d2d2d;
+    font-size: 20px;
+    color: var(--color-heading);
   }
 
   .benefit-desc {
     font-size: 13px;
-    color: #666;
+    color: var(--color-body);
     line-height: 1.5;
   }
 

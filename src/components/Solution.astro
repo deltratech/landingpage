@@ -13,10 +13,10 @@ const checkItems = [
       <div class="screenshot-placeholder">
         <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <rect x="8" y="14" width="56" height="44" rx="6" fill="#a8d5c8" opacity="0.5"/>
-          <rect x="14" y="20" width="44" height="6" rx="3" fill="#2FB5A5" opacity="0.4"/>
-          <rect x="14" y="30" width="30" height="4" rx="2" fill="#192B5E" opacity="0.25"/>
-          <rect x="14" y="38" width="20" height="4" rx="2" fill="#192B5E" opacity="0.2"/>
-          <rect x="14" y="46" width="35" height="4" rx="2" fill="#192B5E" opacity="0.2"/>
+          <rect x="14" y="20" width="44" height="6" rx="3" fill="#1ecfad" opacity="0.4"/>
+          <rect x="14" y="30" width="30" height="4" rx="2" fill="#0f1c2e" opacity="0.25"/>
+          <rect x="14" y="38" width="20" height="4" rx="2" fill="#0f1c2e" opacity="0.2"/>
+          <rect x="14" y="46" width="35" height="4" rx="2" fill="#0f1c2e" opacity="0.2"/>
         </svg>
         <p>Solution diagram<br />or product screenshot</p>
       </div>
@@ -46,7 +46,7 @@ const checkItems = [
 
 <style>
   .solution {
-    background: #f0ede6;
+    background: var(--color-tint);
     padding: 64px 32px;
   }
 
@@ -73,7 +73,7 @@ const checkItems = [
     align-items: center;
     justify-content: center;
     gap: 12px;
-    color: #6a9e92;
+    color: var(--color-muted);
     font-size: 14px;
     text-align: center;
     line-height: 1.5;
@@ -90,26 +90,16 @@ const checkItems = [
     align-items: center;
     font-size: 12px;
     font-weight: 700;
-    color: #192B5E;
-    background: rgba(25, 43, 94, 0.08);
-    border: 1px solid rgba(25, 43, 94, 0.15);
+    color: var(--color-primary);
+    background: rgba(15, 28, 46, 0.07);
+    border: 1px solid rgba(15, 28, 46, 0.14);
     border-radius: 30px;
     padding: 5px 14px;
     align-self: flex-start;
   }
 
-  .solution-heading {
-    font-size: clamp(24px, 3vw, 30px);
-    font-weight: 700;
-    color: #192B5E;
-    line-height: 1.2;
-  }
-
-  .solution-desc {
-    font-size: 14px;
-    color: #666;
-    line-height: 1.7;
-  }
+  .solution-heading { color: var(--color-heading); line-height: 1.2; }
+  .solution-desc { font-size: 14px; color: var(--color-body); line-height: 1.7; }
 
   .check-list {
     list-style: none;
@@ -123,7 +113,7 @@ const checkItems = [
     gap: 12px;
     align-items: flex-start;
     font-size: 14px;
-    color: #444;
+    color: var(--color-body);
     line-height: 1.5;
   }
 
@@ -131,8 +121,8 @@ const checkItems = [
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: #d4ede5;
-    color: #2FB5A5;
+    background: var(--color-tint);
+    color: var(--color-accent);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -140,6 +130,7 @@ const checkItems = [
     font-weight: 700;
     flex-shrink: 0;
     margin-top: 1px;
+    border: 1px solid var(--color-border);
   }
 
   .btn-dark {
@@ -148,7 +139,7 @@ const checkItems = [
     font-size: 14px;
     font-weight: 700;
     color: #fff;
-    background: #192B5E;
+    background: var(--color-primary);
     padding: 11px 24px;
     border-radius: 40px;
     display: inline-flex;
@@ -156,10 +147,7 @@ const checkItems = [
     margin-top: 4px;
     transition: background 0.2s, transform 0.15s;
   }
-  .btn-dark:hover {
-    background: #2FB5A5;
-    transform: translateY(-2px);
-  }
+  .btn-dark:hover { background: var(--color-accent); transform: translateY(-2px); }
 
   @media (max-width: 768px) {
     .solution-grid { grid-template-columns: 1fr; }

@@ -16,7 +16,7 @@ const { title = 'Deltra — School Management Platform' } = Astro.props;
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   </head>
   <body>
     <slot />
@@ -24,14 +24,32 @@ const { title = 'Deltra — School Management Platform' } = Astro.props;
 </html>
 
 <style is:global>
+  :root {
+    --color-primary:  #0f1c2e;
+    --color-accent:   #1ecfad;
+    --color-surface:  #f4faf8;
+    --color-tint:     #e8f5f1;
+    --color-border:   #c2d9d3;
+    --color-body:     #2d4a44;
+    --color-muted:    #6b8f88;
+    --color-heading:  #0f1c2e;
+  }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
+
   body {
     font-family: 'Space Mono', monospace;
-    background: #faf7f2;
-    color: #2d2d2d;
+    background: var(--color-surface);
+    color: var(--color-body);
     -webkit-font-smoothing: antialiased;
   }
+
+  h1, h2, h3 {
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+  }
+
   img { max-width: 100%; display: block; }
   a { text-decoration: none; color: inherit; }
   button, .btn {

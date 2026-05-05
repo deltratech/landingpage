@@ -54,7 +54,7 @@ const pillars = [
 
 <style>
   .pillars {
-    background: #faf7f2;
+    background: var(--color-surface);
     padding: 64px 32px;
     position: relative;
     overflow: hidden;
@@ -79,18 +79,14 @@ const pillars = [
     align-items: center;
     font-size: 12px;
     font-weight: 700;
-    color: #192B5E;
-    background: rgba(25, 43, 94, 0.08);
-    border: 1px solid rgba(25, 43, 94, 0.15);
+    color: var(--color-primary);
+    background: rgba(15, 28, 46, 0.07);
+    border: 1px solid rgba(15, 28, 46, 0.14);
     border-radius: 30px;
     padding: 5px 14px;
   }
 
-  .section-title {
-    font-size: 28px;
-    font-weight: 700;
-    color: #192B5E;
-  }
+  .section-title { color: var(--color-heading); }
 
   .pillars-grid {
     display: grid;
@@ -110,34 +106,34 @@ const pillars = [
   .pillar-label {
     font-size: 12px;
     font-weight: 700;
-    color: #888;
+    color: var(--color-muted);
     background: rgba(0,0,0,0.06);
     border-radius: 6px;
     padding: 3px 8px;
     display: inline-block;
     align-self: flex-start;
+    font-family: 'Space Mono', monospace;
   }
 
   .pillar-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: #2d2d2d;
-    line-height: 1.3;
+    font-size: 20px;
+    color: var(--color-heading);
+    line-height: 1.2;
   }
 
   .pillar-desc {
     font-size: 13px;
-    color: #666;
+    color: var(--color-body);
     line-height: 1.5;
   }
 
   .deco {
     position: absolute;
     pointer-events: none;
-    color: #192B5E;
+    color: var(--color-primary);
   }
-  .deco-1 { top: 16px; left: 18px; font-size: 14px; opacity: 0.2; }
-  .deco-2 { top: 22px; right: 88px; font-size: 12px; opacity: 0.16; }
+  .deco-1 { top: 16px; left: 18px; font-size: 14px; opacity: 0.15; }
+  .deco-2 { top: 22px; right: 88px; font-size: 12px; opacity: 0.12; }
 
   @media (max-width: 900px) {
     .pillars-grid { grid-template-columns: repeat(2, 1fr); }

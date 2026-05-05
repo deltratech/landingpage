@@ -21,7 +21,7 @@
 
 <style>
   .cta {
-    background: #2FB5A5;
+    background: var(--color-accent);
     padding: 72px 32px;
     text-align: center;
     position: relative;
@@ -44,23 +44,23 @@
     align-items: center;
     font-size: 12px;
     font-weight: 700;
-    color: #fff;
-    background: rgba(255,255,255,0.25);
-    border: 1px solid rgba(255,255,255,0.4);
+    color: var(--color-primary);
+    background: rgba(15, 28, 46, 0.12);
+    border: 1px solid rgba(15, 28, 46, 0.2);
     border-radius: 30px;
     padding: 5px 14px;
+    font-family: 'Space Mono', monospace;
   }
 
   .cta-heading {
-    font-size: clamp(26px, 4vw, 34px);
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.2;
+    font-size: clamp(28px, 4vw, 38px);
+    color: var(--color-primary);
+    line-height: 1.15;
   }
 
   .cta-sub {
     font-size: 16px;
-    color: rgba(255,255,255,0.85);
+    color: rgba(15, 28, 46, 0.7);
   }
 
   .cta-actions {
@@ -76,35 +76,35 @@
     font-size: 14px;
     font-weight: 700;
     color: #fff;
-    background: #192B5E;
+    background: var(--color-primary);
     padding: 12px 28px;
     border-radius: 40px;
     display: inline-flex;
     align-items: center;
     transition: background 0.2s, transform 0.15s;
   }
-  .btn-dark:hover { background: #0f1c3a; transform: translateY(-2px); }
+  .btn-dark:hover { background: #172840; transform: translateY(-2px); }
 
   .btn-ghost {
     font-family: 'Space Mono', monospace;
     font-size: 14px;
     font-weight: 700;
-    color: #fff;
-    background: rgba(255,255,255,0.18);
-    border: 2px solid rgba(255,255,255,0.4);
+    color: var(--color-primary);
+    background: rgba(15, 28, 46, 0.1);
+    border: 2px solid rgba(15, 28, 46, 0.25);
     padding: 10px 26px;
     border-radius: 40px;
     display: inline-flex;
     align-items: center;
     transition: background 0.2s, transform 0.15s;
   }
-  .btn-ghost:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
+  .btn-ghost:hover { background: rgba(15, 28, 46, 0.18); transform: translateY(-2px); }
 
   /* Decorative */
   .deco {
     position: absolute;
     pointer-events: none;
-    color: rgba(255,255,255,0.18);
+    color: rgba(15, 28, 46, 0.12);
   }
   .deco-1 { top: 18px; left: 36px; font-size: 18px; }
   .deco-2 { top: 24px; right: 56px; font-size: 16px; }

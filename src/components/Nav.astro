@@ -5,8 +5,8 @@ const links = ['Home', 'Features', 'About', 'Contact'];
   <div class="nav-inner">
     <a href="/" class="logo" aria-label="Deltra home">
       <svg width="100" height="32" viewBox="0 0 100 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <text x="0" y="22" font-family="Space Mono, monospace" font-size="18" font-weight="700" fill="#192B5E">deltra</text>
-        <circle cx="90" cy="16" r="5" fill="#2FB5A5"/>
+        <text x="0" y="22" font-family="Space Mono, monospace" font-size="18" font-weight="700" fill="#0f1c2e">deltra</text>
+        <circle cx="90" cy="16" r="5" fill="#1ecfad"/>
       </svg>
     </a>
 
@@ -33,7 +33,7 @@ const links = ['Home', 'Features', 'About', 'Contact'];
     top: 0;
     z-index: 50;
     background: #fff;
-    border-bottom: 1.5px solid #e8e3da;
+    border-bottom: 1.5px solid var(--color-border);
   }
 
   .nav-inner {
@@ -62,17 +62,17 @@ const links = ['Home', 'Features', 'About', 'Contact'];
   .nav-link {
     font-size: 15px;
     font-weight: 400;
-    color: #666;
+    color: var(--color-muted);
     transition: color 0.2s;
   }
-  .nav-link:hover { color: #192B5E; }
+  .nav-link:hover { color: var(--color-primary); }
   .nav-link.active {
     font-weight: 700;
-    color: #192B5E;
+    color: var(--color-primary);
   }
 
   .btn-demo {
-    background: #192B5E;
+    background: var(--color-primary);
     color: #fff;
     font-family: 'Space Mono', monospace;
     font-size: 13px;
@@ -83,7 +83,7 @@ const links = ['Home', 'Features', 'About', 'Contact'];
     transition: background 0.2s, transform 0.15s;
   }
   .btn-demo:hover {
-    background: #2FB5A5;
+    background: var(--color-accent);
     transform: translateY(-1px);
   }
 </style>

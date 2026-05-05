@@ -73,7 +73,7 @@ const testimonials = [
           <div class="t-header">
             <div class="t-avatar" aria-hidden="true">
               <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="22" cy="22" r="22" fill="#3a3a4a"/>
+                <circle cx="22" cy="22" r="22" fill="#1a2a3a"/>
                 <circle cx="22" cy="18" r="8" fill="#fff" opacity="0.5"/>
                 <path d="M4 42c0-9.941 8.059-18 18-18s18 8.059 18 18" fill="#fff" opacity="0.35"/>
               </svg>
@@ -95,25 +95,23 @@ const testimonials = [
 
 <style>
   .social-proof {
-    background: #192B5E;
+    background: var(--color-primary);
   }
 
   /* Banner */
-  .banner-wrap {
-    position: relative;
-  }
+  .banner-wrap { position: relative; }
 
   .banner-placeholder {
     width: 100%;
     height: 220px;
-    background: rgba(255,255,255,0.05);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    color: rgba(255,255,255,0.35);
+    color: rgba(255,255,255,0.3);
     font-size: 14px;
     text-align: center;
   }
@@ -125,7 +123,7 @@ const testimonials = [
     background: #fff;
     border-radius: 16px;
     padding: 16px 22px;
-    border: 1.5px solid #ddd;
+    border: 1.5px solid var(--color-border);
     box-shadow: 0 8px 28px rgba(0,0,0,0.14);
     z-index: 2;
     font-family: 'Space Mono', monospace;
@@ -134,7 +132,7 @@ const testimonials = [
   .trust-heading {
     font-size: 13px;
     font-weight: 700;
-    color: #192B5E;
+    color: var(--color-primary);
     margin-bottom: 8px;
   }
 
@@ -150,26 +148,13 @@ const testimonials = [
     display: flex;
   }
 
-  .trust-users {
-    font-size: 12px;
-    color: #888;
-    margin-left: 8px;
-  }
+  .trust-users { font-size: 12px; color: var(--color-muted); margin-left: 8px; }
 
-  .stars, .t-stars {
-    display: flex;
-    gap: 2px;
-  }
-
-  .star {
-    color: #2FB5A5;
-    font-size: 14px;
-  }
+  .stars, .t-stars { display: flex; gap: 2px; }
+  .star { color: var(--color-accent); font-size: 14px; }
 
   /* Stats */
-  .stats-wrap {
-    padding: 60px 32px 36px;
-  }
+  .stats-wrap { padding: 60px 32px 36px; }
 
   .stats-grid {
     max-width: 1200px;
@@ -194,18 +179,14 @@ const testimonials = [
   .stat-num {
     font-size: 26px;
     font-weight: 700;
-    color: #2FB5A5;
+    color: var(--color-accent);
+    font-family: 'Space Mono', monospace;
   }
 
-  .stat-label {
-    font-size: 13px;
-    color: #8890b0;
-  }
+  .stat-label { font-size: 13px; color: #8890b0; }
 
   /* Testimonials */
-  .testimonials-wrap {
-    padding: 0 32px 56px;
-  }
+  .testimonials-wrap { padding: 0 32px 56px; }
 
   .testimonials-grid {
     max-width: 1200px;
@@ -216,47 +197,21 @@ const testimonials = [
   }
 
   .testimonial-card {
-    background: rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.05);
     border-radius: 16px;
     padding: 22px;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.09);
     display: flex;
     flex-direction: column;
     gap: 12px;
   }
 
-  .t-header {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-  }
-
-  .t-avatar {
-    width: 44px;
-    height: 44px;
-    flex-shrink: 0;
-  }
-
-  .t-name {
-    font-size: 15px;
-    font-weight: 700;
-    color: #fff;
-  }
-
-  .t-role {
-    font-size: 12px;
-    color: #8890b0;
-  }
-
-  .t-stars .star {
-    font-size: 13px;
-  }
-
-  .t-quote {
-    font-size: 14px;
-    color: #b0b8cc;
-    line-height: 1.6;
-  }
+  .t-header { display: flex; gap: 12px; align-items: center; }
+  .t-avatar { width: 44px; height: 44px; flex-shrink: 0; }
+  .t-name { font-size: 15px; font-weight: 700; color: #fff; }
+  .t-role { font-size: 12px; color: #8890b0; }
+  .t-stars .star { font-size: 13px; }
+  .t-quote { font-size: 14px; color: #b0c8c0; line-height: 1.6; }
 
   @media (max-width: 900px) {
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
