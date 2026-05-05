@@ -1,111 +1,29 @@
 ---
 const benefits = [
-  {
-    title: 'Save Teacher Time',
-    desc: 'AI assistance cuts admin hours so teachers can focus entirely on teaching',
-    color: '#f5edc8',
-  },
-  {
-    title: 'AI-Powered Insights',
-    desc: 'Auto-generate progress summaries & learning reports per student',
-    color: '#d4ede5',
-  },
-  {
-    title: 'Digital Payments',
-    desc: 'Integrated school billing & payment collection — no manual follow-ups',
-    color: '#ddd5ed',
-  },
-  {
-    title: 'Data-Driven Decisions',
-    desc: 'Real-time analytics to help school leaders make smarter choices',
-    color: '#d3e8f5',
-  },
+  { title: 'Save Teacher Time',     desc: 'AI assistance cuts admin hours so teachers can focus entirely on teaching',       bg: 'bg-honey'    },
+  { title: 'AI-Powered Insights',   desc: 'Auto-generate progress summaries & learning reports per student',                bg: 'bg-mint'     },
+  { title: 'Digital Payments',      desc: 'Integrated school billing & payment collection — no manual follow-ups',          bg: 'bg-lavender' },
+  { title: 'Data-Driven Decisions', desc: 'Real-time analytics to help school leaders make smarter choices',                bg: 'bg-sky'      },
 ];
 ---
-<section class="benefits">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="pill">Why Deltra?</div>
-      <h2 class="section-title">Why Schools Choose Deltra</h2>
+<section class="bg-tint py-16 px-8" id="benefits">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="flex flex-col items-center gap-2.5 text-center mb-10">
+      <span class="inline-flex items-center font-mono font-bold text-xs text-primary bg-primary/7 border border-primary/14 rounded-full px-4 py-1.5">
+        Why Deltra?
+      </span>
+      <h2 class="text-primary">Why Schools Choose Deltra</h2>
     </div>
 
-    <div class="benefits-grid">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4.5">
       {benefits.map(b => (
-        <div class="benefit-card" style={`background: ${b.color};`}>
-          <h3 class="benefit-title">{b.title}</h3>
-          <p class="benefit-desc">{b.desc}</p>
+        <div class={`${b.bg} border border-black/6 rounded-[18px] px-5 py-7 flex flex-col items-center text-center gap-3`}>
+          <h3 class="text-xl text-primary">{b.title}</h3>
+          <p class="font-mono text-[13px] text-body leading-relaxed">{b.desc}</p>
         </div>
       ))}
     </div>
+
   </div>
 </section>
-
-<style>
-  .benefits {
-    background: var(--color-tint);
-    padding: 64px 32px;
-  }
-
-  .section-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .section-header {
-    text-align: center;
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--color-primary);
-    background: rgba(15, 28, 46, 0.07);
-    border: 1px solid rgba(15, 28, 46, 0.14);
-    border-radius: 30px;
-    padding: 5px 14px;
-  }
-
-  .section-title { color: var(--color-heading); }
-
-  .benefits-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-  }
-
-  .benefit-card {
-    border-radius: 18px;
-    padding: 28px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 12px;
-    border: 1.5px solid rgba(0,0,0,0.06);
-  }
-
-  .benefit-title {
-    font-size: 20px;
-    color: var(--color-heading);
-  }
-
-  .benefit-desc {
-    font-size: 13px;
-    color: var(--color-body);
-    line-height: 1.5;
-  }
-
-  @media (max-width: 900px) {
-    .benefits-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 500px) {
-    .benefits-grid { grid-template-columns: 1fr; }
-  }
-</style>

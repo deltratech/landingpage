@@ -5,270 +5,72 @@ const stats = [
   { number: '98%', label: 'Satisfaction' },
 ];
 ---
-<section class="hero" id="home">
-  <div class="hero-inner">
-    <!-- Left: text content -->
-    <div class="hero-text">
-      <div class="pill">K-12 Learning Platform</div>
-      <h1 class="hero-heading">
-        One platform. Every workflow. Intelligently automated.<br />
+<section class="bg-surface py-16 px-8 relative overflow-hidden" id="home">
+  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+
+    <!-- Left: text -->
+    <div class="flex flex-col gap-4">
+      <span class="inline-flex self-start font-mono font-bold text-xs text-primary bg-primary/7 border border-primary/14 rounded-full px-4 py-1.5">
+        K-12 Learning Platform
+      </span>
+
+      <h1 class="font-caveat font-bold text-5xl leading-tight text-primary">
+        One platform. Every workflow.<br />Intelligently automated.
       </h1>
-      <p class="hero-sub ">
+
+      <p class="font-mono text-base text-muted leading-relaxed text-justify">
         Deltra is an integrated school operating system combining student records, attendance, grading, reporting, finance, and AI teaching support in a single, Indonesian-built platform.
       </p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn btn-primary">Request a Demo</a>
-        <a href="#features" class="btn btn-outline">Learn More</a>
+
+      <div class="flex gap-3 flex-wrap mt-6">
+        <a href="#contact" class="font-mono font-bold text-sm text-white bg-primary border-2 border-primary px-6 py-2.5 rounded-full transition-all duration-200 hover:bg-accent hover:border-accent hover:-translate-y-0.5">
+          Request a Demo
+        </a>
+        <a href="#features" class="font-mono font-bold text-sm text-primary bg-transparent border-2 border-primary px-6 py-2.5 rounded-full transition-all duration-200 hover:bg-primary hover:text-white hover:-translate-y-0.5">
+          Learn More
+        </a>
       </div>
-      <div class="hero-stats">
+
+      <div class="flex gap-7 mt-2 pt-4 border-t border-border">
         {stats.map(s => (
-          <div class="stat">
-            <span class="stat-num">{s.number}</span>
-            <span class="stat-label">{s.label}</span>
+          <div class="flex flex-col gap-0.5">
+            <span class="font-mono font-bold text-xl text-primary">{s.number}</span>
+            <span class="font-mono text-xs text-muted">{s.label}</span>
           </div>
         ))}
       </div>
     </div>
 
-    <!-- Right: illustration placeholder -->
-    <div class="hero-visual">
-      <div class="photo-placeholder">
-        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <!-- Right: visual -->
+    <div class="relative hidden md:block">
+      <div class="w-full h-80 bg-[#d5d0c8] border border-border rounded-2xl flex flex-col items-center justify-center gap-3 text-muted text-sm text-center">
+        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
           <circle cx="32" cy="22" r="14" fill="#b0c4e8" opacity="0.6"/>
           <path d="M4 58c0-15.464 12.536-28 28-28s28 12.536 28 28" fill="#b0c4e8" opacity="0.4"/>
         </svg>
         <p>Teacher / Student<br />Illustration or Photo</p>
       </div>
 
-      <!-- Floating badge: Easy to Use -->
-      <div class="badge badge-left">
-        <div class="badge-icon badge-icon-teal">✓</div>
+      <!-- Badge: Easy to Use -->
+      <div class="absolute -bottom-6 -left-7 bg-white border border-border rounded-xl px-4 py-2.5 flex items-center gap-2.5 shadow-md">
+        <div class="w-8 h-8 rounded-full bg-tint text-accent flex items-center justify-center text-sm font-bold shrink-0">✓</div>
         <div>
-          <div class="badge-title">Easy to Use</div>
-          <div class="badge-sub">No training needed</div>
+          <div class="font-mono font-bold text-xs text-primary">Easy to Use</div>
+          <div class="font-mono text-xs text-muted">No training needed</div>
         </div>
       </div>
 
-      <!-- Floating badge: Active Schools -->
-      <div class="badge badge-right">
-        <div class="badge-label">Active Schools</div>
-        <div class="badge-stat">500+</div>
+      <!-- Badge: Active Schools -->
+      <div class="absolute -top-5 -right-4 bg-white border border-border rounded-xl px-4 py-2.5 shadow-md flex flex-col gap-0.5">
+        <div class="font-mono text-xs text-muted">Active Schools</div>
+        <div class="font-mono font-bold text-lg text-accent">500+</div>
       </div>
     </div>
+
   </div>
 
-  <!-- Decorative elements -->
-  <span class="deco deco-1">✦</span>
-  <span class="deco deco-2">★</span>
-  <span class="deco deco-3">✦</span>
-  <span class="deco deco-4">○</span>
+  <!-- Decorative -->
+  <span class="absolute top-5 left-6 text-sm text-primary opacity-20 pointer-events-none">✦</span>
+  <span class="absolute top-16 left-1/2 text-xs text-primary opacity-15 pointer-events-none">★</span>
+  <span class="absolute top-32 right-6 text-xs text-primary opacity-12 pointer-events-none">✦</span>
 </section>
-
-<style>
-  .hero {
-    background: var(--color-surface);
-    padding: 60px 32px 48px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: center;
-  }
-
-  .hero-text {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--color-primary);
-    background: rgba(15, 28, 46, 0.07);
-    border: 1px solid rgba(15, 28, 46, 0.14);
-    border-radius: 30px;
-    padding: 5px 14px;
-    align-self: flex-start;
-  }
-
-  .hero-heading {
-    font-size: clamp(32px, 4vw, 52px);
-    line-height: 1.1;
-    color: var(--color-heading);
-  }
-
-  .hero-sub {
-    font-size: 16px;
-    color: var(--color-muted);
-    line-height: 1.6;
-    max-width: 440px;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 4px;
-  }
-
-  .btn {
-    font-family: 'Space Mono', monospace;
-    font-size: 14px;
-    font-weight: 700;
-    padding: 11px 26px;
-    border-radius: 40px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.15s, background 0.2s, border-color 0.2s;
-    cursor: pointer;
-  }
-  .btn:hover { transform: translateY(-2px); }
-
-  .btn-primary {
-    background: var(--color-primary);
-    color: #fff;
-    border: 2px solid var(--color-primary);
-  }
-  .btn-primary:hover { background: var(--color-accent); border-color: var(--color-accent); }
-
-  .btn-outline {
-    background: transparent;
-    color: var(--color-primary);
-    border: 2px solid var(--color-primary);
-  }
-  .btn-outline:hover { background: var(--color-primary); color: #fff; }
-
-  .hero-stats {
-    display: flex;
-    gap: 28px;
-    margin-top: 8px;
-    padding-top: 16px;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .stat {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .stat-num {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--color-primary);
-    font-family: 'Space Mono', monospace;
-  }
-
-  .stat-label {
-    font-size: 12px;
-    color: var(--color-muted);
-  }
-
-  /* Right visual */
-  .hero-visual {
-    position: relative;
-  }
-
-  .photo-placeholder {
-    width: 100%;
-    height: 340px;
-    background: #d5d0c8;
-    border: 1.5px solid var(--color-border);
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    color: var(--color-muted);
-    font-size: 14px;
-    text-align: center;
-    line-height: 1.5;
-  }
-
-  /* Floating badges */
-  .badge {
-    position: absolute;
-    background: #fff;
-    border: 1.5px solid var(--color-border);
-    border-radius: 14px;
-    padding: 10px 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-  }
-
-  .badge-left {
-    bottom: 24px;
-    left: -28px;
-  }
-
-  .badge-right {
-    top: 24px;
-    right: -20px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
-  }
-
-  .badge-icon {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-
-  .badge-icon-teal {
-    background: var(--color-tint);
-    color: var(--color-accent);
-  }
-
-  .badge-title {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--color-heading);
-  }
-
-  .badge-sub { font-size: 11px; color: var(--color-muted); }
-  .badge-label { font-size: 11px; color: var(--color-muted); }
-
-  .badge-stat {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--color-accent);
-    font-family: 'Space Mono', monospace;
-  }
-
-  /* Decorative shapes */
-  .deco {
-    position: absolute;
-    pointer-events: none;
-    font-style: normal;
-    color: var(--color-primary);
-  }
-  .deco-1 { top: 20px; left: 24px; font-size: 14px; opacity: 0.2; }
-  .deco-2 { top: 70px; left: 52%; font-size: 12px; opacity: 0.15; }
-  .deco-3 { top: 130px; right: 24px; font-size: 10px; opacity: 0.12; }
-  .deco-4 { top: 35px; right: 70px; font-size: 30px; opacity: 0.06; }
-
-  @media (max-width: 768px) {
-    .hero-inner { grid-template-columns: 1fr; }
-    .hero-visual { display: none; }
-  }
-</style>

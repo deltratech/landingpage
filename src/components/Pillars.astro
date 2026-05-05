@@ -1,144 +1,33 @@
 ---
 const pillars = [
-  {
-    label: 'Pilar 1',
-    title: 'Smart Administration',
-    desc: 'Automate schedules, attendance & daily records with AI-powered workflows',
-    bg: '#d4ede5',
-    border: '#a8d5c8',
-  },
-  {
-    label: 'Pilar 2',
-    title: 'Integrated Learning',
-    desc: 'Centralize curriculum, assignments & resources in one intelligent system',
-    bg: '#f5ddd3',
-    border: '#e8b8a8',
-  },
-  {
-    label: 'Pilar 3',
-    title: 'Smart Communication',
-    desc: 'Real-time messaging between teachers, students & parents in one place',
-    bg: '#ddd5ed',
-    border: '#bbadd8',
-  },
-  {
-    label: 'Pilar 4',
-    title: 'AI-Powered Analytics',
-    desc: 'Data-driven insights and auto-generated reports to support better decisions',
-    bg: '#d3e8f5',
-    border: '#a5cce0',
-  },
+  { label: 'Pilar 1', title: 'Smart Administration',  desc: 'Automate schedules, attendance & daily records with AI-powered workflows',          bg: 'bg-mint',     border: '#a8d5c8' },
+  { label: 'Pilar 2', title: 'Integrated Learning',   desc: 'Centralize curriculum, assignments & resources in one intelligent system',          bg: 'bg-peach',    border: '#e8b8a8' },
+  { label: 'Pilar 3', title: 'Smart Communication',   desc: 'Real-time messaging between teachers, students & parents in one place',             bg: 'bg-lavender', border: '#bbadd8' },
+  { label: 'Pilar 4', title: 'AI-Powered Analytics',  desc: 'Data-driven insights and auto-generated reports to support better decisions',        bg: 'bg-sky',      border: '#a5cce0' },
 ];
 ---
-<section class="pillars" id="features">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="pill">Core Features</div>
-      <h2 class="section-title">4 Pillars of Deltra</h2>
+<section class="bg-surface py-16 px-8 relative overflow-hidden" id="features">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="flex flex-col items-center gap-2.5 text-center mb-10">
+      <span class="inline-flex items-center font-mono font-bold text-xs text-primary bg-primary/7 border border-primary/14 rounded-full px-4 py-1.5">
+        Core Features
+      </span>
+      <h2 class="text-primary">4 Pillars of Deltra</h2>
     </div>
 
-    <div class="pillars-grid">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4.5">
       {pillars.map(p => (
-        <div class="pillar-card" style={`background: ${p.bg}; border-color: ${p.border};`}>
-          <span class="pillar-label">{p.label}</span>
-          <h3 class="pillar-title">{p.title}</h3>
-          <p class="pillar-desc">{p.desc}</p>
+        <div class={`${p.bg} border rounded-2xl px-4.5 py-5.5 flex flex-col gap-2.5`} style={`border-color: ${p.border};`}>
+          <span class="inline-block self-start font-mono font-bold text-xs text-muted bg-black/6 rounded-md px-2 py-0.5">{p.label}</span>
+          <h3 class="text-xl text-primary leading-tight">{p.title}</h3>
+          <p class="font-mono text-[13px] text-body leading-relaxed">{p.desc}</p>
         </div>
       ))}
     </div>
+
   </div>
 
-  <span class="deco deco-1">✦</span>
-  <span class="deco deco-2">★</span>
+  <span class="absolute top-4 left-4.5 text-primary text-sm opacity-15 pointer-events-none">✦</span>
+  <span class="absolute top-5.5 right-22 text-primary text-xs opacity-12 pointer-events-none">★</span>
 </section>
-
-<style>
-  .pillars {
-    background: var(--color-surface);
-    padding: 64px 32px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .section-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .section-header {
-    text-align: center;
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--color-primary);
-    background: rgba(15, 28, 46, 0.07);
-    border: 1px solid rgba(15, 28, 46, 0.14);
-    border-radius: 30px;
-    padding: 5px 14px;
-  }
-
-  .section-title { color: var(--color-heading); }
-
-  .pillars-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-  }
-
-  .pillar-card {
-    border: 1.5px solid;
-    border-radius: 16px;
-    padding: 22px 18px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .pillar-label {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--color-muted);
-    background: rgba(0,0,0,0.06);
-    border-radius: 6px;
-    padding: 3px 8px;
-    display: inline-block;
-    align-self: flex-start;
-    font-family: 'Space Mono', monospace;
-  }
-
-  .pillar-title {
-    font-size: 20px;
-    color: var(--color-heading);
-    line-height: 1.2;
-  }
-
-  .pillar-desc {
-    font-size: 13px;
-    color: var(--color-body);
-    line-height: 1.5;
-  }
-
-  .deco {
-    position: absolute;
-    pointer-events: none;
-    color: var(--color-primary);
-  }
-  .deco-1 { top: 16px; left: 18px; font-size: 14px; opacity: 0.15; }
-  .deco-2 { top: 22px; right: 88px; font-size: 12px; opacity: 0.12; }
-
-  @media (max-width: 900px) {
-    .pillars-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 500px) {
-    .pillars-grid { grid-template-columns: 1fr; }
-  }
-</style>

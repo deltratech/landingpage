@@ -1,7 +1,6 @@
 ---
-interface Props {
-  title?: string;
-}
+import '../styles/global.css';
+interface Props { title?: string; }
 const { title = 'Deltra — School Management Platform' } = Astro.props;
 ---
 <!doctype html>
@@ -22,40 +21,3 @@ const { title = 'Deltra — School Management Platform' } = Astro.props;
     <slot />
   </body>
 </html>
-
-<style is:global>
-  :root {
-    --color-primary:  #0f1c2e;
-    --color-accent:   #1ecfad;
-    --color-surface:  #f4faf8;
-    --color-tint:     #e8f5f1;
-    --color-border:   #c2d9d3;
-    --color-body:     #2d4a44;
-    --color-muted:    #6b8f88;
-    --color-heading:  #0f1c2e;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Space Mono', monospace;
-    background: var(--color-surface);
-    color: var(--color-body);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  h1, h2, h3 {
-    font-family: 'Caveat', cursive;
-    font-weight: 700;
-  }
-
-  img { max-width: 100%; display: block; }
-  a { text-decoration: none; color: inherit; }
-  button, .btn {
-    cursor: pointer;
-    font-family: 'Space Mono', monospace;
-    border: none;
-    outline: none;
-  }
-</style>

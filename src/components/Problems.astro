@@ -1,121 +1,57 @@
 ---
 const pains = [
-  {
-    title: 'Too Much Admin Work',
-    desc: 'Hours lost daily on paperwork, scheduling & manual tracking',
-    color: '#f5ddd3',
-    border: '#e8b8a8',
-  },
-  {
-    title: 'Inefficient Communication',
-    desc: 'Messages scattered across WhatsApp, email & phone calls',
-    color: '#ddd5ed',
-    border: '#bbadd8',
-  },
-  {
-    title: 'No Learning Visibility',
-    desc: 'No easy way to track student progress or generate insights',
-    color: '#d3e8f5',
-    border: '#a5cce0',
-  },
+  { title: 'Too Much Admin Work',       desc: 'Hours lost daily on paperwork, scheduling & manual tracking',       bg: 'bg-peach',   border: '#e8b8a8' },
+  { title: 'Inefficient Communication', desc: 'Messages scattered across WhatsApp, email & phone calls',           bg: 'bg-lavender', border: '#bbadd8' },
+  { title: 'No Learning Visibility',    desc: 'No easy way to track student progress or generate insights',        bg: 'bg-sky',     border: '#a5cce0' },
+];
+
+const IndonesiaProblem = [
+  { score: '~40%', desc: "of a teacher's week lost to admin and reporting" },
+  { score: '3+',   desc: 'disconnected tools per school (spreadsheet, chat, paper)' },
+  { score: '0',    desc: 'localised AI tools for the Indonesian curriculum' },
+  { score: 'Rp',   desc: 'Insufficient resources allocated to development and integration of modern tech' },
 ];
 ---
-<section class="problems" id="problems">
-  <div class="section-inner">
-    <div class="section-header">
-      <div class="pill">Common Pain Points</div>
-      <h2 class="section-title">Sound Familiar?</h2>
-      <p class="section-sub">What schools struggle with every day</p>
+<section class="bg-surface py-16 px-8 relative overflow-hidden" id="problems">
+  <div class="max-w-6xl mx-auto">
+
+    <div class="flex flex-col items-center gap-2.5 text-center mb-10">
+      <span class="inline-flex items-center font-mono font-bold text-xs text-primary bg-primary/7 border border-primary/14 rounded-full px-4 py-1.5">
+        Common Pain Points
+      </span>
+      <h2 class="text-primary">Sound Familiar?</h2>
+      <p class="font-mono text-[15px] text-muted">What schools struggle with every day</p>
     </div>
 
-    <div class="pain-grid">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
       {pains.map(p => (
-        <div class="pain-card" style={`background: ${p.color}; border-color: ${p.border};`}>
-          <h3 class="pain-title">{p.title}</h3>
-          <p class="pain-desc">{p.desc}</p>
+        <div class={`${p.bg} border rounded-2xl px-6 py-7 flex flex-col items-center text-center gap-3`} style={`border-color: ${p.border};`}>
+          <h3 class="text-xl text-primary">{p.title}</h3>
+          <p class="font-mono text-[13px] text-body leading-relaxed">{p.desc}</p>
         </div>
       ))}
     </div>
+    <div class="flex flex-col items-center gap-2.5 text-center mb-10">
+      <span class="inline-flex items-center font-mono font-bold text-xs text-primary bg-primary/7 border border-primary/14 rounded-full px-4 py-1.5">
+        ??
+      </span>
+      <h2 class="text-primary">??</h2>
+      <p class="font-mono text-[15px] text-muted">??</p>
+
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8">
+      <div>
+        <h1 class="text-4xl">Most K–12 schools still use spreadsheets, WhatsApp groups and manual report cards draining teacher time and slowing the move to modern tools.</h1>
+      </div>
+      <div class="grid grid-cols-2 gap-5">
+        {IndonesiaProblem.map(p => (
+          <div class="bg-sky border border-[#a5cce0] rounded-2xl px-6 py-7 flex flex-col items-center text-center gap-3">
+            <h3 class="text-xl text-primary">{p.score}</h3>
+            <p class="font-mono text-[13px] text-body leading-relaxed">{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
   </div>
-
-  <span class="deco deco-1">★</span>
-  <span class="deco deco-2">✦</span>
 </section>
-
-<style>
-  .problems {
-    background: var(--color-surface);
-    padding: 64px 32px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .section-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .section-header {
-    text-align: center;
-    margin-bottom: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--color-primary);
-    background: rgba(15, 28, 46, 0.07);
-    border: 1px solid rgba(15, 28, 46, 0.14);
-    border-radius: 30px;
-    padding: 5px 14px;
-  }
-
-  .section-title { color: var(--color-heading); }
-  .section-sub { font-size: 15px; color: var(--color-muted); }
-
-  .pain-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-
-  .pain-card {
-    border: 1.5px solid;
-    border-radius: 16px;
-    padding: 28px 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 12px;
-  }
-
-  .pain-title {
-    font-size: 20px;
-    color: var(--color-heading);
-  }
-
-  .pain-desc {
-    font-size: 13px;
-    color: var(--color-body);
-    line-height: 1.5;
-  }
-
-  .deco {
-    position: absolute;
-    pointer-events: none;
-    color: var(--color-primary);
-  }
-  .deco-1 { top: 20px; right: 48px; font-size: 16px; opacity: 0.15; }
-  .deco-2 { top: 80px; left: 24px; font-size: 12px; opacity: 0.15; }
-
-  @media (max-width: 768px) {
-    .pain-grid { grid-template-columns: 1fr; }
-  }
-</style>

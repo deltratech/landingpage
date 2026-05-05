@@ -1,21 +1,20 @@
 ---
 const links = ['Home', 'Features', 'About', 'Contact'];
 ---
-<nav>
-  <div class="nav-inner">
-    <a href="/" class="logo" aria-label="Deltra home">
-      <svg width="100" height="32" viewBox="0 0 100 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <text x="0" y="22" font-family="Space Mono, monospace" font-size="18" font-weight="700" fill="#0f1c2e">deltra</text>
-        <circle cx="90" cy="16" r="5" fill="#1ecfad"/>
-      </svg>
+<nav class="sticky top-0 z-50 bg-white border-b border-border">
+  <div class="max-w-6xl mx-auto px-8 py-3.5 flex items-center justify-between gap-6">
+
+    <a href="/" aria-label="Deltra home" class="flex items-center shrink-0">
+      <span class="font-mono font-bold text-xl text-primary">deltra</span>
+      <span class="w-2.5 h-2.5 rounded-full bg-accent ml-1 mb-2 inline-block"></span>
     </a>
 
-    <ul class="nav-links">
+    <ul class="flex items-center gap-7 list-none">
       {links.map((link, i) => (
         <li>
           <a
             href={link === 'Home' ? '/' : `#${link.toLowerCase()}`}
-            class:list={['nav-link', { active: i === 0 }]}
+            class={`font-mono text-sm transition-colors duration-200 ${i === 0 ? 'font-bold text-primary' : 'font-normal text-muted hover:text-primary'}`}
           >
             {link}
           </a>
@@ -23,67 +22,12 @@ const links = ['Home', 'Features', 'About', 'Contact'];
       ))}
     </ul>
 
-    <a href="#contact" class="btn-demo">Request Demo</a>
+    <a
+      href="#contact"
+      class="font-mono font-bold text-xs text-white bg-primary px-5 py-2 rounded-full whitespace-nowrap transition-all duration-200 hover:bg-accent hover:-translate-y-px"
+    >
+      Request Demo
+    </a>
+
   </div>
 </nav>
-
-<style>
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: #fff;
-    border-bottom: 1.5px solid var(--color-border);
-  }
-
-  .nav-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 14px 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
-  }
-
-  .nav-links {
-    display: flex;
-    list-style: none;
-    align-items: center;
-    gap: 28px;
-  }
-
-  .nav-link {
-    font-size: 15px;
-    font-weight: 400;
-    color: var(--color-muted);
-    transition: color 0.2s;
-  }
-  .nav-link:hover { color: var(--color-primary); }
-  .nav-link.active {
-    font-weight: 700;
-    color: var(--color-primary);
-  }
-
-  .btn-demo {
-    background: var(--color-primary);
-    color: #fff;
-    font-family: 'Space Mono', monospace;
-    font-size: 13px;
-    font-weight: 700;
-    padding: 8px 20px;
-    border-radius: 40px;
-    white-space: nowrap;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .btn-demo:hover {
-    background: var(--color-accent);
-    transform: translateY(-1px);
-  }
-</style>
