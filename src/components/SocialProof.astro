@@ -1,0 +1,266 @@
+---
+const stats = [
+  { number: '500+', label: 'Schools Onboarded' },
+  { number: '10,000+', label: 'Active Teachers' },
+  { number: '95%', label: 'Satisfaction Rate' },
+  { number: '50+', label: 'Cities Covered' },
+];
+
+const testimonials = [
+  {
+    name: 'Ms. Sarah Johnson',
+    role: 'Teacher, Sunrise Academy',
+    quote: '"Deltra saved me hours of admin work every week. I can now focus fully on my students."',
+  },
+  {
+    name: 'Principal David Lee',
+    role: 'Principal, Westbrook School',
+    quote: '"Our whole school is now on the same page. Communication has never been easier."',
+  },
+];
+---
+<section class="social-proof">
+  <!-- Full-bleed photo banner -->
+  <div class="banner-wrap">
+    <div class="banner-placeholder">
+      <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="36" cy="26" r="14" fill="#fff" opacity="0.2"/>
+        <circle cx="22" cy="30" r="10" fill="#fff" opacity="0.15"/>
+        <circle cx="50" cy="30" r="10" fill="#fff" opacity="0.15"/>
+        <path d="M4 68c0-17.673 14.327-32 32-32s32 14.327 32 32" fill="#fff" opacity="0.15"/>
+      </svg>
+      <p>Group photo of students / school community</p>
+    </div>
+
+    <!-- Floating trust card -->
+    <div class="trust-card">
+      <p class="trust-heading">Trusted by 500+ Schools</p>
+      <div class="avatars">
+        {[0,1,2,3].map(i => (
+          <div class="avatar" style={`margin-left: ${i > 0 ? '-8px' : '0'}`}>
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="14" cy="14" r="14" fill="#ccc"/>
+              <circle cx="14" cy="11" r="5" fill="#fff" opacity="0.7"/>
+              <path d="M2 26c0-6.627 5.373-12 12-12s12 5.373 12 12" fill="#fff" opacity="0.5"/>
+            </svg>
+          </div>
+        ))}
+        <span class="trust-users">+10k users</span>
+      </div>
+      <div class="stars" aria-label="5 out of 5 stars">
+        {[1,2,3,4,5].map(s => <span class="star">★</span>)}
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats strip -->
+  <div class="stats-wrap">
+    <div class="stats-grid">
+      {stats.map(s => (
+        <div class="stat-card">
+          <span class="stat-num">{s.number}</span>
+          <span class="stat-label">{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <div class="testimonials-wrap">
+    <div class="testimonials-grid">
+      {testimonials.map(t => (
+        <div class="testimonial-card">
+          <div class="t-header">
+            <div class="t-avatar" aria-hidden="true">
+              <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="22" cy="22" r="22" fill="#3a3a4a"/>
+                <circle cx="22" cy="18" r="8" fill="#fff" opacity="0.5"/>
+                <path d="M4 42c0-9.941 8.059-18 18-18s18 8.059 18 18" fill="#fff" opacity="0.35"/>
+              </svg>
+            </div>
+            <div>
+              <div class="t-name">{t.name}</div>
+              <div class="t-role">{t.role}</div>
+            </div>
+          </div>
+          <div class="t-stars" aria-label="5 out of 5 stars">
+            {[1,2,3,4,5].map(s => <span class="star">★</span>)}
+          </div>
+          <p class="t-quote">{t.quote}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .social-proof {
+    background: #192B5E;
+  }
+
+  /* Banner */
+  .banner-wrap {
+    position: relative;
+  }
+
+  .banner-placeholder {
+    width: 100%;
+    height: 220px;
+    background: rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: rgba(255,255,255,0.35);
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .trust-card {
+    position: absolute;
+    bottom: -36px;
+    right: 80px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 16px 22px;
+    border: 1.5px solid #ddd;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.14);
+    z-index: 2;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .trust-heading {
+    font-size: 13px;
+    font-weight: 700;
+    color: #192B5E;
+    margin-bottom: 8px;
+  }
+
+  .avatars {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .avatar {
+    border-radius: 50%;
+    border: 2px solid #fff;
+    display: flex;
+  }
+
+  .trust-users {
+    font-size: 12px;
+    color: #888;
+    margin-left: 8px;
+  }
+
+  .stars, .t-stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .star {
+    color: #2FB5A5;
+    font-size: 14px;
+  }
+
+  /* Stats */
+  .stats-wrap {
+    padding: 60px 32px 36px;
+  }
+
+  .stats-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .stat-card {
+    padding: 20px 12px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-size: 26px;
+    font-weight: 700;
+    color: #2FB5A5;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: #8890b0;
+  }
+
+  /* Testimonials */
+  .testimonials-wrap {
+    padding: 0 32px 56px;
+  }
+
+  .testimonials-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .testimonial-card {
+    background: rgba(255,255,255,0.06);
+    border-radius: 16px;
+    padding: 22px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .t-header {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .t-avatar {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+
+  .t-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .t-role {
+    font-size: 12px;
+    color: #8890b0;
+  }
+
+  .t-stars .star {
+    font-size: 13px;
+  }
+
+  .t-quote {
+    font-size: 14px;
+    color: #b0b8cc;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .trust-card { right: 24px; }
+  }
+</style>

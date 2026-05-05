@@ -1,0 +1,47 @@
+---
+const items = [
+  'Smart Administration',
+  'Integrated Learning',
+  'AI-Powered Insights',
+  'Communication Tools',
+  'Performance Analytics',
+  'Digital Payments',
+  'Student Management',
+  'Attendance Tracking',
+];
+---
+<div class="feature-strip-wrap">
+  <div class="feature-strip">
+    {items.map(item => (
+      <span class="feature-pill">{item}</span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .feature-strip-wrap {
+    background: #192B5E;
+    padding: 16px 32px;
+  }
+
+  .feature-strip {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feature-pill {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: #c8cee8;
+    padding: 6px 18px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 30px;
+    background: rgba(255,255,255,0.06);
+    white-space: nowrap;
+  }
+</style>

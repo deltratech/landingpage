@@ -1,0 +1,130 @@
+---
+const pains = [
+  {
+    title: 'Too Much Admin Work',
+    desc: 'Hours lost daily on paperwork, scheduling & manual tracking',
+    color: '#f5ddd3',
+    border: '#e8b8a8',
+  },
+  {
+    title: 'Inefficient Communication',
+    desc: 'Messages scattered across WhatsApp, email & phone calls',
+    color: '#ddd5ed',
+    border: '#bbadd8',
+  },
+  {
+    title: 'No Learning Visibility',
+    desc: 'No easy way to track student progress or generate insights',
+    color: '#d3e8f5',
+    border: '#a5cce0',
+  },
+];
+---
+<section class="problems" id="problems">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="pill">Common Pain Points</div>
+      <h2 class="section-title">Sound Familiar?</h2>
+      <p class="section-sub">What schools struggle with every day</p>
+    </div>
+
+    <div class="pain-grid">
+      {pains.map(p => (
+        <div class="pain-card" style={`background: ${p.color}; border-color: ${p.border};`}>
+          <h3 class="pain-title">{p.title}</h3>
+          <p class="pain-desc">{p.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <span class="deco deco-1">★</span>
+  <span class="deco deco-2">✦</span>
+</section>
+
+<style>
+  .problems {
+    background: #faf7f2;
+    padding: 64px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #192B5E;
+    background: rgba(25, 43, 94, 0.08);
+    border: 1px solid rgba(25, 43, 94, 0.15);
+    border-radius: 30px;
+    padding: 5px 14px;
+  }
+
+  .section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #192B5E;
+  }
+
+  .section-sub {
+    font-size: 15px;
+    color: #888;
+  }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .pain-card {
+    border: 1.5px solid;
+    border-radius: 16px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .pain-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #2d2d2d;
+  }
+
+  .pain-desc {
+    font-size: 13px;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  .deco {
+    position: absolute;
+    pointer-events: none;
+    color: #192B5E;
+  }
+  .deco-1 { top: 20px; right: 48px; font-size: 16px; opacity: 0.18; }
+  .deco-2 { top: 80px; left: 24px; font-size: 12px; opacity: 0.18; }
+
+  @media (max-width: 768px) {
+    .pain-grid { grid-template-columns: 1fr; }
+  }
+</style>
