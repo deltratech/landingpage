@@ -195,13 +195,23 @@ const panels = [
   function panelBodyIn(panel: HTMLElement) {
     const body = panel.querySelector<HTMLElement>('.hero-panel-body');
     if (!body) return;
-    gsap.fromTo(body, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, delay: 0.3, ease: 'power2.out' });
+    gsap.killTweensOf(body);
+    // body is already at opacity:0 y:10 — just animate to visible
+    gsap.to(body, { opacity: 1, y: 0, duration: 0.45, delay: 0.1, ease: 'power2.out' });
   }
 
   function panelBodyOut(panel: HTMLElement) {
     const body = panel.querySelector<HTMLElement>('.hero-panel-body');
     if (!body) return;
-    gsap.to(body, { opacity: 0, duration: 0.2, ease: 'power2.in' });
+    gsap.killTweensOf(body);
+    gsap.to(body, { opacity: 0, y: -6, duration: 0.18, ease: 'power2.in' });
+  }
+
+  function resetPanelBody(panel: HTMLElement) {
+    const body = panel.querySelector<HTMLElement>('.hero-panel-body');
+    if (!body) return;
+    gsap.killTweensOf(body);
+    gsap.set(body, { opacity: 0, y: 10 });
   }
 
   // ── Swap badge label ──
@@ -233,8 +243,8 @@ const panels = [
     swapBadge(index);
 
     // animate OUT: heading chars + body
-    textInstances[prev].animateOut();
     panelBodyOut(textPanels[prev]);
+    textInstances[prev].animateOut();
 
     // after out delay, swap panel visibility and animate IN
     gsap.delayedCall(0.35, () => {
@@ -242,11 +252,12 @@ const panels = [
       textPanels[prev].style.opacity = '0';
       textPanels[prev].style.pointerEvents = 'none';
 
-      // show next panel
+      // reset next panel body to hidden BEFORE the panel fades in
       const nextPanel = textPanels[current];
+      resetPanelBody(nextPanel);
       nextPanel.style.pointerEvents = 'auto';
+
       gsap.fromTo(nextPanel, { opacity: 0 }, { opacity: 1, duration: 0.25, onComplete: () => {
-        // animate IN: heading chars
         textInstances[current].animateIn();
         panelBodyIn(nextPanel);
         busy = false;
@@ -268,6 +279,7 @@ const panels = [
 
   // ── Initial animate-in on load ──
   window.addEventListener('DOMContentLoaded', () => {
+    resetPanelBody(textPanels[0] as HTMLElement);
     textInstances[0].animateIn();
     panelBodyIn(textPanels[0] as HTMLElement);
     startTimer();
