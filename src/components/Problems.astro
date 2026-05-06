@@ -43,7 +43,9 @@ const IndonesiaProblem = [
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8">
       <div>
-        <h1 class="text-2xl md:text-4xl font-sans">Most K–12 schools still use spreadsheets, WhatsApp groups and manual report cards draining teacher time and slowing the move to modern tools.</h1>
+        <h1 class="text-2xl md:text-4xl font-sans text-primary leading-tight">
+          <span id="problems-typed"></span>
+        </h1>
       </div>
       <div class="grid grid-cols-2 gap-5">
         {IndonesiaProblem.map(p => (
@@ -57,3 +59,42 @@ const IndonesiaProblem = [
 
   </div>
 </section>
+
+<style>
+  .typed-cursor {
+    color: var(--color-accent);
+    font-weight: 300;
+    animation: typed-blink 0.7s step-end infinite;
+  }
+  @keyframes typed-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+</style>
+
+<script>
+  import Typed from 'typed.js';
+
+  const el = document.getElementById('problems-typed');
+  if (el) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          observer.disconnect();
+          new Typed('#problems-typed', {
+            strings: ['Most K–12 schools still use spreadsheets, WhatsApp groups and manual report cards — draining teacher time and slowing the move to modern tools.'],
+            typeSpeed: 2,
+            showCursor: true,
+            cursorChar: '|',
+            loop: false,
+            onComplete(self) {
+              setTimeout(() => self.cursor.remove(), 1800);
+            },
+          });
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(el);
+  }
+</script>
