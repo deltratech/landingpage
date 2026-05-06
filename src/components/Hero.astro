@@ -1,4 +1,6 @@
 ---
+import dashboardImg from '../assets/images/one-dashboard.png';
+
 const stats = [
   { number: '500+', label: 'Schools' },
   { number: '10k+', label: 'Teachers' },
@@ -48,18 +50,59 @@ const stats = [
       </div>
     </div>
 
-    <!-- Right: visual -->
+    <!-- Right: visual slideshow -->
     <div class="relative hidden md:block">
-      <div class="w-full h-80 bg-[#d5d0c8] border border-border rounded-2xl flex flex-col items-center justify-center gap-3 text-muted text-sm text-center">
-        <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true">
-          <circle cx="32" cy="22" r="14" fill="#b0c4e8" opacity="0.6"/>
-          <path d="M4 58c0-15.464 12.536-28 28-28s28 12.536 28 28" fill="#b0c4e8" opacity="0.4"/>
-        </svg>
-        <p>Teacher / Student<br />Illustration or Photo</p>
+
+      <!-- Slideshow container -->
+      <div id="hero-slideshow" class="relative w-full rounded-2xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)] border border-white/60 bg-white">
+
+        <!-- Slide 1: Dashboard screenshot -->
+        <div class="hero-slide absolute inset-0 transition-opacity duration-700 ease-in-out opacity-100">
+          <img src={dashboardImg.src} class="w-full h-auto block" alt="Deltra dashboard" />
+        </div>
+
+        <!-- Slide 2: Attendance placeholder -->
+        <div class="hero-slide absolute inset-0 transition-opacity duration-700 ease-in-out opacity-0 bg-linear-to-br from-[#eaf4f0] to-[#d5eae4] flex flex-col items-center justify-center gap-3 text-muted text-sm text-center p-8" style="min-height: 240px;">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">
+            <rect x="6" y="10" width="40" height="36" rx="4" fill="#a8d5c8" opacity="0.5"/>
+            <rect x="14" y="4" width="4" height="10" rx="2" fill="#3a9e7f"/>
+            <rect x="34" y="4" width="4" height="10" rx="2" fill="#3a9e7f"/>
+            <rect x="14" y="24" width="6" height="6" rx="1" fill="#3a9e7f" opacity="0.7"/>
+            <rect x="23" y="24" width="6" height="6" rx="1" fill="#3a9e7f" opacity="0.7"/>
+            <rect x="32" y="24" width="6" height="6" rx="1" fill="#3a9e7f" opacity="0.4"/>
+          </svg>
+          <p class="font-mono font-bold text-primary text-base">Picture 1</p>
+          <p class="font-mono text-xs text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio illum illo maiores fuga ea est, culpa architecto iste alias quam delectus ducimus, odit blanditiis labore nobis molestias tenetur nisi sed!</p>
+        </div>
+
+        <!-- Slide 3: AI features placeholder -->
+        <div class="hero-slide absolute inset-0 transition-opacity duration-700 ease-in-out opacity-0 bg-linear-to-br from-[#eef2fb] to-[#dce6f7] flex flex-col items-center justify-center gap-3 text-muted text-sm text-center p-8" style="min-height: 240px;">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">
+            <circle cx="26" cy="22" r="13" fill="#b0c4e8" opacity="0.6"/>
+            <circle cx="26" cy="22" r="6" fill="#5b7fc4" opacity="0.5"/>
+            <path d="M10 44c0-8.837 7.163-16 16-16s16 7.163 16 16" fill="#b0c4e8" opacity="0.4"/>
+            <circle cx="38" cy="12" r="5" fill="#5b7fc4" opacity="0.7"/>
+            <path d="M35.5 12h5M38 9.5v5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <p class="font-mono font-bold text-primary text-base">Picture 3</p>
+          <p class="font-mono text-xs text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores reiciendis quidem maxime adipisci? Dignissimos, quisquam assumenda blanditiis, libero iusto laborum nisi minus excepturi id nemo alias deleniti explicabo veniam debitis?</p>
+        </div>
+
+        <!-- Invisible sizer so container has height -->
+        <div class="invisible pointer-events-none">
+          <img src={dashboardImg.src} class="w-full h-auto block" alt="" aria-hidden="true" />
+        </div>
+
+        <!-- Dot indicators -->
+        <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+          <button class="hero-dot w-2 h-2 rounded-full bg-primary transition-opacity duration-300 opacity-100" data-index="0" aria-label="Slide 1"></button>
+          <button class="hero-dot w-2 h-2 rounded-full bg-primary transition-opacity duration-300 opacity-30" data-index="1" aria-label="Slide 2"></button>
+          <button class="hero-dot w-2 h-2 rounded-full bg-primary transition-opacity duration-300 opacity-30" data-index="2" aria-label="Slide 3"></button>
+        </div>
       </div>
 
       <!-- Badge: Easy to Use -->
-      <div class="absolute -bottom-6 -left-7 bg-white border border-border rounded-xl px-4 py-2.5 flex items-center gap-2.5 shadow-md">
+      <div class="absolute -bottom-6 -left-7 bg-white border border-border rounded-xl px-4 py-2.5 flex items-center gap-2.5 shadow-md z-20">
         <div class="w-8 h-8 rounded-full bg-tint text-accent flex items-center justify-center text-sm font-bold shrink-0">✓</div>
         <div>
           <div class="font-mono font-bold text-xs text-primary">Easy to Use</div>
@@ -68,7 +111,7 @@ const stats = [
       </div>
 
       <!-- Badge: Active Schools -->
-      <div class="absolute -top-5 -right-4 bg-white border border-border rounded-xl px-4 py-2.5 shadow-md flex flex-col gap-0.5">
+      <div class="absolute -top-5 -right-4 bg-white border border-border rounded-xl px-4 py-2.5 shadow-md flex flex-col gap-0.5 z-20">
         <div class="font-mono text-xs text-muted">Active Schools</div>
         <div class="font-mono font-bold text-lg text-accent">500+</div>
       </div>
@@ -77,6 +120,40 @@ const stats = [
   </div>
 
   <!-- Decorative -->
+  <script>
+    const slides = document.querySelectorAll<HTMLElement>('#hero-slideshow .hero-slide');
+    const dots = document.querySelectorAll<HTMLElement>('#hero-slideshow .hero-dot');
+    let current = 0;
+    let timer: ReturnType<typeof setInterval>;
+
+    function goTo(index: number) {
+      slides[current].style.opacity = '0';
+      slides[current].style.pointerEvents = 'none';
+      dots[current].style.opacity = '0.3';
+      current = index;
+      slides[current].style.opacity = '1';
+      slides[current].style.pointerEvents = 'auto';
+      dots[current].style.opacity = '1';
+    }
+
+    function next() {
+      goTo((current + 1) % slides.length);
+    }
+
+    function startTimer() {
+      timer = setInterval(next, 3500);
+    }
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        clearInterval(timer);
+        goTo(i);
+        startTimer();
+      });
+    });
+
+    startTimer();
+  </script>
   <span class="absolute top-5 left-6 text-sm text-primary opacity-20 pointer-events-none">✦</span>
   <span class="absolute top-16 left-1/2 text-xs text-primary opacity-15 pointer-events-none">★</span>
   <span class="absolute top-32 right-6 text-xs text-primary opacity-12 pointer-events-none">✦</span>
