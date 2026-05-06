@@ -18,9 +18,9 @@ const contactInfo = [
   },
 ];
 ---
-<section class="bg-surface py-16 px-8" id="contact">
+<section class="bg-surface py-10 md:py-16 px-4 md:px-8" id="contact">
   <div class="max-w-6xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
 
       <!-- Left: info -->
       <div class="flex flex-col gap-4">
@@ -34,8 +34,8 @@ const contactInfo = [
         <div class="flex flex-col gap-3 mt-1">
           {contactInfo.map(c => (
             <div class="flex gap-3 items-center">
-              <div class="w-9.5 h-9.5 rounded-full bg-tint border border-border flex items-center justify-center text-accent shrink-0" aria-hidden="true" set:html={c.svg} />
-              <span class="font-mono text-sm text-body">{c.value}</span>
+              <div class="w-9 h-9 rounded-full bg-tint border border-border flex items-center justify-center text-accent shrink-0" aria-hidden="true" set:html={c.svg} />
+              <span class="font-mono text-sm text-body break-all">{c.value}</span>
             </div>
           ))}
         </div>
@@ -44,7 +44,7 @@ const contactInfo = [
       <!-- Right: form -->
       <div class="bg-white rounded-2xl p-7 border border-border">
         <form class="flex flex-col gap-3.5" novalidate>
-          <div class="grid grid-cols-2 gap-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div class="flex flex-col gap-1.5">
               <label for="fullName" class="font-mono font-bold text-xs text-body">Full Name *</label>
               <input id="fullName" type="text" class="font-mono text-[13px] text-body bg-surface border border-border rounded-[10px] px-3.5 py-2.5 outline-none transition-all duration-200 placeholder:text-muted/60 focus:border-accent focus:shadow-[0_0_0_3px_rgba(30,207,173,0.15)]" placeholder="Name..." autocomplete="name" />

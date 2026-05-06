@@ -4,7 +4,7 @@ import deltraLogo from '../assets/images/deltratech-logo.png';
 const links = ['Home', 'Features', 'About', 'Contact'];
 ---
 <nav class="sticky top-0 z-50 bg-white border-b border-border">
-  <div class="max-w-6xl mx-auto px-8 py-3.5 flex items-center justify-between gap-6">
+  <div class="max-w-6xl mx-auto px-4 md:px-8 py-3.5 flex items-center justify-between gap-4">
 
     <a href="/" aria-label="Deltra home" class="flex items-center shrink-0">
       <span class="mr-2">
@@ -12,10 +12,10 @@ const links = ['Home', 'Features', 'About', 'Contact'];
       </span>
       <span class="font-mono font-bold text-xl text-primary mr-1">Deltra</span>
       <span class="font-mono font-bold text-xl text-accent">Tech</span>
-      <!-- <span class="w-2.5 h-2.5 rounded-full bg-accent ml-1 mb-2 inline-block"></span> -->
     </a>
 
-    <ul class="flex items-center gap-7 list-none">
+    <!-- Desktop nav links -->
+    <ul class="hidden md:flex items-center gap-7 list-none">
       {links.map((link, i) => (
         <li>
           <a
@@ -28,15 +28,59 @@ const links = ['Home', 'Features', 'About', 'Contact'];
       ))}
     </ul>
 
-    <div class="text-white">
-      <a
-        href="#contact"
-        data-toast
-        class="font-mono font-bold text-xs bg-primary px-5 py-2 rounded-full whitespace-nowrap transition-all duration-200 hover:bg-accent hover:-translate-y-px"
-      >
-        Request Demo
-      </a>
+    <div class="flex items-center gap-3">
+      <div class="text-white hidden md:block">
+        <a
+          href="#contact"
+          data-toast
+          class="font-mono font-bold text-xs bg-primary px-5 py-2 rounded-full whitespace-nowrap transition-all duration-200 hover:bg-accent hover:-translate-y-px"
+        >
+          Request Demo
+        </a>
+      </div>
+      <!-- Hamburger button (mobile only) -->
+      <button id="nav-toggle" class="md:hidden flex flex-col gap-1.5 p-1 shrink-0" aria-label="Toggle menu" aria-expanded="false">
+        <span class="w-6 h-0.5 bg-primary rounded transition-all duration-200"></span>
+        <span class="w-6 h-0.5 bg-primary rounded transition-all duration-200"></span>
+        <span class="w-4 h-0.5 bg-primary rounded transition-all duration-200"></span>
+      </button>
     </div>
 
   </div>
+
+  <!-- Mobile menu -->
+  <div id="nav-menu" class="hidden md:hidden border-t border-border bg-white px-4 pb-4">
+    <ul class="flex flex-col gap-1 list-none pt-3">
+      {links.map((link, i) => (
+        <li>
+          <a
+            href={link === 'Home' ? '/' : `#${link.toLowerCase()}`}
+            class={`block font-mono text-sm py-2.5 px-3 rounded-lg transition-colors duration-200 ${i === 0 ? 'font-bold text-primary bg-primary/5' : 'font-normal text-muted hover:text-primary hover:bg-primary/5'}`}
+          >
+            {link}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <div class="pt-3 border-t border-border mt-2">
+      <a href="#contact" data-toast class="block text-center font-mono font-bold text-sm text-white bg-primary px-5 py-2.5 rounded-full transition-all duration-200 hover:bg-accent">
+        Request Demo
+      </a>
+    </div>
+  </div>
 </nav>
+
+<script>
+  const toggle = document.getElementById('nav-toggle')!;
+  const menu   = document.getElementById('nav-menu')!;
+  toggle.addEventListener('click', () => {
+    const open = menu.classList.toggle('hidden') === false;
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+  menu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      menu.classList.add('hidden');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
