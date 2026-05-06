@@ -1,12 +1,18 @@
 ---
+import deltraLogo from '../assets/images/deltratech-logo.png';
+
 const links = ['Home', 'Features', 'About', 'Contact'];
 ---
 <nav class="sticky top-0 z-50 bg-white border-b border-border">
   <div class="max-w-6xl mx-auto px-8 py-3.5 flex items-center justify-between gap-6">
 
     <a href="/" aria-label="Deltra home" class="flex items-center shrink-0">
-      <span class="font-mono font-bold text-xl text-primary">deltra</span>
-      <span class="w-2.5 h-2.5 rounded-full bg-accent ml-1 mb-2 inline-block"></span>
+      <span class="mr-2">
+        <img src={deltraLogo.src} class="h-7 w-auto object-contain" alt="Deltra logo" />
+      </span>
+      <span class="font-mono font-bold text-xl text-primary mr-1">Deltra</span>
+      <span class="font-mono font-bold text-xl text-accent">Tech</span>
+      <!-- <span class="w-2.5 h-2.5 rounded-full bg-accent ml-1 mb-2 inline-block"></span> -->
     </a>
 
     <ul class="flex items-center gap-7 list-none">
@@ -25,10 +31,11 @@ const links = ['Home', 'Features', 'About', 'Contact'];
     <div class="text-white">
       <a
         href="#contact"
+        data-toast
         class="font-mono font-bold text-xs bg-primary px-5 py-2 rounded-full whitespace-nowrap transition-all duration-200 hover:bg-accent hover:-translate-y-px"
       >
         Request Demo
-      </a> 
+      </a>
     </div>
 
   </div>
