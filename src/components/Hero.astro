@@ -10,7 +10,7 @@ const stats = [
 const panels = [
   {
     badge: 'K-12 Learning Platform',
-    heading: 'One Platform.\nEvery Workflow.\nIntelligently Automated.',
+    heading: 'One Platform.\n Every Workflow.\n Intelligently Automated.',
     body: 'Deltra is your school\'s all-in-one operating system — combining student records, attendance, grading, finance, and AI support in one seamless Indonesian-built platform.',
   },
   {
@@ -20,7 +20,7 @@ const panels = [
   },
   {
     badge: 'School Efficiency',
-    heading: 'Less Admin.\nMore Time for Students.',
+    heading: 'Less Admin.\n More Time for Students.',
     body: 'Automate invoices, parent communications, staff contracts, and daily schedules. One platform. Zero redundancy. Every workflow handled — so your team stays focused.',
   },
 ];
@@ -38,14 +38,14 @@ const panels = [
       </span>
 
       <!-- Text stack — all panels absolute, container has fixed height -->
-      <div id="hero-text-stack" class="relative" style="height: 400px;">
+      <div id="hero-text-stack" class="relative" style="height: 330px;">
         {panels.map((p, i) => (
           <div
             class={`hero-text-panel absolute top-0 left-0 w-full ${i > 0 ? 'opacity-0 pointer-events-none' : ''}`}
             data-panel={i}
           >
             <h1
-              class={`animation-${i} font-caveat font-bold text-7xl sm:text-7xl md:text-7xl leading-tight text-primary whitespace-pre-line mb-3`}
+              class={`animation-${i} font-caveat font-bold text-6xl sm:text-6xl md:text-6xl leading-tight text-primary whitespace-pre-line mb-3`}
             >
               {p.heading}
             </h1>
