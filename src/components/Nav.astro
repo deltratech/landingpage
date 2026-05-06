@@ -1,7 +1,13 @@
 ---
 import deltraLogo from '../assets/images/deltratech-logo.png';
 
-const links = ['Home', 'Features', 'About', 'Contact'];
+const links = [
+  { label: 'Home',     href: '/'          },
+  { label: 'Platform', href: '#solution'  },
+  { label: 'Features', href: '#features'  },
+  { label: 'About',    href: '#about'     },
+  { label: 'Contact',  href: '#contact'   },
+];
 ---
 <nav class="sticky top-0 z-50 bg-white border-b border-border">
   <div class="max-w-6xl mx-auto px-4 md:px-8 py-3.5 flex items-center justify-between gap-4">
@@ -19,10 +25,10 @@ const links = ['Home', 'Features', 'About', 'Contact'];
       {links.map((link, i) => (
         <li>
           <a
-            href={link === 'Home' ? '/' : `#${link.toLowerCase()}`}
+            href={link.href}
             class={`font-mono text-sm transition-colors duration-200 ${i === 0 ? 'font-bold text-primary' : 'font-normal text-muted hover:text-primary'}`}
           >
-            {link}
+            {link.label}
           </a>
         </li>
       ))}
@@ -54,10 +60,10 @@ const links = ['Home', 'Features', 'About', 'Contact'];
       {links.map((link, i) => (
         <li>
           <a
-            href={link === 'Home' ? '/' : `#${link.toLowerCase()}`}
+            href={link.href}
             class={`block font-mono text-sm py-2.5 px-3 rounded-lg transition-colors duration-200 ${i === 0 ? 'font-bold text-primary bg-primary/5' : 'font-normal text-muted hover:text-primary hover:bg-primary/5'}`}
           >
-            {link}
+            {link.label}
           </a>
         </li>
       ))}
