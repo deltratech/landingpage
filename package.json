@@ -14,8 +14,11 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.2.4",
     "astro": "^6.2.1",
+    "gsap": "^3.15.0",
     "iconoir": "^7.11.0",
+    "openai": "^6.36.0",
     "tailwindcss": "^4.2.4",
+    "textify.js": "^3.0.1",
     "typed.js": "^3.0.0"
   }
 }

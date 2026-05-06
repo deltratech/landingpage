@@ -34,7 +34,7 @@ const testimonials = [
     </div>
 
     <!-- Floating trust card -->
-    <div class="absolute -bottom-9 right-20 bg-white border border-border rounded-2xl px-5.5 py-4 shadow-[0_8px_28px_rgba(0,0,0,0.14)] z-10 font-mono">
+    <div class="absolute -bottom-9 right-20 bg-white border border-border rounded-2xl px-5.5 py-4 shadow-[0_8px_28px_rgba(0,0,0,0.14)] z-10 font-sans">
       <p class="font-bold text-[13px] text-primary mb-2">Trusted by 500+ Schools</p>
       <div class="flex items-center mb-2">
         {[0,1,2,3].map(i => (
@@ -46,7 +46,7 @@ const testimonials = [
             </svg>
           </div>
         ))}
-        <span class="font-mono text-xs text-muted ml-2">+10k users</span>
+        <span class="font-sans text-xs text-muted ml-2">+10k users</span>
       </div>
       <div class="flex gap-0.5" aria-label="5 out of 5 stars">
         {[1,2,3,4,5].map(() => <span class="text-accent text-sm">★</span>)}
@@ -59,8 +59,8 @@ const testimonials = [
     <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
       {stats.map(s => (
         <div class="py-5 px-3 bg-white/5 rounded-xl border border-white/8 flex flex-col items-center gap-1.5 text-center">
-          <span class="font-mono font-bold text-[26px] text-accent">{s.number}</span>
-          <span class="font-mono text-[13px] text-[#8890b0]">{s.label}</span>
+          <span class="font-sans font-bold text-[26px] text-accent">{s.number}</span>
+          <span class="font-sans text-[13px] text-[#8890b0]">{s.label}</span>
         </div>
       ))}
     </div>
@@ -80,14 +80,14 @@ const testimonials = [
               </svg>
             </div>
             <div>
-              <div class="font-mono font-bold text-[15px] text-white">{t.name}</div>
-              <div class="font-mono text-xs text-[#8890b0]">{t.role}</div>
+              <div class="font-sans font-bold text-[15px] text-white">{t.name}</div>
+              <div class="font-sans text-xs text-[#8890b0]">{t.role}</div>
             </div>
           </div>
           <div class="flex gap-0.5" aria-label="5 out of 5 stars">
             {[1,2,3,4,5].map(() => <span class="text-accent text-[13px]">★</span>)}
           </div>
-          <p class="font-mono text-sm text-[#b0c8c0] leading-relaxed">{t.quote}</p>
+          <p class="font-sans text-sm text-[#b0c8c0] leading-relaxed">{t.quote}</p>
         </div>
       ))}
     </div>
