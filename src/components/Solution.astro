@@ -1,25 +1,20 @@
 ---
+import dashboardImg from '../assets/images/one-dashboard.png';
+
 const checkItems = [
-  'Automate daily admin tasks with smart AI assistance',
-  'Generate student learning summaries & progress insights automatically',
-  'Centralize all learning materials in one intelligent system',
-  'Simplify school payment & billing with integrated digital payments',
+  'Unified records. Student profile, grades, attendance and fees — one view, one source of truth.',
+  'AI where it counts. Teacher copilots, at-risk flags and question generation, tuned for Indonesian curricula.',
+  'Parent-ready by default. WhatsApp and email communication built in — no third-party plug-ins.',
+  'School-friendly pricing Per-student annual pricing that scales from small to large institutions.',
 ];
 ---
 <section class="bg-tint py-16 px-8" id="solution">
   <div class="max-w-6xl mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
-      <!-- Left: screenshot placeholder -->
-      <div class="w-full h-75 bg-mint border border-[#a8d5c8] rounded-2xl flex flex-col items-center justify-center gap-3 text-muted text-sm text-center leading-relaxed">
-        <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect x="8" y="14" width="56" height="44" rx="6" fill="#a8d5c8" opacity="0.5"/>
-          <rect x="14" y="20" width="44" height="6" rx="3" fill="#1ecfad" opacity="0.4"/>
-          <rect x="14" y="30" width="30" height="4" rx="2" fill="#0f1c2e" opacity="0.25"/>
-          <rect x="14" y="38" width="20" height="4" rx="2" fill="#0f1c2e" opacity="0.2"/>
-          <rect x="14" y="46" width="35" height="4" rx="2" fill="#0f1c2e" opacity="0.2"/>
-        </svg>
-        <p>Solution diagram<br />or product screenshot</p>
+      <!-- Left: screenshot -->
+      <div class="w-full rounded-2xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)] border border-white/60 bg-white">
+        <img src={dashboardImg.src} class="w-full h-auto block" alt="Deltra dashboard" />
       </div>
 
       <!-- Right: text content -->
@@ -30,8 +25,8 @@ const checkItems = [
         <h2 class="text-primary leading-tight">
           One Platform.<br />Every School Need.
         </h2>
-        <p class="font-mono text-sm text-body leading-relaxed">
-          Deltra brings together administration, learning, communication, and AI-powered intelligence — so your school can focus on what matters most: students.
+        <p class="font-mono text-sm text-body leading-relaxed">          
+            Deltra is an integrated school operating system combining student records, attendance, grading, reporting, finance and Al teaching support in a single, Indonesian-built platform.
         </p>
         <ul class="flex flex-col gap-2.5 list-none">
           {checkItems.map(item => (
