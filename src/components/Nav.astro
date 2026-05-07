@@ -2,31 +2,68 @@
 import deltraLogo from '../assets/images/deltratech-logo.png';
 
 const links = [
-  { label: 'Home',     href: '/'          },
-  { label: 'Platform', href: '#solution'  },
-  { label: 'Features', href: '#features'  },
-  { label: 'About',    href: '#about'     },
-  { label: 'Contact',  href: '#contact'   },
+  { label: 'Home',     href: '/',         active: true  },
+  { label: 'Platform', href: '#solution', active: false },
+  { label: 'Features', href: '#features', active: false },
+  { label: 'About',    href: '#about',    active: false },
+  { label: 'Contact',  href: '#contact',  active: false },
 ];
 ---
-<nav class="sticky top-0 z-50 bg-white border-b border-border">
+
+<style>
+  /* ── Logo ── */
+  #main-nav .nav-logo-primary { color: white; }
+  #main-nav .nav-logo-accent  { color: rgba(255,255,255,0.75); }
+  #main-nav[data-scrolled] .nav-logo-primary { color: var(--color-primary); }
+  #main-nav[data-scrolled] .nav-logo-accent  { color: var(--color-accent); }
+
+  /* ── Desktop links ── */
+  #main-nav .nav-link         { color: rgba(255,255,255,0.75); }
+  #main-nav .nav-link[data-active] { color: white; font-weight: 700; }
+  #main-nav .nav-link:hover   { color: white; transform: translateY(-2px); }
+
+  #main-nav[data-scrolled] .nav-link              { color: var(--color-muted); }
+  #main-nav[data-scrolled] .nav-link[data-active] { color: var(--color-primary); }
+  #main-nav[data-scrolled] .nav-link:hover        { color: var(--color-primary); transform: translateY(-2px); }
+
+  /* ── Hamburger bars ── */
+  #main-nav .hamburger-bar { background-color: white; }
+  #main-nav[data-scrolled] .hamburger-bar { background-color: var(--color-primary); }
+
+  /* ── Mobile menu ── */
+  #nav-menu { background: rgba(15,24,39,0.97); border-color: rgba(255,255,255,0.15); }
+  #nav-menu .mobile-link { color: rgba(255,255,255,0.8); }
+  #nav-menu .mobile-link[data-active] { color: white; background: rgba(255,255,255,0.1); }
+  #nav-menu .mobile-link:hover { color: white; background: rgba(255,255,255,0.1); transform: translateX(4px); }
+
+  #main-nav[data-scrolled] #nav-menu { background: rgba(255,255,255,0.97); border-color: var(--color-border); }
+  #main-nav[data-scrolled] #nav-menu .mobile-link { color: var(--color-muted); }
+  #main-nav[data-scrolled] #nav-menu .mobile-link[data-active] { color: var(--color-primary); background: rgba(15,28,46,0.05); }
+  #main-nav[data-scrolled] #nav-menu .mobile-link:hover { color: var(--color-primary); background: rgba(15,28,46,0.05); transform: translateX(4px); }
+</style>
+
+<nav
+  id="main-nav"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+>
   <div class="max-w-6xl mx-auto px-4 md:px-8 py-3.5 flex items-center justify-between gap-4">
 
     <a href="/" aria-label="Deltra home" class="flex items-center shrink-0">
       <span class="mr-2">
         <img src={deltraLogo.src} class="h-7 w-auto object-contain" alt="Deltra logo" />
       </span>
-      <span class="font-sans font-bold text-xl text-primary">Deltra</span>
-      <span class="font-sans font-bold text-xl text-accent">Tech</span>
+      <span class="nav-logo-primary font-sans font-bold text-xl transition-colors duration-300">Deltra</span>
+      <span class="nav-logo-accent  font-sans font-bold text-xl transition-colors duration-300">Tech</span>
     </a>
 
     <!-- Desktop nav links -->
     <ul class="hidden md:flex items-center gap-7 list-none">
-      {links.map((link, i) => (
+      {links.map(link => (
         <li>
           <a
             href={link.href}
-            class={`font-sans text-lg transition-colors duration-200 ${i === 0 ? 'font-bold text-primary' : 'font-normal text-muted hover:text-primary'}`}
+            class="nav-link font-sans text-lg transition-all duration-200"
+            {...(link.active ? { 'data-active': '' } : {})}
           >
             {link.label}
           </a>
@@ -35,41 +72,42 @@ const links = [
     </ul>
 
     <div class="flex items-center gap-3">
-      <div class="text-white hidden md:block">
+      <div class="hidden md:block">
         <a
           href="#contact"
           data-toast
-          class="font-sans font-bold text-sm bg-primary px-5 py-2 rounded-full inline-flex items-center transition-all duration-200 hover:bg-[#172840] hover:-translate-y-0.5 hover:scale-[1.03]"
+          class="font-sans font-bold text-sm bg-primary text-white px-5 py-2 rounded-full inline-flex items-center transition-all duration-200 hover:bg-[#172840] hover:-translate-y-0.5 hover:shadow-md"
         >
           Request Demo
         </a>
       </div>
-      <!-- Hamburger button (mobile only) -->
+      <!-- Hamburger (mobile only) -->
       <button id="nav-toggle" class="md:hidden flex flex-col gap-1.5 p-1 shrink-0" aria-label="Toggle menu" aria-expanded="false">
-        <span class="w-6 h-0.5 bg-primary rounded transition-all duration-200"></span>
-        <span class="w-6 h-0.5 bg-primary rounded transition-all duration-200"></span>
-        <span class="w-4 h-0.5 bg-primary rounded transition-all duration-200"></span>
+        <span class="hamburger-bar w-6 h-0.5 rounded transition-all duration-300"></span>
+        <span class="hamburger-bar w-6 h-0.5 rounded transition-all duration-300"></span>
+        <span class="hamburger-bar w-4 h-0.5 rounded transition-all duration-300"></span>
       </button>
     </div>
 
   </div>
 
   <!-- Mobile menu -->
-  <div id="nav-menu" class="hidden md:hidden border-t border-border bg-white px-4 pb-4">
+  <div id="nav-menu" class="hidden md:hidden border-t backdrop-blur-sm px-4 pb-4 transition-colors duration-300">
     <ul class="flex flex-col gap-1 list-none pt-3">
-      {links.map((link, i) => (
+      {links.map(link => (
         <li>
           <a
             href={link.href}
-            class={`block font-sans text-sm py-2.5 px-3 rounded-lg transition-colors duration-200 ${i === 0 ? 'font-bold text-primary bg-primary/5' : 'font-normal text-muted hover:text-primary hover:bg-primary/5'}`}
+            class="mobile-link block font-sans text-sm py-2.5 px-3 rounded-lg transition-all duration-200"
+            {...(link.active ? { 'data-active': '' } : {})}
           >
             {link.label}
           </a>
         </li>
       ))}
     </ul>
-    <div class="pt-3 border-t border-border mt-2">
-      <a href="#contact" data-toast class="font-sans font-bold text-sm bg-primary px-7 py-3 rounded-full inline-flex items-center transition-all duration-200 hover:bg-[#172840] hover:-translate-y-0.5 hover:scale-[1.03]">
+    <div class="pt-3 border-t border-white/20 mt-2">
+      <a href="#contact" data-toast class="font-sans font-bold text-sm bg-primary text-white px-7 py-3 rounded-full inline-flex items-center transition-all duration-200 hover:bg-[#172840] hover:-translate-y-0.5">
         Request Demo
       </a>
     </div>
@@ -77,8 +115,23 @@ const links = [
 </nav>
 
 <script>
+  const nav   = document.getElementById('main-nav')!;
   const toggle = document.getElementById('nav-toggle')!;
   const menu   = document.getElementById('nav-menu')!;
+
+  function applyScrolled(scrolled: boolean) {
+    if (scrolled) {
+      nav.setAttribute('data-scrolled', '');
+      nav.classList.add('bg-white/95', 'backdrop-blur-sm', 'shadow-md', 'border-b', 'border-border');
+    } else {
+      nav.removeAttribute('data-scrolled');
+      nav.classList.remove('bg-white/95', 'backdrop-blur-sm', 'shadow-md', 'border-b', 'border-border');
+    }
+  }
+
+  window.addEventListener('scroll', () => applyScrolled(window.scrollY > 60), { passive: true });
+
+  // Mobile menu toggle
   toggle.addEventListener('click', () => {
     const open = menu.classList.toggle('hidden') === false;
     toggle.setAttribute('aria-expanded', String(open));

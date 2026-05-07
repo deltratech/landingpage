@@ -568,7 +568,7 @@
   function addMessage(text: string, role: 'bot' | 'user') {
     const el = document.createElement('div');
     el.className = `chatbot-msg ${role}`;
-    const roleLabel = role === 'bot' ? 'Delta AI' : 'You';
+    const roleLabel = role === 'bot' ? 'Deltra AI' : 'You';
     el.innerHTML = `
       <span class="chatbot-role">${roleLabel}</span>
       <div class="chatbot-bubble">${text}</div>
@@ -578,7 +578,7 @@
   }
 
   function showWelcome() {
-    addMessage('👋 Hey! I\'m <strong>Delta AI</strong>, your Deltra guide.<br>How can I help you today?', 'bot');
+    addMessage('👋 Hey! I\'m <strong>Deltra AI</strong>, your Deltra guide.<br>How can I help you today?', 'bot');
 
     const faqWrapper = document.createElement('div');
     faqWrapper.className = 'chatbot-msg bot';

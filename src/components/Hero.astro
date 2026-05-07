@@ -1,6 +1,4 @@
 ---
-import dashboardImg from '../assets/images/one-dashboard.png';
-
 const stats = [
   { number: '500+', label: 'Schools' },
   { number: '10k+', label: 'Teachers' },
@@ -10,7 +8,7 @@ const stats = [
 const panels = [
   {
     badge: 'K-12 Learning Platform',
-    heading: 'One Platform.\n Every Workflow.\n Intelligently Automated.',
+    heading: 'One Platform. Every Workflow. Intelligently Automated.',
     body: 'Deltra is your school\'s all-in-one operating system — combining student records, attendance, grading, finance, and AI support in one seamless Indonesian-built platform.',
   },
   {
@@ -20,158 +18,137 @@ const panels = [
   },
   {
     badge: 'School Efficiency',
-    heading: 'Less Admin.\n More Time for Students.',
+    heading: 'Less Admin. More Time for Students.',
     body: 'Automate invoices, parent communications, staff contracts, and daily schedules. One platform. Zero redundancy. Every workflow handled — so your team stays focused.',
   },
 ];
+
+const bgImages = [
+  'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1920&q=80',
+  'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1920&q=80',
+  'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1920&q=80',
+  'https://images.unsplash.com/photo-1497633762265-9d179a990aa6?w=1920&q=80',
+];
 ---
 
-<section class="bg-surface py-10 md:py-16 px-4 md:px-8 relative overflow-hidden" id="home">
-  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+<section class="relative h-screen min-h-150 flex items-center justify-center overflow-hidden" id="home">
 
-    <!-- Left: text panels -->
-    <div class="flex flex-col gap-4">
-
-      <!-- Badge (swaps with panel) -->
-      <span id="hero-badge" class="inline-flex self-start font-sans font-bold text-xs text-primary bg-primary/7 border border-primary/14 rounded-full px-4 py-1.5 transition-opacity duration-300">
-        {panels[0].badge}
-      </span>
-
-      <!-- Text stack — all panels absolute, container has fixed height -->
-      <div id="hero-text-stack" class="relative" style="height: 330px;">
-        {panels.map((p, i) => (
-          <div
-            class={`hero-text-panel absolute top-0 left-0 w-full ${i > 0 ? 'opacity-0 pointer-events-none' : ''}`}
-            data-panel={i}
-          >
-            <h1
-              class={`animation-${i} font-caveat font-bold text-6xl sm:text-6xl md:text-6xl leading-tight text-primary whitespace-pre-line mb-3`}
-            >
-              {p.heading}
-            </h1>
-            <p class="hero-panel-body font-sans text-xl text-muted leading-relaxed">
-              {p.body}
-            </p>
-          </div>
-        ))}
+  <!-- Background slideshow -->
+  <div id="bg-slideshow" class="absolute inset-0 z-0">
+    {bgImages.map((src, i) => (
+      <div
+        class="bg-slide absolute inset-0"
+        style={`opacity: ${i === 0 ? 1 : 0}; transition: opacity 1s ease-in-out;`}
+      >
+        <img
+          src={src}
+          class="w-full h-full object-cover"
+          alt=""
+          aria-hidden="true"
+          loading={i === 0 ? 'eager' : 'lazy'}
+        />
       </div>
-
-      <!-- CTA buttons (always visible) -->
-      <div class="flex gap-3 flex-wrap mt-2 md:mt-4">
-        <div class="text-white">
-          <a href="#contact" data-toast class="font-sans font-bold text-sm bg-primary px-7 py-3 rounded-full inline-flex items-center transition-all duration-200 hover:bg-[#172840] hover:-translate-y-0.5 hover:scale-[1.03]">
-            Request a Demo
-          </a>
-        </div>
-        <div class="text-primary">
-          <a href="#features" data-toast class="font-sans font-bold text-sm bg-transparent border-2 border-primary px-7 py-3 rounded-full inline-flex items-center transition-all duration-200 hover:text-white hover:bg-accent hover:-translate-y-0.5 hover:scale-[1.03]">
-            Learn More
-          </a>
-        </div>
-      </div>
-
-      <!-- Stats (always visible) -->
-      <div class="flex gap-7 mt-2 pt-4 border-t border-border">
-        {stats.map(s => (
-          <div class="flex flex-col gap-0.5">
-            <span class="font-sans font-bold text-xl text-primary">{s.number}</span>
-            <span class="font-sans text-xs text-muted">{s.label}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <!-- Right: visual slideshow -->
-    <div class="relative hidden md:block">
-      <div id="hero-slideshow" class="relative w-full rounded-2xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.12)] border border-white/60 bg-white">
-
-        <!-- Slide 1: Dashboard screenshot -->
-        <div class="hero-slide absolute inset-0 transition-opacity duration-700 ease-in-out opacity-100">
-          <img src={dashboardImg.src} class="w-full h-auto block" alt="Deltra dashboard" />
-        </div>
-
-        <!-- Slide 2 -->
-        <div class="hero-slide absolute inset-0 transition-opacity duration-700 ease-in-out opacity-0 bg-linear-to-br from-[#eaf4f0] to-[#d5eae4] flex flex-col items-center justify-center gap-3 text-muted text-sm text-center p-8" style="min-height: 240px;">
-          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">
-            <rect x="6" y="10" width="40" height="36" rx="4" fill="#a8d5c8" opacity="0.5"/>
-            <rect x="14" y="4" width="4" height="10" rx="2" fill="#3a9e7f"/>
-            <rect x="34" y="4" width="4" height="10" rx="2" fill="#3a9e7f"/>
-            <rect x="14" y="24" width="6" height="6" rx="1" fill="#3a9e7f" opacity="0.7"/>
-            <rect x="23" y="24" width="6" height="6" rx="1" fill="#3a9e7f" opacity="0.7"/>
-            <rect x="32" y="24" width="6" height="6" rx="1" fill="#3a9e7f" opacity="0.4"/>
-          </svg>
-          <p class="font-sans font-bold text-primary text-base">AI Insights Dashboard</p>
-          <p class="font-sans text-xs text-muted">Real-time KPI summaries, risk flags and performance trends — all generated automatically every week.</p>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="hero-slide absolute inset-0 transition-opacity duration-700 ease-in-out opacity-0 bg-linear-to-br from-[#eef2fb] to-[#dce6f7] flex flex-col items-center justify-center gap-3 text-muted text-sm text-center p-8" style="min-height: 240px;">
-          <svg width="52" height="52" viewBox="0 0 52 52" fill="none" aria-hidden="true">
-            <circle cx="26" cy="22" r="13" fill="#b0c4e8" opacity="0.6"/>
-            <circle cx="26" cy="22" r="6" fill="#5b7fc4" opacity="0.5"/>
-            <path d="M10 44c0-8.837 7.163-16 16-16s16 7.163 16 16" fill="#b0c4e8" opacity="0.4"/>
-            <circle cx="38" cy="12" r="5" fill="#5b7fc4" opacity="0.7"/>
-            <path d="M35.5 12h5M38 9.5v5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-          <p class="font-sans font-bold text-primary text-base">Automated Admin Hub</p>
-          <p class="font-sans text-xs text-muted">Invoices, contracts, attendance reports and parent messages — handled automatically so your staff can breathe.</p>
-        </div>
-
-        <!-- Invisible sizer -->
-        <div class="invisible pointer-events-none">
-          <img src={dashboardImg.src} class="w-full h-auto block" alt="" aria-hidden="true" />
-        </div>
-
-        <!-- Dot indicators -->
-        <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
-          <button class="hero-dot w-2 h-2 rounded-full bg-primary transition-opacity duration-300 opacity-100" data-index="0" aria-label="Slide 1"></button>
-          <button class="hero-dot w-2 h-2 rounded-full bg-primary transition-opacity duration-300 opacity-30"  data-index="1" aria-label="Slide 2"></button>
-          <button class="hero-dot w-2 h-2 rounded-full bg-primary transition-opacity duration-300 opacity-30"  data-index="2" aria-label="Slide 3"></button>
-        </div>
-      </div>
-
-      <!-- Badges -->
-      <div class="absolute -bottom-6 -left-7 bg-white border border-border rounded-xl px-4 py-2.5 flex items-center gap-2.5 shadow-md z-20">
-        <div class="w-8 h-8 rounded-full bg-tint text-accent flex items-center justify-center text-sm font-bold shrink-0">✓</div>
-        <div>
-          <div class="font-sans font-bold text-xs text-primary">Easy to Use</div>
-          <div class="font-sans text-xs text-muted">No training needed</div>
-        </div>
-      </div>
-      <div class="absolute -top-5 -right-4 bg-white border border-border rounded-xl px-4 py-2.5 shadow-md flex flex-col gap-0.5 z-20">
-        <div class="font-sans text-xs text-muted">Active Schools</div>
-        <div class="font-sans font-bold text-lg text-accent">500+</div>
-      </div>
-    </div>
-
+    ))}
   </div>
-</section>
 
-<style>
-  /* Textify required — scoped to avoid the page-wide transform:translateZ(0) bug */
-  .textify .word,
-  .textify .char { display: inline-block; will-change: transform, opacity; }
-  .textify .char { position: relative; }
-  .textify .char::before, .textify .char::after { content: attr(data-char); position: absolute; top: 0; left: 0; visibility: hidden; display: none; }
-  .textify .word::before, .textify .word::after  { content: attr(data-word); position: absolute; top: 0; left: 0; visibility: hidden; display: none; }
-  .textify .line-box, .textify .line { overflow: hidden; }
-</style>
+  <!-- Dark gradient overlay -->
+  <div class="absolute inset-0 z-10 bg-linear-to-b from-black/65 via-black/50 to-black/70 pointer-events-none"></div>
+
+  <!-- Hero content -->
+  <div class="relative z-20 w-full max-w-3xl mx-auto px-6 md:px-10 text-center">
+
+    <!-- Badge -->
+    <span
+      id="hero-badge"
+      class="inline-flex self-center font-sans font-semibold text-xs text-white bg-white/15 border border-white/30 rounded-full px-4 py-1.5 mb-5 transition-opacity duration-300"
+    >
+      {panels[0].badge}
+    </span>
+
+    <!-- Text panels -->
+    <div id="hero-text-stack" class="relative" style="height: 360px;">
+      {panels.map((p, i) => (
+        <div
+          class={`hero-text-panel absolute inset-x-0 top-0`}
+          style={`opacity: ${i === 0 ? 1 : 0}; pointer-events: ${i === 0 ? 'auto' : 'none'}; transition: opacity 0.3s ease-in-out;`}
+          data-panel={i}
+        >
+          <h1
+            class={`animation-${i} font-caveat font-bold text-5xl sm:text-6xl md:text-7xl leading-tight text-white mb-4`}
+          >
+            {p.heading}
+          </h1>
+          <p class="hero-panel-body font-sans text-base sm:text-lg text-white/75 leading-relaxed max-w-2xl mx-auto">
+            {p.body}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA buttons -->
+    <div class="flex gap-4 flex-wrap justify-center mt-10 mb-8">
+      <a
+        href="#contact"
+        data-toast
+        class="font-sans font-bold text-sm text-white bg-primary px-8 py-3.5 rounded-full inline-flex items-center gap-2 transition-all duration-200 hover:bg-[#172840] hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/30"
+      >
+        Request a Demo
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+      <a
+        href="#features"
+        class="font-sans font-bold text-sm text-white bg-white/10 border border-white/50 px-8 py-3.5 rounded-full inline-flex items-center gap-2 backdrop-blur-sm transition-all duration-200 hover:bg-white/20 hover:border-white hover:-translate-y-1"
+      >
+        Learn More
+      </a>
+    </div>
+
+    <!-- Stats -->
+    <div class="flex gap-8 justify-center pt-5 border-t border-white/20">
+      {stats.map(s => (
+        <div class="flex flex-col gap-0.5 items-center">
+          <span class="font-sans font-bold text-xl text-white">{s.number}</span>
+          <span class="font-sans text-xs text-white/60">{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Slide indicator dots -->
+  <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+    {bgImages.map((_, i) => (
+      <button
+        class="bg-dot w-2.5 h-2.5 rounded-full bg-white transition-opacity duration-300"
+        style={`opacity: ${i === 0 ? 1 : 0.35};`}
+        data-index={i}
+        aria-label={`Slide ${i + 1}`}
+      ></button>
+    ))}
+  </div>
+
+</section>
 
 <script>
   import gsap from 'gsap';
-  import Textify from 'textify.js'
-  
-  const badgeLabels = ['K-12 Learning Platform', 'AI-Powered Insights', 'School Efficiency'];
-  const badgeEl = document.getElementById('hero-badge')!;
+  import Textify from 'textify.js';
 
-  // ── Textify instances (customAnimation:true = no auto IntersectionObserver trigger) ──
+  const badgeLabels = ['K-12 Learning Platform', 'AI-Powered Insights', 'School Efficiency'];
+  const badgeEl     = document.getElementById('hero-badge')!;
+  const bgSlides    = document.querySelectorAll<HTMLElement>('#bg-slideshow .bg-slide');
+  const textPanels  = document.querySelectorAll<HTMLElement>('.hero-text-panel');
+  const dots        = document.querySelectorAll<HTMLButtonElement>('#home .bg-dot');
+
+  let current = 0;
+  let busy    = false;
+
+  // ── Textify instances ──
   const animCfg = (cls: string) => new Textify({
     el: cls,
     animation: {
       customAnimation: true,
       by: 'chars',
-      stagger: 0.022,
-      duration: 0.25,
+      stagger: 0.018,
+      duration: 0.22,
       ease: 'expo.inOut',
       animateProps: { opacity: 0, scale: 0 },
     },
@@ -183,21 +160,11 @@ const panels = [
     animCfg('.animation-2'),
   ];
 
-  const textPanels   = document.querySelectorAll<HTMLElement>('.hero-text-panel');
-  const slides       = document.querySelectorAll<HTMLElement>('#hero-slideshow .hero-slide');
-  const dots         = document.querySelectorAll<HTMLElement>('#hero-slideshow .hero-dot');
-
-  let current = 0;
-  let busy    = false;
-  let timer: ReturnType<typeof setInterval>;
-
-  // ── Animate panel body separately with GSAP ──
   function panelBodyIn(panel: HTMLElement) {
     const body = panel.querySelector<HTMLElement>('.hero-panel-body');
     if (!body) return;
     gsap.killTweensOf(body);
-    // body is already at opacity:0 y:10 — just animate to visible
-    gsap.to(body, { opacity: 1, y: 0, duration: 0.45, delay: 0.1, ease: 'power2.out' });
+    gsap.to(body, { opacity: 1, y: 0, duration: 0.4, delay: 0.1, ease: 'power2.out' });
   }
 
   function panelBodyOut(panel: HTMLElement) {
@@ -210,11 +177,9 @@ const panels = [
   function resetPanelBody(panel: HTMLElement) {
     const body = panel.querySelector<HTMLElement>('.hero-panel-body');
     if (!body) return;
-    gsap.killTweensOf(body);
     gsap.set(body, { opacity: 0, y: 10 });
   }
 
-  // ── Swap badge label ──
   function swapBadge(index: number) {
     gsap.to(badgeEl, { opacity: 0, duration: 0.18, onComplete: () => {
       badgeEl.textContent = badgeLabels[index];
@@ -222,66 +187,70 @@ const panels = [
     }});
   }
 
-  // ── Core transition ──
   function goTo(index: number) {
     if (index === current || busy) return;
     busy = true;
     const prev = current;
     current = index;
+    const totalPanels = textPanels.length;
 
-    // slide out right image
-    slides[prev].style.opacity = '0';
-    slides[prev].style.pointerEvents = 'none';
-    dots[prev].style.opacity = '0.3';
+    // Transition background
+    bgSlides[prev].style.opacity = '0';
+    bgSlides[current % bgSlides.length].style.opacity = '1';
 
-    // slide in new image
-    slides[current].style.opacity = '1';
-    slides[current].style.pointerEvents = 'auto';
-    dots[current].style.opacity = '1';
+    // Update dots
+    dots.forEach((d, i) => { d.style.opacity = i === current % dots.length ? '1' : '0.35'; });
 
-    // swap badge
-    swapBadge(index);
+    swapBadge(index % totalPanels);
+    panelBodyOut(textPanels[prev % totalPanels]);
+    textInstances[prev % totalPanels].animateOut();
 
-    // animate OUT: heading chars + body
-    panelBodyOut(textPanels[prev]);
-    textInstances[prev].animateOut();
+    gsap.delayedCall(0.32, () => {
+      textPanels[prev % totalPanels].style.opacity = '0';
+      textPanels[prev % totalPanels].style.pointerEvents = 'none';
 
-    // after out delay, swap panel visibility and animate IN
-    gsap.delayedCall(0.35, () => {
-      // hide prev panel
-      textPanels[prev].style.opacity = '0';
-      textPanels[prev].style.pointerEvents = 'none';
-
-      // reset next panel body to hidden BEFORE the panel fades in
-      const nextPanel = textPanels[current];
+      const nextPanel = textPanels[current % totalPanels];
       resetPanelBody(nextPanel);
       nextPanel.style.pointerEvents = 'auto';
 
-      gsap.fromTo(nextPanel, { opacity: 0 }, { opacity: 1, duration: 0.25, onComplete: () => {
-        textInstances[current].animateIn();
-        panelBodyIn(nextPanel);
-        busy = false;
-      }});
+      gsap.fromTo(nextPanel,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.25, onComplete: () => {
+          textInstances[current % totalPanels].animateIn();
+          panelBodyIn(nextPanel);
+          busy = false;
+        }}
+      );
     });
   }
 
-  function next() { goTo((current + 1) % slides.length); }
+  let slideIndex = 0;
+  let paused = false;
 
-  function startTimer() { timer = setInterval(next, 4000); }
+  function nextSlide() {
+    if (!paused) {
+      goTo((slideIndex + 1) % Math.max(bgSlides.length, textPanels.length));
+      slideIndex = current;
+    }
+  }
+
+  const timer = setInterval(nextSlide, 5000);
 
   dots.forEach((dot, i) => {
     dot.addEventListener('click', () => {
       clearInterval(timer);
       goTo(i);
-      startTimer();
     });
   });
 
-  // ── Initial animate-in on load ──
+  // Pause on hover
+  const section = document.getElementById('home')!;
+  section.addEventListener('mouseenter', () => { paused = true; });
+  section.addEventListener('mouseleave', () => { paused = false; });
+
   window.addEventListener('DOMContentLoaded', () => {
     resetPanelBody(textPanels[0] as HTMLElement);
     textInstances[0].animateIn();
     panelBodyIn(textPanels[0] as HTMLElement);
-    startTimer();
   });
 </script>
