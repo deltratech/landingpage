@@ -2,11 +2,12 @@
 import deltraLogo from '../assets/images/deltratech-logo.png';
 
 const links = [
-  { label: 'Home',     href: '/',         active: true  },
-  { label: 'Platform', href: '#solution', active: false },
-  { label: 'Features', href: '#features', active: false },
+  { label: 'Home',     href: '/',         active: true  },  
+  { label: 'Product', href: '#', active: false },
+  { label: 'Pricing', href: '#pricing', active: false },
   { label: 'About',    href: '#about',    active: false },
   { label: 'Contact',  href: '#contact',  active: false },
+  { label: 'Case Studies ',  href: '#contact',  active: false },
 ];
 ---
 
@@ -72,11 +73,11 @@ const links = [
     </ul>
 
     <div class="flex items-center gap-3">
-      <div class="hidden md:block">
+      <div class="hidden md:block text-white">
         <a
           href="#contact"
           data-toast
-          class="font-sans font-bold text-sm bg-primary text-white px-5 py-2 rounded-full inline-flex items-center transition-all duration-200 hover:bg-[#172840] hover:-translate-y-0.5 hover:shadow-md"
+          class="font-sans font-bold text-sm bg-primary text-white px-5 py-2 rounded-full inline-flex items-center transition-all duration-200 hover:bg-accent hover:-translate-y-0.5 hover:shadow-md"
         >
           Request Demo
         </a>
@@ -106,8 +107,8 @@ const links = [
         </li>
       ))}
     </ul>
-    <div class="pt-3 border-t border-white/20 mt-2">
-      <a href="#contact" data-toast class="font-sans font-bold text-sm bg-primary text-white px-7 py-3 rounded-full inline-flex items-center transition-all duration-200 hover:bg-[#172840] hover:-translate-y-0.5">
+    <div class="pt-3 border-t border-white/20 text-white mt-2">
+      <a href="#contact" data-toast class="font-sans font-bold text-sm bg-primary text-white px-7 py-3 rounded-full inline-flex items-center transition-all duration-200 hover:bg-accent hover:-translate-y-0.5">
         Request Demo
       </a>
     </div>

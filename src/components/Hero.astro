@@ -78,7 +78,7 @@ const bgImages = [
           >
             {p.heading}
           </h1>
-          <p class="hero-panel-body font-sans text-base sm:text-lg text-white/75 leading-relaxed max-w-2xl mx-auto">
+          <p class="hero-panel-body font-bold font-sans text-base sm:text-lg text-white/75 leading-relaxed max-w-2xl mx-auto">
             {p.body}
           </p>
         </div>
@@ -86,11 +86,11 @@ const bgImages = [
     </div>
 
     <!-- CTA buttons -->
-    <div class="flex gap-4 flex-wrap justify-center mt-10 mb-8">
+    <div class="flex gap-4 flex-wrap text-white justify-center mt-10 mb-8">
       <a
         href="#contact"
         data-toast
-        class="font-sans font-bold text-sm text-white bg-primary px-8 py-3.5 rounded-full inline-flex items-center gap-2 transition-all duration-200 hover:bg-[#172840] hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/30"
+        class="font-sans font-bold text-sm text-white bg-primary px-8 py-3.5 rounded-full inline-flex items-center gap-2 transition-all duration-200 hover:bg-accent hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/30"
       >
         Request a Demo
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
@@ -107,8 +107,8 @@ const bgImages = [
     <div class="flex gap-8 justify-center pt-5 border-t border-white/20">
       {stats.map(s => (
         <div class="flex flex-col gap-0.5 items-center">
-          <span class="font-sans font-bold text-xl text-white">{s.number}</span>
-          <span class="font-sans text-xs text-white/60">{s.label}</span>
+          <span class="font-sans font-bold text-5xl text-white">{s.number}</span>
+          <span class="font-sans text-xl text-white/60">{s.label}</span>
         </div>
       ))}
     </div>

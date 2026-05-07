@@ -1,0 +1,124 @@
+---
+const plans = [
+  {
+    name: 'Sekolah',
+    subtitle: 'For small schools up to 500 students',
+    badge: '',
+    features: [
+      'Student Information System',
+      'Attendance & Grade Management',
+      'Parent Communication Portal',
+      'Basic AI Reports',
+      'Mobile App Access',
+      'Email Support',
+    ],
+    cta: 'Request a Quote',
+    highlight: false,
+  },
+  {
+    name: 'Institusi',
+    subtitle: 'For established schools 500–2,000 students',
+    badge: 'Most Popular',
+    features: [
+      'Everything in Sekolah',
+      'Full LMS with Curriculum Tools',
+      'Advanced AI Analytics',
+      'AI Lesson Planning Assistant',
+      'Multi-class & Grade Management',
+      'Finance & Fee Management',
+      'Priority Support + Account Manager',
+    ],
+    cta: 'Book a Demo',
+    highlight: true,
+  },
+  {
+    name: 'Yayasan',
+    subtitle: 'For school foundations & multi-campus groups',
+    badge: 'Enterprise',
+    features: [
+      'Everything in Institusi',
+      'Multi-campus Dashboard',
+      'Foundation-level Analytics',
+      'Custom Integrations & API',
+      'White-label Options',
+      'Dedicated Onboarding Team',
+      'SLA & Priority Infrastructure',
+    ],
+    cta: 'Talk to Sales',
+    highlight: false,
+  },
+];
+---
+
+<section class="bg-white py-20 md:py-28" id="pricing">
+  <div class="max-w-6xl mx-auto px-4 md:px-8">
+
+    <div class="text-center mb-14" data-reveal>
+      <span class="inline-flex items-center font-sans font-semibold text-xs text-accent bg-accent/10 border border-accent/20 rounded-full px-4 py-1.5 mb-4">
+        Flexible Pricing
+      </span>
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-primary mb-4">
+        Plans That Grow With Your School
+      </h2>
+      <p class="font-sans text-muted text-lg max-w-xl mx-auto">
+        No hidden fees. No per-seat surprises. Pricing is customized to your school's size and needs — contact us for a tailored proposal.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+      {plans.map((plan, i) => (
+        <div
+          class={`relative rounded-3xl border flex flex-col p-8 transition-shadow duration-300 hover:shadow-xl ${plan.highlight ? 'bg-primary border-primary text-white shadow-xl shadow-primary/20' : 'bg-white border-border'}`}
+          data-reveal
+          data-delay={String(i + 1)}
+        >
+          {plan.badge && (
+            <span class={`absolute -top-3.5 left-1/2 -translate-x-1/2 font-sans font-bold text-xs px-4 py-1 rounded-full ${plan.highlight ? 'bg-accent text-primary' : 'bg-primary text-white'}`}>
+              {plan.badge}
+            </span>
+          )}
+
+          <div class="mb-6">
+            <h3 class={`font-display font-bold text-2xl mb-1 ${plan.highlight ? 'text-white' : 'text-primary'}`}>{plan.name}</h3>
+            <p class={`font-sans text-sm ${plan.highlight ? 'text-white/60' : 'text-muted'}`}>{plan.subtitle}</p>
+          </div>
+
+          <div class={`text-center py-4 mb-6 rounded-2xl border ${plan.highlight ? 'border-white/10 bg-white/5' : 'border-border bg-surface'}`}>
+            <p class={`font-display font-bold text-xl ${plan.highlight ? 'text-accent' : 'text-primary'}`}>
+              Custom Pricing
+            </p>
+            <p class={`font-sans text-xs mt-1 ${plan.highlight ? 'text-white/50' : 'text-muted'}`}>
+              Tailored to your school's needs
+            </p>
+          </div>
+
+          <ul class="flex flex-col gap-3 flex-1 mb-8">
+            {plan.features.map(f => (
+              <li class="flex items-start gap-2.5 font-sans text-sm">
+                <span class={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${plan.highlight ? 'bg-accent/20 text-accent' : 'bg-accent/10 text-accent'}`}>
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                    <path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class={plan.highlight ? 'text-white/80' : 'text-body'}>{f}</span>
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href="#contact"
+            class={`font-sans font-bold text-sm px-6 py-3 rounded-full text-center transition-all duration-200 hover:-translate-y-0.5 ${plan.highlight ? 'bg-accent text-primary hover:bg-[#18b899] hover:shadow-lg hover:shadow-accent/30' : 'bg-primary text-white hover:bg-[#172840] hover:shadow-lg hover:shadow-primary/20'}`}
+          >
+            {plan.cta}
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <p class="text-center font-sans text-sm text-muted mt-8" data-reveal>
+      All plans include onboarding support, training, and data migration assistance.
+      <a href="#contact" class="text-accent font-semibold hover:underline ml-1">Talk to our team →</a>
+    </p>
+
+  </div>
+</section>

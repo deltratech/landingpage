@@ -1,60 +1,85 @@
 ---
 const pains = [
-  { title: 'Too Much Admin Work',       desc: 'Hours lost daily on paperwork, scheduling & manual tracking',       bg: 'bg-peach',   border: '#e8b8a8' },
-  { title: 'Inefficient Communication', desc: 'Messages scattered across WhatsApp, email & phone calls',           bg: 'bg-lavender', border: '#bbadd8' },
-  { title: 'No Learning Visibility',    desc: 'No easy way to track student progress or generate insights',        bg: 'bg-sky',     border: '#a5cce0' },
-];
-
-const IndonesiaProblem = [
-  { score: '~40%', desc: "of a teacher's week lost to admin and reporting" },
-  { score: '3+',   desc: 'disconnected tools per school (spreadsheet, chat, paper)' },
-  { score: '0',    desc: 'localised AI tools for the Indonesian curriculum' },
-  { score: 'Rp',   desc: 'Insufficient resources allocated to development and integration of modern tech' },
+  {
+    title: 'Administrative Overload',
+    stat: '40%',
+    statLabel: 'of teacher time lost to admin each week',
+    desc: 'Attendance registers, grade books, parent reports, exam schedules — all manual, all time-consuming, all pulling teachers away from students.',
+    color: 'bg-peach',
+    border: '#e8b8a8',
+    accent: '#c05a3a',
+  },
+  {
+    title: 'Fragmented Communication',
+    stat: '3+',
+    statLabel: 'separate tools used per school on average',
+    desc: 'Critical messages live across WhatsApp groups, email inboxes, and paper notices. Things fall through the cracks. Parents feel left out. Staff feel overwhelmed.',
+    color: 'bg-lavender',
+    border: '#bbadd8',
+    accent: '#7a5aa8',
+  },
+  {
+    title: 'No Learning Visibility',
+    stat: '0',
+    statLabel: 'localized AI tools for Indonesian K-12 curriculum',
+    desc: 'Teachers can\'t easily see which students are falling behind until exam results reveal it\'s too late. There\'s no early warning system, no data layer, no actionable insight.',
+    color: 'bg-sky',
+    border: '#a5cce0',
+    accent: '#2a6a8a',
+  },
 ];
 ---
-<section class="bg-surface py-10 md:py-16 px-4 md:px-8 relative overflow-hidden" id="problems">
-  <div class="max-w-6xl mx-auto">
 
-    <div class="flex flex-col items-center gap-2.5 text-center mb-10">
-      <span class="inline-flex items-center font-sans font-bold text-xs text-primary bg-primary/7 border border-primary/14 rounded-full px-4 py-1.5">
-        Common Pain Points
+<section class="bg-white py-20 md:py-28 relative overflow-hidden" id="problems">
+  <!-- Decorative element -->
+  <div class="absolute -left-32 top-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-surface opacity-60 blur-3xl pointer-events-none"></div>
+
+  <div class="relative max-w-6xl mx-auto px-4 md:px-8">
+
+    <div class="text-center mb-14" data-reveal>
+      <span class="inline-flex items-center font-sans font-semibold text-xs text-red-500 bg-red-50 border border-red-100 rounded-full px-4 py-1.5 mb-4">
+        The Problem
       </span>
-      <h2 class="text-primary font-sans">Sound Familiar?</h2>
-      <p class="font-sans text-[15px] text-muted">What schools struggle with every day</p>
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-primary mb-4">
+        Indonesian Schools Are Running on Systems<br class="hidden md:block"/> Built for a Different Era
+      </h2>
+      <p class="font-sans text-muted text-lg max-w-2xl mx-auto">
+        Most K-12 schools still rely on spreadsheets, WhatsApp groups, and paper-based workflows — draining teacher time and slowing down every decision.
+      </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-      {pains.map(p => (
-        <div class={`${p.bg} border rounded-2xl px-6 py-7 flex flex-col items-center text-center gap-3`} style={`border-color: ${p.border};`}>
-          <h3 class="text-xl text-primary font-sans">{p.title}</h3>
-          <p class="font-sans text-[13px] text-body leading-relaxed">{p.desc}</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-12">
+      {pains.map((p, i) => (
+        <div
+          class={`${p.color} border rounded-3xl p-7 flex flex-col gap-4 group hover:shadow-md transition-shadow duration-300`}
+          style={`border-color: ${p.border};`}
+          data-reveal
+          data-delay={String((i % 2) + 1)}
+        >
+          <div class="flex items-start justify-between gap-4">
+            <h3 class="font-display font-bold text-xl text-primary">{p.title}</h3>
+            <div class="text-right shrink-0">
+              <span class="font-display font-bold text-3xl" style={`color: ${p.accent};`}>{p.stat}</span>
+            </div>
+          </div>
+          <p class="font-sans text-xs font-semibold uppercase tracking-wider" style={`color: ${p.accent};`}>{p.statLabel}</p>
+          <p class="font-sans text-body text-sm leading-relaxed">{p.desc}</p>
         </div>
       ))}
     </div>
-    <div class="flex flex-col items-center gap-2.5 text-center mb-10">
-      <span class="inline-flex items-center font-sans font-bold text-xs text-primary bg-primary/7 border border-primary/14 rounded-full px-4 py-1.5">
-        The Reality in Indonesia
-      </span>
-      <h2 class="text-primary font-sans">Not Just a Pain — A Systemic Problem</h2>
-      <p class="font-sans text-[15px] text-muted">
-        Across Indonesian schools, these challenges aren’t occasional — they’re the norm.
-      </p>
 
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8">
-      <div>
-        <h1 class="text-2xl md:text-4xl font-sans text-primary leading-tight">
-          <span id="problems-typed"></span>
-        </h1>
-      </div>
-      <div class="grid grid-cols-2 gap-5">
-        {IndonesiaProblem.map(p => (
-          <div class="bg-green-100 border border-[#a5cce0] rounded-2xl px-6 py-7 flex flex-col items-center text-center gap-3">
-            <h3 class="text-xl text-primary">{p.score}</h3>
-            <p class="font-sans text-[13px] text-body leading-relaxed">{p.desc}</p>
-          </div>
-        ))}
-      </div>
+    <!-- Transition bridge -->
+    <div class="bg-primary rounded-3xl px-8 py-10 text-center" data-reveal>
+      <p class="font-display font-bold text-2xl md:text-3xl text-white mb-3">
+        Deltra changes all of this.
+      </p>
+      <p class="font-sans text-white/60 text-base max-w-xl mx-auto mb-6">
+        One platform that eliminates fragmentation, automates routine work, and gives school leaders the real-time visibility they need to lead effectively.
+      </p>
+      <a href="#features" class="font-sans font-bold text-sm text-primary bg-accent px-7 py-3 rounded-full inline-flex items-center gap-2 transition-all duration-200 hover:bg-[#18b899] hover:-translate-y-0.5">
+        See How It Works
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
     </div>
 
   </div>
@@ -71,30 +96,3 @@ const IndonesiaProblem = [
     50%       { opacity: 0; }
   }
 </style>
-
-<script>
-  import Typed from 'typed.js';
-
-  const el = document.getElementById('problems-typed');
-  if (el) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          observer.disconnect();
-          new Typed('#problems-typed', {
-            strings: ['Most K–12 schools still use spreadsheets, WhatsApp groups and manual report cards — draining teacher time and slowing the move to modern tools.'],
-            typeSpeed: 2,
-            showCursor: true,
-            cursorChar: '|',
-            loop: false,
-            onComplete(self) {
-              setTimeout(() => self.cursor.remove(), 1800);
-            },
-          });
-        }
-      });
-    }, { threshold: 0.3 });
-
-    observer.observe(el);
-  }
-</script>

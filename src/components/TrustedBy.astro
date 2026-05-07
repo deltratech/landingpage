@@ -1,0 +1,62 @@
+---
+const schools = [
+  'SMA Negeri 1 Jakarta', 'SMP Al-Azhar', 'SD Bina Bangsa', 'SMAN 3 Bandung',
+  'Sekolah Global Mandiri', 'SMA Kristen BPK Penabur', 'SD Islam Terpadu Rabbani',
+  'SMP Labschool Jakarta', 'SMAN 1 Surabaya', 'Sekolah Cendekia Harapan',
+];
+
+const stats = [
+  { value: '500+',  label: 'Schools Onboarded'   },
+  { value: '10k+',  label: 'Teachers & Staff'    },
+  { value: '98%',   label: 'Satisfaction Rate'   },
+  { value: '50+',   label: 'Cities in Indonesia' },
+];
+---
+
+<section class="bg-white border-y border-border py-16 md:py-20" id="trusted">
+  <div class="max-w-6xl mx-auto px-4 md:px-8">
+
+    <div class="text-center mb-10" data-reveal>
+      <p class="font-sans text-sm font-semibold text-muted uppercase tracking-widest mb-3">
+        Trusted Across Indonesia
+      </p>
+      <h2 class="font-display text-3xl md:text-4xl text-primary font-bold leading-tight">
+        Joined by 500+ Leading Schools
+      </h2>
+    </div>
+
+    <!-- School name marquee -->
+    <div class="relative overflow-hidden mb-12" data-reveal>
+      <div class="flex gap-3 flex-wrap justify-center">
+        {schools.map((name, i) => (
+          <span
+            class="inline-flex items-center gap-2 bg-surface border border-border text-primary font-sans text-sm font-medium px-4 py-2 rounded-full"
+            data-reveal
+            data-delay={String((i % 5) + 1)}
+          >
+            <span class="w-1.5 h-1.5 rounded-full bg-accent inline-block shrink-0"></span>
+            {name}
+          </span>
+        ))}
+        <span class="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 text-primary font-sans text-sm font-semibold px-4 py-2 rounded-full">
+          + 490 more schools
+        </span>
+      </div>
+    </div>
+
+    <!-- Stats strip -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden" data-reveal>
+      {stats.map((s, i) => (
+        <div
+          class="bg-white flex flex-col items-center justify-center py-8 px-4 text-center"
+          data-reveal
+          data-delay={String(i + 1)}
+        >
+          <span class="font-display font-bold text-4xl text-primary mb-1">{s.value}</span>
+          <span class="font-sans text-sm text-muted">{s.label}</span>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

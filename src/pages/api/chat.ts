@@ -40,7 +40,7 @@ export const POST: APIRoute = async ({ request }) => {
       ],
     });
 
-    const reply = completion.choices[0]?.message?.content ?? "I'm not sure about that. Try asking about Deltra's features or request a demo!";
+    const reply = completion.choices[0]?.message?.content ?? "I'm not sure about that. Try asking about Deltra`s features or request a demo!";
 
     return new Response(JSON.stringify({ reply }), {
       status: 200,

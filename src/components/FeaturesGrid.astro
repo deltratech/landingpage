@@ -1,0 +1,121 @@
+---
+const modules = [
+  {
+    tag: 'Learning Management',
+    title: 'A Complete LMS Built for Indonesian Curriculum',
+    desc: 'Give teachers a powerful learning platform that supports K-12 curriculum, lesson delivery, assignments, and real-time student tracking — all in one place.',
+    color: 'bg-mint',
+    borderColor: 'border-[#a8d5c8]',
+    accent: 'text-[#2a8a6a]',
+    features: [
+      'Curriculum-aligned lesson builder',
+      'Assignments, quizzes & grading tools',
+      'Student progress dashboard',
+      'Parent access portal',
+      'Learning analytics & reports',
+    ],
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/><path d="M8 7h8M8 11h5"/></svg>`,
+  },
+  {
+    tag: 'School Administration',
+    title: 'End-to-End Admin, Without the Paperwork',
+    desc: 'Streamline every administrative process — from student enrollment and attendance to staff contracts and financial reporting — on a single platform.',
+    color: 'bg-sky',
+    borderColor: 'border-[#a5cce0]',
+    accent: 'text-[#2a6a8a]',
+    features: [
+      'Student information & enrollment',
+      'Automated attendance tracking',
+      'Staff & HR management',
+      'Digital document workflows',
+      'Financial reporting & budgeting',
+    ],
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 8h10M7 12h6"/></svg>`,
+  },
+  {
+    tag: 'AI-Powered Tools',
+    title: 'An AI Co-Pilot for Every Teacher',
+    desc: 'Deltra`s AI engine surfaces insights, automates reports, and assists teachers with lesson planning — so educators spend less time on admin and more time teaching.',
+    color: 'bg-lavender',
+    borderColor: 'border-[#bbadd8]',
+    accent: 'text-[#6a4a8a]',
+    features: [
+      'AI student performance summaries',
+      'Auto-generated progress reports',
+      'AI lesson plan & exam questions',
+      'Attendance anomaly detection',
+      'Predictive analytics dashboard',
+    ],
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 014 4v1a4 4 0 01-8 0V6a4 4 0 014-4z"/><path d="M9 7H5a2 2 0 00-2 2v2a7 7 0 0014 0V9a2 2 0 00-2-2h-4"/><path d="M12 13v5M9 18h6"/></svg>`,
+  },
+  {
+    tag: 'Communication',
+    title: 'One Channel for Students, Parents & Staff',
+    desc: 'Replace fragmented WhatsApp groups and email chains with a unified, structured communication hub — with smart announcements and real-time notifications.',
+    color: 'bg-honey',
+    borderColor: 'border-[#e0c878]',
+    accent: 'text-[#8a6a2a]',
+    features: [
+      'School-wide announcements',
+      'Parent-teacher messaging',
+      'AI-assisted announcement drafts',
+      'Push & SMS notifications',
+      'Communication audit trail',
+    ],
+    icon: `<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M8 10h8M8 14h5"/></svg>`,
+  },
+];
+---
+
+<section class="bg-surface py-20 md:py-28" id="features">
+  <div class="max-w-6xl mx-auto px-4 md:px-8">
+
+    <div class="text-center mb-14" data-reveal>
+      <span class="inline-flex items-center font-sans font-semibold text-xs text-accent bg-accent/10 border border-accent/20 rounded-full px-4 py-1.5 mb-4">
+        Platform Modules
+      </span>
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-primary mb-4">
+        Everything Your School Needs, <br class="hidden md:block"/>in One Platform
+      </h2>
+      <p class="font-sans text-muted text-lg max-w-2xl mx-auto">
+        Four deeply integrated modules that replace the patchwork of spreadsheets, WhatsApp groups, and paper-based systems your school relies on today.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {modules.map((mod, i) => (
+        <div
+          class={`${mod.color} border ${mod.borderColor} rounded-3xl p-8 flex flex-col gap-5 group hover:shadow-lg transition-shadow duration-300`}
+          data-reveal
+          data-delay={String((i % 2) + 1)}
+        >
+          <div class="flex items-start gap-4">
+            <div class={`w-14 h-14 rounded-2xl bg-white/60 flex items-center justify-center shrink-0 ${mod.accent} group-hover:bg-white transition-colors duration-200`}>
+              <span set:html={mod.icon}></span>
+            </div>
+            <div>
+              <span class={`font-sans font-semibold text-xs uppercase tracking-widest ${mod.accent} mb-1 block`}>{mod.tag}</span>
+              <h3 class="font-display font-bold text-xl text-primary leading-snug">{mod.title}</h3>
+            </div>
+          </div>
+
+          <p class="font-sans text-body text-base leading-relaxed">{mod.desc}</p>
+
+          <ul class="flex flex-col gap-2.5">
+            {mod.features.map(f => (
+              <li class="flex items-center gap-2.5 font-sans text-sm text-body">
+                <span class={`w-4 h-4 rounded-full bg-white/80 flex items-center justify-center shrink-0 ${mod.accent}`}>
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none">
+                    <path d="M2 6l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                {f}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

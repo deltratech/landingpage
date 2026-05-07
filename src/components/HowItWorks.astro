@@ -1,0 +1,75 @@
+---
+const steps = [
+  {
+    num: '01',
+    title: 'Book a Free Demo',
+    desc: 'Schedule a 30-minute walkthrough with our education team. We will show you exactly how Deltra fits your school`s unique workflow.',
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>`,
+  },
+  {
+    num: '02',
+    title: 'Tailored Onboarding',
+    desc: 'Our team configures Deltra to match your curriculum, grading system, and school structure. Most schools are fully set up within 2 weeks.',
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>`,
+  },
+  {
+    num: '03',
+    title: 'Go Live & Grow',
+    desc: 'Launch to your teachers, students, and parents. Your dedicated success manager stays with you for the first 90 days to ensure smooth adoption.',
+    icon: `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`,
+  },
+];
+---
+
+<section class="bg-white py-20 md:py-28" id="how-it-works">
+  <div class="max-w-6xl mx-auto px-4 md:px-8">
+
+    <div class="text-center mb-16" data-reveal>
+      <span class="inline-flex items-center font-sans font-semibold text-xs text-accent bg-accent/10 border border-accent/20 rounded-full px-4 py-1.5 mb-4">
+        Simple Onboarding
+      </span>
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-primary mb-4">
+        Up and Running in 2 Weeks
+      </h2>
+      <p class="font-sans text-muted text-lg max-w-xl mx-auto">
+        We handle the heavy lifting so your team can focus on students from day one.
+      </p>
+    </div>
+
+    <div class="relative">
+      <!-- Connecting line (desktop) -->
+      <div class="hidden md:block absolute top-14 left-[calc(16.67%-1px)] right-[calc(16.67%-1px)] h-px bg-gradient-to-r from-border via-accent/30 to-border z-0"></div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+        {steps.map((step, i) => (
+          <div
+            class="flex flex-col items-center text-center"
+            data-reveal
+            data-delay={String(i + 1)}
+          >
+            <!-- Number circle -->
+            <div class="relative mb-6">
+              <div class="w-28 h-28 rounded-full bg-surface border-2 border-border flex flex-col items-center justify-center gap-1 shadow-sm">
+                <span class="font-mono text-xs font-bold text-accent tracking-widest">{step.num}</span>
+                <span class="text-primary" set:html={step.icon}></span>
+              </div>
+            </div>
+            <h3 class="font-display font-bold text-xl text-primary mb-3">{step.title}</h3>
+            <p class="font-sans text-muted text-base leading-relaxed">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="flex justify-center mt-14" data-reveal>
+      <a
+        href="#contact"
+        class="font-sans font-bold text-sm text-white bg-primary px-8 py-3.5 rounded-full inline-flex items-center gap-2 transition-all duration-200 hover:bg-[#172840] hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/20"
+      >
+        Book Your Free Demo
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+      </a>
+    </div>
+
+  </div>
+</section>

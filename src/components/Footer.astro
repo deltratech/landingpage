@@ -1,52 +1,111 @@
 ---
-const footerCols = [
-  { title: 'Product', items: ['Features', 'Pricing', 'Changelog', 'Integrations'] },
-  { title: 'Company', items: ['About', 'Careers', 'Press', 'Blog']                },
-  { title: 'Support', items: ['Help Center', 'Contact', 'Privacy', 'Terms']       },
+const product = [
+  { label: 'Features',        href: '#features'      },
+  { label: 'AI Tools',        href: '#ai'            },
+  { label: 'Pricing',         href: '#pricing'       },
+  { label: 'How It Works',    href: '#how-it-works'  },
+  { label: 'Security',        href: '#contact'       },
+];
+
+const company = [
+  { label: 'About Us',        href: '#'  },
+  { label: 'Our Mission',     href: '#'  },
+  { label: 'Careers',         href: '#'  },
+  { label: 'Press',           href: '#'  },
+  { label: 'Blog',            href: '#'  },
+];
+
+const support = [
+  { label: 'Help Center',     href: '#'  },
+  { label: 'Contact Us',      href: '#contact' },
+  { label: 'Request Demo',    href: '#contact' },
+  { label: 'Privacy Policy',  href: '#'  },
+  { label: 'Terms of Service',href: '#'  },
 ];
 
 const socials = [
-  { label: 'fb', href: '#', title: 'Facebook'    },
-  { label: 'ig', href: '#', title: 'Instagram'   },
-  { label: 'tw', href: '#', title: 'Twitter / X' },
-  { label: 'li', href: '#', title: 'LinkedIn'    },
+  {
+    label: 'Instagram',
+    href: '#',
+    icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
+  },
+  {
+    label: 'LinkedIn',
+    href: '#',
+    icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`,
+  },
+  {
+    label: 'Twitter / X',
+    href: '#',
+    icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`,
+  },
+  {
+    label: 'Facebook',
+    href: '#',
+    icon: `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>`,
+  },
+];
+
+const cols = [
+  { title: 'Product',  items: product  },
+  { title: 'Company',  items: company  },
+  { title: 'Support',  items: support  },
 ];
 ---
-<footer class="bg-primary px-4 md:px-8 pt-10 md:pt-12 pb-6">
+
+<footer class="bg-primary pt-16 pb-8 px-4 md:px-8">
   <div class="max-w-6xl mx-auto">
 
-    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-[2.2fr_1fr_1fr_1fr] gap-6 md:gap-8 pb-8 border-b border-white/8">
+    <div class="grid grid-cols-2 md:grid-cols-[2fr_1fr_1fr_1fr] gap-10 pb-12 border-b border-white/8">
 
       <!-- Brand column -->
-      <div class="col-span-2 md:col-span-1 flex flex-col gap-3.5 mb-2 md:mb-0">
-        <a href="/" aria-label="Deltra home" class="inline-flex">
-          <span class="flex items-center gap-1.5">
-            <span class="font-mono font-bold text-xl text-white">Deltra Tech</span>
-            <span class="w-2.5 h-2.5 rounded-full bg-accent inline-block mb-1 shrink-0"></span>
-          </span>
+      <div class="col-span-2 md:col-span-1 flex flex-col gap-5">
+        <a href="/" aria-label="Deltra home" class="inline-flex items-center gap-2">
+          <span class="font-sans font-bold text-xl text-white">Deltra</span>
+          <span class="font-sans font-bold text-xl text-accent">Tech</span>
+          <span class="w-2 h-2 rounded-full bg-accent mb-1 shrink-0"></span>
         </a>
-        <p class="font-mono text-[13px] text-white/40 leading-relaxed max-w-60">
-          One platform. Every workflow. Intelligently automated.
+
+        <p class="font-sans text-sm text-white/40 leading-relaxed max-w-56">
+          All-in-one AI-powered school operations platform for Indonesian K-12 schools.
         </p>
+
+        <!-- Trust badges -->
+        <div class="flex flex-wrap gap-2">
+          {['🔒 Data Privacy', '🇮🇩 Made for Indonesia', '☁️ Secure Cloud'].map(badge => (
+            <span class="font-sans text-xs text-white/40 border border-white/10 rounded-full px-3 py-1">
+              {badge}
+            </span>
+          ))}
+        </div>
+
+        <!-- Social icons -->
         <div class="flex gap-2">
           {socials.map(s => (
-            <a href={s.href} title={s.title} aria-label={s.title}
-               class="w-7.5 h-7.5 rounded-[7px] bg-white/7 border border-white/10 text-white/40 font-mono font-bold text-[10px] uppercase flex items-center justify-center transition-all duration-200 hover:bg-accent hover:text-primary hover:border-accent">
-              {s.label}
+            <a
+              href={s.href}
+              title={s.label}
+              aria-label={s.label}
+              class="w-9 h-9 rounded-xl bg-white/5 border border-white/10 text-white/40 flex items-center justify-center transition-all duration-200 hover:bg-accent hover:text-primary hover:border-accent"
+            >
+              <span set:html={s.icon}></span>
             </a>
           ))}
         </div>
       </div>
 
       <!-- Nav columns -->
-      {footerCols.map(col => (
-        <div class="flex flex-col gap-3">
-          <h3 class="font-mono font-bold text-[13px] text-white/60">{col.title}</h3>
-          <ul class="flex flex-col gap-2 list-none">
+      {cols.map(col => (
+        <div class="flex flex-col gap-4">
+          <h4 class="font-sans font-bold text-xs text-white/50 uppercase tracking-widest">{col.title}</h4>
+          <ul class="flex flex-col gap-2.5 list-none">
             {col.items.map(item => (
               <li>
-                <a href="#" class="font-mono text-[13px] text-white/30 leading-snug transition-colors duration-200 hover:text-accent">
-                  {item}
+                <a
+                  href={item.href}
+                  class="font-sans text-sm text-white/30 transition-all duration-200 hover:text-accent hover:translate-x-0.5 inline-block"
+                >
+                  {item.label}
                 </a>
               </li>
             ))}
@@ -56,9 +115,14 @@ const socials = [
 
     </div>
 
-    <div class="pt-5 flex flex-col sm:flex-row justify-between items-center gap-1.5 font-mono text-xs text-white/20 text-center">
-      <span>© 2026 Deltra Inc. All rights reserved.</span>
-      <span>Made with ♥ for educators</span>
+    <!-- Bottom strip -->
+    <div class="pt-7 flex flex-col sm:flex-row justify-between items-center gap-3">
+      <p class="font-sans text-xs text-white/20">
+        © 2026 Deltra Tech Inc. All rights reserved.
+      </p>
+      <p class="font-sans text-xs text-white/20">
+        Made with ♥ for educators across Indonesia
+      </p>
     </div>
 
   </div>
