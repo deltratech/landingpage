@@ -10,7 +10,7 @@ const pains = [
     accent: '#c05a3a',
   },
   {
-    title: 'Fragmented Communication',
+    title: 'Inefficient Communication',
     stat: '3+',
     statLabel: 'separate tools used per school on average',
     desc: 'Critical messages live across WhatsApp groups, email inboxes, and paper notices. Things fall through the cracks. Parents feel left out. Staff feel overwhelmed.',
@@ -22,7 +22,9 @@ const pains = [
     title: 'No Learning Visibility',
     stat: '0',
     statLabel: 'localized AI tools for Indonesian K-12 curriculum',
-    desc: 'Teachers can\'t easily see which students are falling behind until exam results reveal it\'s too late. There\'s no early warning system, no data layer, no actionable insight.',
+    stat2: 'Rp',
+    statLabel2: 'insufficient resources allocated to modern tech integration',
+    desc: 'Teachers can\'t see which students are falling behind until it\'s too late — and schools lack the budget and tools to fix it. No AI, no early warning, no data layer.',
     color: 'bg-sky',
     border: '#a5cce0',
     accent: '#2a6a8a',
@@ -40,10 +42,10 @@ const pains = [
       <span class="inline-flex items-center font-sans font-semibold text-xs text-red-500 bg-red-50 border border-red-100 rounded-full px-4 py-1.5 mb-4">
         The Problem
       </span>
-      <h2 class="font-display text-3xl md:text-4xl font-bold text-primary mb-4">
+      <h2 class="font-display text-4xl md:text-5xl font-bold text-primary mb-4">
         Indonesian Schools Are Running on Systems<br class="hidden md:block"/> Built for a Different Era
       </h2>
-      <p class="font-sans text-muted text-lg max-w-2xl mx-auto">
+      <p class="font-sans text-muted text-lg font-semibold max-w-4xl mx-auto">
         Most K-12 schools still rely on spreadsheets, WhatsApp groups, and paper-based workflows — draining teacher time and slowing down every decision.
       </p>
     </div>
@@ -51,18 +53,34 @@ const pains = [
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-12">
       {pains.map((p, i) => (
         <div
-          class={`${p.color} border rounded-3xl p-7 flex flex-col gap-4 group hover:shadow-md transition-shadow duration-300`}
+          class={`${(p as any).stat2 ? 'sm:col-span-2' : ''} ${p.color} border rounded-3xl p-7 flex flex-col gap-4 group hover:shadow-md transition-shadow duration-300`}
           style={`border-color: ${p.border};`}
           data-reveal
           data-delay={String((i % 2) + 1)}
         >
-          <div class="flex items-start justify-between gap-4">
-            <h3 class="font-display font-bold text-xl text-primary">{p.title}</h3>
-            <div class="text-right shrink-0">
-              <span class="font-display font-bold text-3xl" style={`color: ${p.accent};`}>{p.stat}</span>
+          <h3 class="font-display font-bold text-xl text-primary">{p.title}</h3>
+
+          {(p as any).stat2 ? (
+            <!-- Dual-stat — one box, divided -->
+            <div class="bg-white/50 rounded-2xl flex overflow-hidden">
+              <div class="flex-1 px-5 py-4 flex flex-col gap-1">
+                <span class="font-display font-bold text-5xl py-2" style={`color: ${p.accent};`}>{p.stat}</span>
+                <span class="font-sans text-xs font-semibold uppercase tracking-wider leading-snug" style={`color: ${p.accent};`}>{p.statLabel}</span>
+              </div>
+              <div class="w-px self-stretch" style={`background: ${p.border};`}></div>
+              <div class="flex-1 px-5 py-4 flex flex-col gap-1">
+                <span class="font-display font-bold text-5xl py-2" style={`color: ${p.accent};`}>{(p as any).stat2}</span>
+                <span class="font-sans text-xs font-semibold uppercase tracking-wider leading-snug" style={`color: ${p.accent};`}>{(p as any).statLabel2}</span>
+              </div>
             </div>
-          </div>
-          <p class="font-sans text-xs font-semibold uppercase tracking-wider" style={`color: ${p.accent};`}>{p.statLabel}</p>
+          ) : (
+            <!-- Single-stat layout -->
+            <div class="flex items-start justify-between gap-4">
+              <p class="font-sans text-xs font-semibold uppercase tracking-wider" style={`color: ${p.accent};`}>{p.statLabel}</p>
+              <span class="font-display font-bold text-5xl shrink-0" style={`color: ${p.accent};`}>{p.stat}</span>
+            </div>
+          )}
+
           <p class="font-sans text-body text-sm leading-relaxed">{p.desc}</p>
         </div>
       ))}

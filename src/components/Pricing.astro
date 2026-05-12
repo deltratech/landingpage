@@ -50,17 +50,17 @@ const plans = [
 ];
 ---
 
-<section class="bg-white py-20 md:py-28" id="pricing">
+<section class="bg-mint py-20 md:py-28" id="pricing">
   <div class="max-w-6xl mx-auto px-4 md:px-8">
 
     <div class="text-center mb-14" data-reveal>
-      <span class="inline-flex items-center font-sans font-semibold text-xs text-accent bg-accent/10 border border-accent/20 rounded-full px-4 py-1.5 mb-4">
+      <span class="inline-flex items-center font-sans font-bold text-xs text-accent bg-accent/10 border border-accent/20 rounded-full px-4 py-1.5 mb-4">
         Flexible Pricing
       </span>
-      <h2 class="font-display text-3xl md:text-4xl font-bold text-primary mb-4">
+      <h2 class="font-display text-4xl md:text-5xl font-bold text-primary mb-4">
         Plans That Grow With Your School
       </h2>
-      <p class="font-sans text-muted text-lg max-w-xl mx-auto">
+      <p class="font-sans text-muted text-lg font-bold mx-auto">
         No hidden fees. No per-seat surprises. Pricing is customized to your school's size and needs — contact us for a tailored proposal.
       </p>
     </div>
@@ -105,12 +105,14 @@ const plans = [
             ))}
           </ul>
 
-          <a
-            href="#contact"
-            class={`font-sans font-bold text-sm px-6 py-3 rounded-full text-center transition-all duration-200 hover:-translate-y-0.5 ${plan.highlight ? 'bg-accent text-primary hover:bg-[#18b899] hover:shadow-lg hover:shadow-accent/30' : 'bg-primary text-white hover:bg-[#172840] hover:shadow-lg hover:shadow-primary/20'}`}
-          >
-            {plan.cta}
-          </a>
+          <div class="text-white">
+              <a
+              href="#contact"
+              class={`font-sans font-bold text-sm px-6 py-3 rounded-full text-center transition-all duration-200 hover:-translate-y-0.5 ${plan.highlight ? 'bg-accent text-primary hover:bg-[#18b899] hover:shadow-lg hover:shadow-accent/30' : 'bg-primary text-white hover:bg-[#172840] hover:shadow-lg hover:shadow-primary/20'}`}
+            >
+              {plan.cta}
+            </a>
+          </div>
         </div>
       ))}
     </div>

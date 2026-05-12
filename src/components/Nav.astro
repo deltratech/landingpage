@@ -5,9 +5,9 @@ const links = [
   { label: 'Home',     href: '/',         active: true  },  
   { label: 'Product', href: '#', active: false },
   { label: 'Pricing', href: '#pricing', active: false },
-  { label: 'About',    href: '#about',    active: false },
+  { label: 'About Us',    href: '#about',    active: false },
   { label: 'Contact',  href: '#contact',  active: false },
-  { label: 'Case Studies ',  href: '#contact',  active: false },
+  { label: 'FAQ ',  href: '#faq',  active: false },
 ];
 ---
 
@@ -63,7 +63,7 @@ const links = [
         <li>
           <a
             href={link.href}
-            class="nav-link font-sans text-lg transition-all duration-200"
+            class="nav-link font-sans text-lg font-bold transition-all duration-200"
             {...(link.active ? { 'data-active': '' } : {})}
           >
             {link.label}

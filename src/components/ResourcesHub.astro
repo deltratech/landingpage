@@ -1,0 +1,385 @@
+---
+const API_BASE = import.meta.env.PUBLIC_API_URL;
+
+const TAG_COLORS = [
+  'bg-tint text-accent border-border',
+  'bg-peach border border-[#e8b8a8] text-[#c05a3a]',
+  'bg-lavender border border-[#bbadd8] text-[#7a5aa8]',
+];
+
+function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function estimateReadTime(content: string) {
+  const words = content?.split(/\s+/).length ?? 0;
+  return `${Math.max(1, Math.ceil(words / 200))} min read`;
+}
+
+type ApiPost = {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt: string | null;
+  coverImage: string | null;
+  status: string;
+  createdAt: string;
+  tags: { id: string; name: string }[];
+};
+
+type Post = {
+  tag: string;
+  tagColor: string;
+  title: string;
+  excerpt: string;
+  readTime: string;
+  date: string;
+  photo: string;
+  slug: string;
+};
+
+const FALLBACK_POSTS: Post[] = [
+  {
+    tag: 'AI in Education',
+    tagColor: TAG_COLORS[0],
+    title: 'How AI Early-Warning Systems Are Preventing Student Dropouts in Indonesian Schools',
+    excerpt: 'A look at how predictive analytics — applied to attendance, grades, and engagement data — are helping teachers intervene before it\'s too late.',
+    readTime: '6 min read',
+    date: 'Apr 28, 2025',
+    photo: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&h=360&fit=crop&auto=format&q=80',
+    slug: '',
+  },
+  {
+    tag: 'School Operations',
+    tagColor: TAG_COLORS[1],
+    title: 'The Hidden Cost of Manual Attendance: Why Indonesian Teachers Lose 40% of Their Time',
+    excerpt: 'We surveyed 500+ school administrators across Java and Sumatra. Here\'s what they told us about administrative overload — and how to fix it.',
+    readTime: '5 min read',
+    date: 'Apr 14, 2025',
+    photo: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=360&fit=crop&auto=format&q=80',
+    slug: '',
+  },
+  {
+    tag: 'Digital Transformation',
+    tagColor: TAG_COLORS[2],
+    title: 'From Spreadsheets to Smart Systems: A 90-Day Digital Transformation Playbook for K-12 Schools',
+    excerpt: 'A practical, step-by-step guide for principals and IT leads navigating the transition from legacy workflows to a modern school management platform.',
+    readTime: '8 min read',
+    date: 'Mar 31, 2025',
+    photo: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=600&h=360&fit=crop&auto=format&q=80',
+    slug: '',
+  },
+];
+
+let posts: Post[] = FALLBACK_POSTS;
+
+try {
+  const res = await fetch(`${API_BASE}/posts/published`);
+  if (res.ok) {
+    const json = await res.json();
+    const apiPosts: ApiPost[] = json.data ?? [];
+    if (apiPosts.length > 0) {
+      posts = apiPosts.slice(0, 3).map((p, i) => ({
+        tag: p.tags?.[0]?.name ?? 'Insight',
+        tagColor: TAG_COLORS[i % TAG_COLORS.length],
+        title: p.title,
+        excerpt: p.excerpt ?? p.content?.slice(0, 160) + '…',
+        readTime: estimateReadTime(p.content),
+        date: formatDate(p.createdAt),
+        photo: p.coverImage ?? 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&h=360&fit=crop&auto=format&q=80',
+        slug: p.slug,
+      }));
+    }
+  }
+} catch {
+  // API unavailable — render with fallback posts
+}
+
+const resources = [
+  {
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>`,
+    label: 'Whitepaper',
+    title: 'The State of K-12 Education Technology in Indonesia 2025',
+    desc: '28-page research report covering adoption barriers, budget trends, and ROI data from 300+ schools.',
+    cta: 'Download Free',
+  },
+  {
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>`,
+    label: 'Implementation Guide',
+    title: 'Deltra Onboarding Playbook: Go Live in 5 Days',
+    desc: 'Step-by-step guide for IT leads and principals — covers data migration, staff training, and parent communication.',
+    cta: 'Get the Guide',
+  },
+  {
+    icon: `<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>`,
+    label: 'ROI Calculator',
+    title: 'How Much Teacher Time Could Your School Reclaim?',
+    desc: 'Interactive worksheet: plug in your school size and current admin hours, and see your projected time & cost savings.',
+    cta: 'Get the Template',
+  },
+];
+
+const faqs = [
+  {
+    q: 'How is student data protected?',
+    a: 'Deltra is fully compliant with Indonesia\'s UU PDP (Personal Data Protection Law). All data is encrypted at rest and in transit, hosted on AWS ap-southeast-1 (Jakarta), and never shared with third parties. We are aligned with ISO 27001 standards and SOC 2 Type II certification is in progress.',
+  },
+  {
+    q: 'How long does onboarding take?',
+    a: 'Most schools are fully live within 3–5 business days. Our onboarding team handles data migration, configures your school\'s academic calendar and curriculum structure, and runs live training sessions for admin staff and teachers. Zero technical expertise required from your team.',
+  },
+  {
+    q: 'Do teachers need to be trained to use Deltra?',
+    a: 'Deltra is designed for non-technical users. Teachers typically need 1–2 hours to get comfortable with the platform. We provide in-app walkthroughs, a dedicated help center in Bahasa Indonesia, and live support via WhatsApp during school hours.',
+  },
+  {
+    q: 'Can Deltra integrate with our existing systems (DAPODIK, SisPenA, etc.)?',
+    a: 'Yes. Deltra has native integrations with DAPODIK and SisPenA, and supports CSV/Excel import for historical grade and attendance data. Custom API integrations are available on the Yayasan plan.',
+  },
+  {
+    q: 'What happens to our data if we stop using Deltra?',
+    a: 'You own your data. Upon request, we export all your school\'s data in standard formats (CSV, Excel, PDF) at no cost. Data is retained for 90 days after account closure, then permanently deleted from our servers.',
+  },
+  {
+    q: 'Is pricing per student or per school?',
+    a: 'Pricing is structured per school, not per student — so you won\'t face surprise costs as enrollment grows. Each plan includes unlimited students, with tiered pricing based on the number of active staff accounts and feature set. Contact us for a custom quote.',
+  },
+];
+---
+
+<section class="bg-accent py-20 md:py-28" id="resources">
+  <div class="max-w-6xl mx-auto px-4 md:px-8 space-y-24">
+
+    <!-- ── Blog ───────────────────────────────────────────── -->
+    <div>
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10" data-reveal>
+        <div>
+          <span class="inline-flex items-center font-sans font-semibold text-xs text-accent bg-tint border border-border rounded-full px-4 py-1.5 mb-3">
+            Thought Leadership
+          </span>
+          <h2 class="font-display text-3xl md:text-4xl font-bold text-primary">
+            Insights for Indonesian School Leaders
+          </h2>
+        </div>
+        <a href="#" class="font-sans font-semibold text-sm text-accent hover:underline underline-offset-4 shrink-0">
+          View all articles →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {posts.map((p, i) => (
+          <article
+            class="group bg-surface border border-border rounded-3xl overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col"
+            data-reveal
+            data-delay={String(i + 1)}
+          >
+            <a href={p.slug ? `/blog/${p.slug}` : '#'} class="h-44 overflow-hidden block">
+              <img
+                src={p.photo}
+                alt={p.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+            </a>
+            <div class="p-6 flex flex-col gap-3 flex-1">
+              <span class={`self-start inline-flex items-center font-sans font-semibold text-xs border rounded-full px-3 py-1 ${p.tagColor}`}>
+                {p.tag}
+              </span>
+              <a href={p.slug ? `/blog/${p.slug}` : '#'}>
+                <h3 class="font-display font-bold text-lg text-primary leading-snug group-hover:text-accent transition-colors duration-200">
+                  {p.title}
+                </h3>
+              </a>
+              <p class="font-sans text-sm text-muted leading-relaxed flex-1">{p.excerpt}</p>
+              <div class="flex items-center justify-between pt-2 border-t border-border mt-auto">
+                <span class="font-sans text-xs text-muted">{p.date}</span>
+                <span class="font-sans text-xs font-medium text-accent">{p.readTime}</span>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Downloadable Resources ─────────────────────────── -->
+  <section class="bg-surface py-20 md:py-28" id="resources">
+    <div class="max-w-6xl mx-auto px-4 md:px-8 space-y-24">      
+      <div>
+        <div class="text-center mb-10" data-reveal>
+          <span class="inline-flex items-center font-sans font-bold text-xs text-accent bg-tint border border-border rounded-full px-4 py-1.5 mb-3">
+            Free Resources
+          </span>
+          <h2 class="font-display text-4xl md:text-5xl font-bold text-primary mb-3">
+            Tools & Guides for School Administrators
+          </h2>
+          <p class="font-sans text-muted font-bold text-base max-w-xl mx-auto">
+            Practical resources built for Indonesian K-12 contexts — free to download.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {resources.map((r, i) => (
+            <div
+              class="bg-surface border border-border rounded-3xl p-7 flex flex-col gap-5 hover:border-accent/40 hover:shadow-md transition-all duration-200"
+              data-reveal
+              data-delay={String(i + 1)}
+            >
+              <div class="w-12 h-12 rounded-2xl bg-tint flex items-center justify-center text-accent shrink-0">
+                <Fragment set:html={r.icon} />
+              </div>
+              <div class="flex flex-col gap-2 flex-1">
+                <span class="font-sans text-xs font-semibold uppercase tracking-wider text-accent">{r.label}</span>
+                <h3 class="font-display font-bold text-lg text-primary leading-snug">{r.title}</h3>
+                <p class="font-sans text-sm text-muted leading-relaxed">{r.desc}</p>
+              </div>
+              <!-- Email gate trigger -->
+              <button
+                class="resource-download w-full font-sans font-bold text-sm text-white bg-primary rounded-xl py-3 px-5 hover:bg-accent transition-colors duration-200"
+                data-title={r.title}
+              >
+                {r.cta}
+              </button>
+            </div>
+          ))}
+        </div>
+
+        <!-- Email capture modal -->
+        <div id="resource-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+          <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="modal-backdrop"></div>
+          <div class="relative bg-white rounded-3xl p-8 w-full max-w-md shadow-2xl">
+            <button id="modal-close" class="absolute top-4 right-4 text-muted hover:text-primary transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <p class="font-sans text-xs font-semibold uppercase tracking-widest text-accent mb-2">Free Download</p>
+            <h3 id="modal-title" class="font-display font-bold text-xl text-primary mb-1">Resource Title</h3>
+            <p class="font-sans text-sm text-muted mb-6">Enter your work email and we'll send the download link instantly.</p>
+            <form id="resource-form" class="flex flex-col gap-3">
+              <input
+                type="text"
+                placeholder="Your name"
+                required
+                class="font-sans text-sm text-primary bg-surface border border-border rounded-xl px-4 py-3 outline-none focus:border-accent transition-colors"
+              />
+              <input
+                type="email"
+                placeholder="Work email address"
+                required
+                class="font-sans text-sm text-primary bg-surface border border-border rounded-xl px-4 py-3 outline-none focus:border-accent transition-colors"
+              />
+              <input
+                type="text"
+                placeholder="School name"
+                class="font-sans text-sm text-primary bg-surface border border-border rounded-xl px-4 py-3 outline-none focus:border-accent transition-colors"
+              />
+              <button
+                type="submit"
+                class="w-full font-sans font-bold text-sm text-primary bg-accent rounded-xl py-3 px-5 hover:bg-[#18b899] transition-colors duration-200 mt-1"
+              >
+                Send Me the Resource
+              </button>
+            </form>
+            <p class="font-sans text-xs text-muted text-center mt-4">No spam. Unsubscribe anytime.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+   
+
+  <!-- ── FAQ ────────────────────────────────────────────── -->
+<section class="bg-blue-50 py-20 md:py-28" id="resources">
+  <div class="max-w-6xl mx-auto px-4 md:px-8 space-y-24">      
+    <div>
+        <div class="text-center mb-10" data-reveal>
+          <span class="inline-flex items-center font-sans font-bold text-xs text-accent bg-tint border border-border rounded-full px-4 py-1.5 mb-3">
+            FAQ
+          </span>
+          <h2 class="font-display text-4xl md:text-5xl font-bold text-primary mb-3">
+            Common Questions from School Leaders
+          </h2>
+          <p class="font-sans text-muted font-bold text-base max-w-xl mx-auto">
+            Everything you need to know before bringing Deltra to your school.
+          </p>
+        </div>
+
+        <div class="max-w-3xl mx-auto divide-y divide-border" id="faq-list">
+          {faqs.map((f, i) => (
+            <div class="faq-item py-5" data-reveal data-delay={String((i % 3) + 1)}>
+              <button
+                class="faq-trigger w-full flex items-center justify-between gap-4 text-left group"
+                aria-expanded="false"
+              >
+                <span class="font-sans font-semibold text-base text-primary group-hover:text-accent transition-colors duration-200">
+                  {f.q}
+                </span>
+                <span class="faq-icon w-6 h-6 rounded-full border border-border flex items-center justify-center shrink-0 text-muted transition-transform duration-300">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                </span>
+              </button>
+              <div class="faq-body overflow-hidden max-h-0 transition-all duration-300">
+                <p class="font-sans text-sm text-muted leading-relaxed pt-3 pb-1">{f.a}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>  
+
+  </div>
+</section>
+
+<script>
+  // ── FAQ accordion ──────────────────────────────────────
+  document.querySelectorAll('.faq-trigger').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item') as HTMLElement;
+      const body = item.querySelector('.faq-body') as HTMLElement;
+      const icon = item.querySelector('.faq-icon') as HTMLElement;
+      const open = btn.getAttribute('aria-expanded') === 'true';
+
+      // close all
+      document.querySelectorAll('.faq-item').forEach(el => {
+        (el.querySelector('.faq-body') as HTMLElement).style.maxHeight = '0';
+        (el.querySelector('.faq-icon') as HTMLElement).style.transform = 'rotate(0deg)';
+        el.querySelector('.faq-trigger')!.setAttribute('aria-expanded', 'false');
+      });
+
+      if (!open) {
+        body.style.maxHeight = body.scrollHeight + 'px';
+        icon.style.transform = 'rotate(180deg)';
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // ── Resource email gate ────────────────────────────────
+  const modal   = document.getElementById('resource-modal') as HTMLElement;
+  const titleEl = document.getElementById('modal-title') as HTMLElement;
+  const form    = document.getElementById('resource-form') as HTMLFormElement;
+
+  document.querySelectorAll('.resource-download').forEach(btn => {
+    btn.addEventListener('click', () => {
+      titleEl.textContent = (btn as HTMLElement).dataset.title ?? '';
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    });
+  });
+
+  function closeModal() {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  }
+
+  document.getElementById('modal-close')!.addEventListener('click', closeModal);
+  document.getElementById('modal-backdrop')!.addEventListener('click', closeModal);
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    closeModal();
+    // Dispatch a custom event for Toast integration
+    document.dispatchEvent(new CustomEvent('show-toast', {
+      detail: { message: 'Resource sent! Check your inbox.' }
+    }));
+  });
+</script>

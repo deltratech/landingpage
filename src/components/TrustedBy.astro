@@ -1,62 +1,286 @@
 ---
+// import kinderfield logo
+import kinderfieldLogo from '../assets/images/kinderfield-logo.png';
+
 const schools = [
-  'SMA Negeri 1 Jakarta', 'SMP Al-Azhar', 'SD Bina Bangsa', 'SMAN 3 Bandung',
-  'Sekolah Global Mandiri', 'SMA Kristen BPK Penabur', 'SD Islam Terpadu Rabbani',
-  'SMP Labschool Jakarta', 'SMAN 1 Surabaya', 'Sekolah Cendekia Harapan',
+  
+  { name: 'Kinderfield Duren Sawit',            location: 'Jakarta',                photo: kinderfieldLogo.src },
+  { name: 'Kinderfield Bogor',         location: 'Bogor',                photo: kinderfieldLogo.src },
+  { name: 'Kinderfield Bekasi',       location: 'Bekasi',         photo: kinderfieldLogo.src },
+];
+
+const testimonials = [
+  {
+    quote: 'Deltra cut our monthly admin workload by nearly half. Attendance, reports, parent communication — it\'s all in one place now. Our teachers actually have time to teach again.',
+    name: 'Drs. Ahmad Fauzi, M.Pd.',
+    role: 'Principal',
+    school: 'SMAN 3 Bandung',
+    photo: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=96&h=96&fit=crop&crop=face&auto=format&q=80',
+    color: 'bg-sky',
+    borderColor: '#a5cce0',
+  },
+  {
+    quote: 'The AI early-warning system flagged three at-risk students in the first week. We\'d never have caught that from a spreadsheet. This is a genuine step change for student outcomes.',
+    name: 'Ibu Sari Dewi Kusuma',
+    role: 'Vice Principal, Curriculum',
+    school: 'SMP Labschool Jakarta',
+    photo: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=96&h=96&fit=crop&crop=face&auto=format&q=80',
+    color: 'bg-mint',
+    borderColor: '#9ed8c5',
+  },
+  {
+    quote: 'Setup was done in a single afternoon. The Deltra team migrated our data, trained staff, and we were live the next day. I expected weeks of disruption — it was the opposite.',
+    name: 'Bpk. Rizky Prasetyo',
+    role: 'IT & Admin Lead',
+    school: 'Sekolah Global Mandiri',
+    photo: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=96&h=96&fit=crop&crop=face&auto=format&q=80',
+    color: 'bg-lavender',
+    borderColor: '#bbadd8',
+  },
+];
+
+const founders = [
+  {
+    name: 'John Doe',
+    role: 'Co-Founder',
+    bio: '10+ yrs in EdTech & SaaS. Former Head of Product at EduNesia; alumni of UI and Stanford d.school.',
+    photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face&auto=format&q=80',
+  },
+  {
+    name: 'John Doe',
+    role: 'Co-Founder',
+    bio: 'Full-stack engineer turned AI researcher. Led platform engineering at Gojek Education; MSc in ML, ITB.',
+    photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face&auto=format&q=80',
+  },
+  {
+    name: 'John Doe',
+    role: 'Co-Founder',
+    bio: '15 yrs in Indonesian K-12. Former Regional Supervisor, Kemendikbud; built curriculum for 300+ schools.',
+    photo: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face&auto=format&q=80',
+  },
+];
+
+const badges = [  
+  { icon: '', label: 'Student Data Protection',  sub: 'ISO 27001 Aligned' },
+  { icon: '', label: 'Secure Cloud Hosting',     sub: 'AWS' },
+];
+
+const press = [
+  { outlet: 'Kompas.id',    label: '"Best EdTech Startup 2024"' },
+  { outlet: 'Detik.com',    label: '"Transforming Indonesian Schools"' },
+  { outlet: 'Tech in Asia', label: '"One to Watch — SEA EdTech"' },
+  { outlet: 'KORAN SINDO',  label: '"Inovasi Pendidikan Digital"' },
+  { outlet: 'Kemendikbud',  label: 'Official Education Partner' },
 ];
 
 const stats = [
-  { value: '500+',  label: 'Schools Onboarded'   },
-  { value: '10k+',  label: 'Teachers & Staff'    },
-  { value: '98%',   label: 'Satisfaction Rate'   },
-  { value: '50+',   label: 'Cities in Indonesia' },
+  { value: '500+', label: 'Schools Onboarded'  },
+  { value: '10k+', label: 'Teachers & Staff'   },
+  { value: '98%',  label: 'Satisfaction Rate'  },
+  { value: '50+',  label: 'Cities in Indonesia'},
 ];
 ---
 
-<section class="bg-white border-y border-border py-16 md:py-20" id="trusted">
-  <div class="max-w-6xl mx-auto px-4 md:px-8">
+<section class="bg-accent py-20 md:py-28 overflow-hidden" id="trusted">
+  <div class="max-w-6xl mx-auto px-4 md:px-8 space-y-10">
 
-    <div class="text-center mb-10" data-reveal>
-      <p class="font-sans text-sm font-semibold text-muted uppercase tracking-widest mb-3">
+    <!-- ── Header ───────────────────────────────────────── -->
+    <div class="text-center" data-reveal>
+      <span class="inline-flex items-center font-sans font-semibold text-xs text-primary bg-white/30 border border-white/40 rounded-full px-4 py-1.5 mb-4">
         Trusted Across Indonesia
-      </p>
-      <h2 class="font-display text-3xl md:text-4xl text-primary font-bold leading-tight">
+      </span>
+      <h2 class="font-display text-4xl md:text-5xl font-bold text-primary mb-4">
         Joined by 500+ Leading Schools
       </h2>
+      <p class="font-sans text-primary/70 text-lg font-bold max-w-2xl mx-auto">
+        From national public schools to private institutions and religious foundations — Deltra powers learning operations across the archipelago.
+      </p>
     </div>
 
-    <!-- School name marquee -->
-    <div class="relative overflow-hidden mb-12" data-reveal>
-      <div class="flex gap-3 flex-wrap justify-center">
-        {schools.map((name, i) => (
-          <span
-            class="inline-flex items-center gap-2 bg-surface border border-border text-primary font-sans text-sm font-medium px-4 py-2 rounded-full"
-            data-reveal
-            data-delay={String((i % 5) + 1)}
-          >
-            <span class="w-1.5 h-1.5 rounded-full bg-accent inline-block shrink-0"></span>
-            {name}
-          </span>
-        ))}
-        <span class="inline-flex items-center gap-2 bg-primary/5 border border-primary/10 text-primary font-sans text-sm font-semibold px-4 py-2 rounded-full">
-          + 490 more schools
-        </span>
+    <!-- ── School Carousel ──────────────────────────────── -->
+    <div data-reveal>
+      <p class="font-sans text-xs font-semibold uppercase tracking-widest text-primary/60 text-center mb-8">Partner Schools</p>
+      <div class="relative justify-items-center">
+        <!-- Prev button -->
+        <button
+          id="school-prev"
+          class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-primary hover:shadow-lg hover:scale-105 transition-all duration-200"
+          aria-label="Previous"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+        </button>
+
+        <!-- Track -->
+        <div id="school-track" class="overflow-hidden">
+          <div id="school-inner" class="flex gap-6 transition-transform duration-500 ease-in-out">
+            {schools.map((s) => (
+              <div class="flex-none w-44 flex flex-col items-center gap-3 text-center">
+                <div class="w-full h-48 rounded-2xl overflow-hidden bg-accent shadow-sm border border-accent">
+                  <img
+                    src={s.photo}
+                    alt={s.name}
+                    class="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <div>
+                  <p class="font-sans font-semibold text-xl text-primary leading-tight">{s.name}</p>
+                  <p class="font-sans text-lg text-primary/60 mt-0.5">({s.location})</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Next button -->
+        <button
+          id="school-next"
+          class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-primary hover:shadow-lg hover:scale-105 transition-all duration-200"
+          aria-label="Next"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+        </button>
       </div>
     </div>
 
-    <!-- Stats strip -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden" data-reveal>
+    <!-- ── Stats Strip ───────────────────────────────────── -->
+    <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-primary border border-transparent rounded-2xl overflow-hidden bg-transparent" data-reveal>
       {stats.map((s, i) => (
-        <div
-          class="bg-white flex flex-col items-center justify-center py-8 px-4 text-center"
-          data-reveal
-          data-delay={String(i + 1)}
-        >
-          <span class="font-display font-bold text-4xl text-primary mb-1">{s.value}</span>
-          <span class="font-sans text-sm text-muted">{s.label}</span>
+        <div class="flex flex-col items-center justify-center py-8 px-4 text-center" data-reveal data-delay={String(i + 1)}>
+          <span class="font-sans font-bold text-5xl text-primary mb-1">{s.value}</span>
+          <span class="font-sans text-xl text-primary/70">{s.label}</span>
         </div>
       ))}
     </div>
 
+    <!-- ── Testimonials ──────────────────────────────────── -->
+    <div>
+      <p class="font-sans text-xs font-semibold uppercase tracking-widest text-primary/60 text-center mb-8" data-reveal>
+        What School Leaders Say
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {testimonials.map((t, i) => (
+          <div
+            class={`${t.color} border rounded-3xl p-7 flex flex-col gap-5`}
+            style={`border-color:${t.borderColor}`}
+            data-reveal
+            data-delay={String(i + 1)}
+          >
+            <div class="flex gap-0.5">
+              {[1,2,3,4,5].map(() => (
+                <svg class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              ))}
+            </div>
+            <blockquote class="font-sans text-body text-sm leading-relaxed flex-1">"{t.quote}"</blockquote>
+            <div class="flex items-center gap-3 pt-1 border-t border-white/40">
+              <img
+                src={t.photo}
+                alt={t.name}
+                class="w-10 h-10 rounded-full object-cover shrink-0 ring-2 ring-white/60"
+                loading="lazy"
+              />
+              <div>
+                <p class="font-sans font-semibold text-sm text-primary leading-tight">{t.name}</p>
+                <p class="font-sans text-xs text-muted">{t.role} · {t.school}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- ── Founders ──────────────────────────────────────── -->
+    <div>
+      <p class="font-sans text-xs font-semibold uppercase tracking-widest text-primary/60 text-center mb-8" data-reveal>
+        Built by Educators & Engineers
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {founders.map((f, i) => (
+          <div
+            class="bg-white border border-white/20 rounded-3xl p-7 flex flex-col gap-4 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+            data-reveal
+            data-delay={String(i + 1)}
+          >
+            <div class="flex items-center gap-4">
+              <img
+                src={f.photo}
+                alt={f.name}
+                class="w-16 h-16 rounded-2xl object-cover shrink-0 ring-2 ring-accent/30"
+                loading="lazy"
+              />
+              <div>
+                <p class="font-display font-bold text-lg text-primary leading-tight">{f.name}</p>
+                <p class="font-sans text-xs font-semibold text-accent uppercase tracking-wide">{f.role}</p>
+              </div>
+            </div>
+            <p class="font-sans text-sm text-muted leading-relaxed">{f.bio}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- ── Press & Awards ────────────────────────────────── -->
+    <div data-reveal>
+      <p class="font-sans text-xs font-semibold uppercase tracking-widest text-primary/60 text-center mb-6">Press & Recognition</p>
+      <div class="flex flex-wrap justify-center gap-3">
+        {press.map((p, i) => (
+          <div
+            class="flex items-center gap-3 bg-white border border-white/20 rounded-2xl px-5 py-3 hover:shadow-md transition-all duration-200"
+            data-reveal
+            data-delay={String((i % 3) + 1)}
+          >
+            <span class="font-sans font-bold text-sm text-primary">{p.outlet}</span>
+            <span class="w-px h-4 bg-primary/20 shrink-0"></span>
+            <span class="font-sans text-sm text-muted italic">{p.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- ── Security & Compliance Badges ─────────────────── -->
+    <div data-reveal>
+      <p class="font-sans text-xs font-semibold uppercase tracking-widest text-primary/60 text-center mb-6">Security & Compliance</p>
+      <div class="flex flex-wrap justify-center gap-3">
+        {badges.map((b, i) => (
+          <div
+            class="flex items-center gap-3 bg-white/20 border border-white/30 rounded-2xl px-5 py-3 hover:bg-white/30 transition-all duration-200"
+            data-reveal
+            data-delay={String((i % 3) + 1)}
+          >
+            <span class="text-xl">{b.icon}</span>
+            <div>
+              <p class="font-sans font-semibold text-sm text-primary leading-tight">{b.label}</p>
+              <p class="font-sans text-xs text-primary/60">{b.sub}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
   </div>
 </section>
+
+<script>
+  const inner = document.getElementById('school-inner') as HTMLElement;
+  const track = document.getElementById('school-track') as HTMLElement;
+  const prevBtn = document.getElementById('school-prev') as HTMLButtonElement;
+  const nextBtn = document.getElementById('school-next') as HTMLButtonElement;
+
+  const CARD_W = 176 + 24; // w-44 (176px) + gap-6 (24px)
+  let offset = 0;
+
+  function clamp(val: number) {
+    const maxOffset = inner.scrollWidth - track.clientWidth;
+    return Math.max(0, Math.min(val, maxOffset));
+  }
+
+  prevBtn.addEventListener('click', () => {
+    offset = clamp(offset - CARD_W * 2);
+    inner.style.transform = `translateX(-${offset}px)`;
+  });
+
+  nextBtn.addEventListener('click', () => {
+    offset = clamp(offset + CARD_W * 2);
+    inner.style.transform = `translateX(-${offset}px)`;
+  });
+</script>

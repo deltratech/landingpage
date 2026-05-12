@@ -21,7 +21,13 @@ const contactDetails = [
 ];
 
 const roles = ['Kepala Sekolah / Principal', 'Wakil Kepala Sekolah', 'Administrator / TU', 'Guru / Teacher', 'IT / Technology Lead', 'Yayasan / Foundation', 'Other'];
-const sizes = ['< 200 students', '200–500 students', '500–1,000 students', '1,000–2,000 students', '2,000+ students'];
+const sizes = [
+  { label: '< 200 students',         value: 'below_200' },
+  { label: '200–500 students',        value: 'between_200_500' },
+  { label: '500–1,000 students',      value: 'between_500_1000' },
+  { label: '1,000–2,000 students',    value: 'between_1000_2000' },
+  { label: '2,000+ students',         value: 'above_2000' },
+];
 ---
 
 <section class="bg-surface py-20 md:py-28" id="contact">
@@ -74,24 +80,7 @@ const sizes = ['< 200 students', '200–500 students', '500–1,000 students', '
         </a>
 
         <!-- Trust signals -->
-        <div class="bg-white border border-border rounded-2xl p-5">
-          <p class="font-sans font-semibold text-xs text-muted uppercase tracking-wider mb-3">Why Schools Trust Deltra</p>
-          <ul class="flex flex-col gap-2.5">
-            {[
-              'Data hosted on Indonesian servers',
-              'Compliant with PDPA data privacy',
-              '99.9% uptime SLA guaranteed',
-              'Dedicated customer success manager',
-            ].map(item => (
-              <li class="flex items-center gap-2.5 font-sans text-sm text-body">
-                <svg class="w-4 h-4 text-accent shrink-0" viewBox="0 0 16 16" fill="none">
-                  <path d="M3 8l4 4 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
+       
 
       </div>
 
@@ -99,7 +88,7 @@ const sizes = ['< 200 students', '200–500 students', '500–1,000 students', '
       <div class="bg-white border border-border rounded-3xl p-8 shadow-sm" data-reveal data-delay="2">
         <h3 class="font-display font-bold text-xl text-primary mb-6">Request Your Free Demo</h3>
 
-        <form class="flex flex-col gap-4" novalidate>
+        <form id="demo-form" class="flex flex-col gap-4" novalidate>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div class="flex flex-col gap-1.5">
               <label for="contactName" class="font-sans font-semibold text-xs text-body">Your Name *</label>
@@ -129,7 +118,7 @@ const sizes = ['< 200 students', '200–500 students', '500–1,000 students', '
               <select id="schoolSize" required
                 class="font-sans text-sm text-body bg-surface border border-border rounded-xl px-4 py-3 outline-none transition-all duration-200 focus:border-accent focus:shadow-[0_0_0_3px_rgba(30,207,173,0.15)] appearance-none cursor-pointer">
                 <option value="" disabled selected>Select school size</option>
-                {sizes.map(s => <option value={s}>{s}</option>)}
+                {sizes.map(s => <option value={s.value}>{s.label}</option>)}
               </select>
             </div>
           </div>
@@ -161,11 +150,14 @@ const sizes = ['< 200 students', '200–500 students', '500–1,000 students', '
           </div>
 
           <button
+            id="demo-submit"
             type="submit"
-            class="font-sans font-bold text-sm text-white bg-primary px-6 py-4 rounded-xl cursor-pointer transition-all duration-200 hover:bg-[#172840] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/20 mt-1"
+            class="font-sans font-bold text-sm text-white bg-primary px-6 py-4 rounded-xl cursor-pointer transition-all duration-200 hover:bg-[#172840] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/20 mt-1 disabled:opacity-60 disabled:cursor-not-allowed"
           >
             Request Free Demo →
           </button>
+
+          <div id="demo-status" class="hidden text-sm text-center font-sans rounded-xl px-4 py-3"></div>
 
           <p class="font-sans text-xs text-muted text-center">
             By submitting, you agree to our
@@ -177,3 +169,62 @@ const sizes = ['< 200 students', '200–500 students', '500–1,000 students', '
     </div>
   </div>
 </section>
+
+<script>
+  const API_BASE = import.meta.env.PUBLIC_API_URL;
+
+  const form   = document.getElementById('demo-form') as HTMLFormElement;
+  const btn    = document.getElementById('demo-submit') as HTMLButtonElement;
+  const status = document.getElementById('demo-status') as HTMLDivElement;
+
+  function showStatus(msg: string, ok: boolean) {
+    status.textContent = msg;
+    status.className = `text-sm text-center font-sans rounded-xl px-4 py-3 ${
+      ok ? 'bg-accent/10 text-accent border border-accent/20' : 'bg-red-50 text-red-600 border border-red-200'
+    }`;
+    status.classList.remove('hidden');
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const name          = (document.getElementById('contactName') as HTMLInputElement).value.trim();
+    const schoolName    = (document.getElementById('schoolName') as HTMLInputElement).value.trim();
+    const schoolRole    = (document.getElementById('role') as HTMLSelectElement).value;
+    const numberOfStudents = (document.getElementById('schoolSize') as HTMLSelectElement).value;
+    const email         = (document.getElementById('contactEmail') as HTMLInputElement).value.trim();
+    const phone         = (document.getElementById('whatsapp') as HTMLInputElement).value.trim();
+    const message       = (document.getElementById('message') as HTMLTextAreaElement).value.trim();
+
+    if (!name || !email || !schoolName || !schoolRole || !numberOfStudents || !phone) {
+      showStatus('Please fill in all required fields.', false);
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    status.classList.add('hidden');
+
+    try {
+      const res = await fetch(`${API_BASE}/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone, message, schoolName, schoolRole, numberOfStudents }),
+      });
+
+      const json = await res.json();
+
+      if (res.ok && json.success) {
+        showStatus('Thanks! Our team will reach out within 24 hours.', true);
+        form.reset();
+      } else {
+        showStatus(json.message ?? 'Something went wrong. Please try again.', false);
+      }
+    } catch {
+      showStatus('Unable to send. Please try WhatsApp or email us directly.', false);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Request Free Demo →';
+    }
+  });
+</script>
