@@ -75,11 +75,19 @@ type Post = {
 // let posts: Post[] = FALLBACK_POSTS;
 
 let posts: Post[] = [];
+console.log('[ResourcesHub] API_BASE:', API_BASE);
 try {
-  const res = await fetch(`${API_BASE}/posts/published`, { signal: AbortSignal.timeout(8000) });
+  const url = `${API_BASE}/posts/published`;
+  console.log('[ResourcesHub] Fetching:', url);
+
+  const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+  console.log('[ResourcesHub] Status:', res.status, res.statusText);
+
   if (res.ok) {
     const json = await res.json();
+    console.log('[ResourcesHub] Raw response:', JSON.stringify(json).slice(0, 300));
     const apiPosts: ApiPost[] = json.data ?? [];
+    console.log('[ResourcesHub] Posts count:', apiPosts.length);
     if (apiPosts.length > 0) {
       posts = apiPosts.slice(0, 3).map((p, i) => ({
         tag: p.tags?.[0]?.name ?? 'Insight',
@@ -92,12 +100,13 @@ try {
         slug: p.slug,
       }));
     }
+  } else {
+    const text = await res.text();
+    console.error('[ResourcesHub] Error body:', text.slice(0, 300));
   }
-  
-} catch {
-  // API unavailable — render with fallback posts
+} catch (err) {
+  console.error('[ResourcesHub] Fetch failed:', err);
 }
-
 
 const resources = [
   {
@@ -387,4 +396,6 @@ const faqs = [
       detail: { message: 'Resource sent! Check your inbox.' }
     }));
   });
+
+  
 </script>
