@@ -1,0 +1,372 @@
+---
+---
+
+<div id="product-showcase-root">
+
+  <div
+    id="ps-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Deltra platform demo"
+    class="fixed inset-0 z-[200] flex flex-col"
+    style="display:none; background: #0f1c2e;"
+  >
+
+    <!-- ── Top bar ── -->
+    <div class="flex items-center justify-between px-5 py-3 shrink-0" style="border-bottom:1px solid rgba(255,255,255,0.1);">
+      <div class="flex items-center gap-3">
+        <div class="w-7 h-7 rounded-lg flex items-center justify-center" style="background:linear-gradient(135deg,#1ecfad,#0ea88a);">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <div>
+          <span class="text-white font-bold text-sm font-sans">Deltra School</span>
+          <span class="ml-2 text-xs font-medium px-2 py-0.5 rounded-full" style="background:rgba(30,207,173,0.15);color:#1ecfad;">Interactive Demo</span>
+        </div>
+      </div>
+      <!-- Feature tab bar (desktop) -->
+      <div id="ps-tabs" class="hidden md:flex items-center gap-1 px-1 py-1 rounded-xl" style="background:rgba(255,255,255,0.07);">
+        <button data-tab="dashboard" class="ps-tab active text-xs font-semibold px-3 py-1.5 rounded-lg transition-all duration-150">Dashboard</button>
+        <button data-tab="students"  class="ps-tab text-xs font-semibold px-3 py-1.5 rounded-lg transition-all duration-150">Students</button>
+        <button data-tab="ai"        class="ps-tab text-xs font-semibold px-3 py-1.5 rounded-lg transition-all duration-150">AI Insights</button>
+        <button data-tab="contracts" class="ps-tab text-xs font-semibold px-3 py-1.5 rounded-lg transition-all duration-150">Contracts</button>
+        <button data-tab="teacher"   class="ps-tab text-xs font-semibold px-3 py-1.5 rounded-lg transition-all duration-150">Teacher View</button>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="ps-tour-restart" title="Restart tour" class="hidden md:flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all duration-150" style="color:#1ecfad;background:rgba(30,207,173,0.1);">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          Tour
+        </button>
+        <button id="ps-fullscreen" title="Toggle fullscreen" class="p-2 rounded-lg transition-all duration-150" style="color:rgba(255,255,255,0.6);" onmouseenter="this.style.color='white'" onmouseleave="this.style.color='rgba(255,255,255,0.6)'">
+          <svg id="ps-fs-icon" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+        </button>
+        <button id="ps-close" aria-label="Close demo" class="p-2 rounded-lg transition-all duration-150" style="color:rgba(255,255,255,0.6);" onmouseenter="this.style.color='white'" onmouseleave="this.style.color='rgba(255,255,255,0.6)'">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ── Iframe area ── -->
+    <div class="flex-1 relative overflow-hidden">
+      <!-- Skeleton loader -->
+      <div id="ps-skeleton" class="absolute inset-0 flex flex-col gap-4 p-6" style="background:#f8fafc;z-index:10;transition:opacity 0.4s ease;">
+        <div class="flex gap-4 h-full">
+          <div class="w-48 rounded-xl animate-pulse shrink-0" style="background:#e2e8f0;opacity:0.5;"></div>
+          <div class="flex-1 flex flex-col gap-4">
+            <div class="h-8 w-64 rounded-lg animate-pulse" style="background:#e2e8f0;"></div>
+            <div class="grid grid-cols-4 gap-3">
+              <div class="h-24 rounded-xl animate-pulse" style="background:#e2e8f0;"></div>
+              <div class="h-24 rounded-xl animate-pulse" style="background:#e2e8f0;animation-delay:0.1s;"></div>
+              <div class="h-24 rounded-xl animate-pulse" style="background:#e2e8f0;animation-delay:0.2s;"></div>
+              <div class="h-24 rounded-xl animate-pulse" style="background:#e2e8f0;animation-delay:0.3s;"></div>
+            </div>
+            <div class="h-56 rounded-xl animate-pulse" style="background:#e2e8f0;"></div>
+            <div class="grid grid-cols-3 gap-3">
+              <div class="h-40 col-span-2 rounded-xl animate-pulse" style="background:#e2e8f0;"></div>
+              <div class="h-40 rounded-xl animate-pulse" style="background:#e2e8f0;animation-delay:0.15s;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- The actual iframe -->
+      <iframe
+        id="ps-iframe"
+        src=""
+        title="Deltra platform interactive demo"
+        class="absolute inset-0 w-full h-full border-0"
+        style="opacity:0;transition:opacity 0.4s ease;"
+        allow="same-origin"
+      ></iframe>
+    </div>
+
+    <!-- ── Onboarding tour overlay ── -->
+    <div id="ps-tour" class="absolute inset-0 pointer-events-none" style="z-index:50;display:none;">
+      <div class="absolute inset-0" style="background:rgba(0,0,0,0.55);"></div>
+      <div id="ps-tour-card" class="pointer-events-auto absolute bottom-8 left-1/2 -translate-x-1/2 w-full max-w-md rounded-2xl p-6 shadow-2xl" style="background:white;">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex gap-1" id="ps-tour-dots"></div>
+          <button id="ps-tour-skip" class="text-xs font-medium" style="color:#6b8f88;">Skip tour</button>
+        </div>
+        <div class="flex items-center gap-3 mb-3">
+          <div id="ps-tour-icon" class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style="background:#f4faf8;"></div>
+          <div>
+            <h3 id="ps-tour-title" class="font-bold text-sm" style="color:#0f1c2e;font-family:'Raleway',sans-serif;"></h3>
+            <p id="ps-tour-sub" class="text-xs" style="color:#6b8f88;"></p>
+          </div>
+        </div>
+        <p id="ps-tour-body" class="text-sm leading-relaxed mb-4" style="color:#2d4a44;font-family:'Raleway',sans-serif;"></p>
+        <div class="flex items-center justify-between">
+          <button id="ps-tour-prev" class="text-xs font-semibold px-4 py-2 rounded-lg transition-all" style="color:#6b8f88;background:#f4faf8;">← Previous</button>
+          <button id="ps-tour-next" class="text-xs font-bold px-5 py-2 rounded-lg transition-all" style="background:#1ecfad;color:#0f1c2e;">Next →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Bottom bar: feature cards + contact form ── -->
+    <div class="shrink-0 flex items-stretch" style="border-top:1px solid rgba(255,255,255,0.08);background:#0a1525;">
+      <!-- Contact / trial form -->
+      <div class="shrink-0 flex items-center gap-4 px-5 py-3">
+        <div class="hidden md:block">
+          <div class="text-2xl font-bold text-white leading-tight">Ready to try it live?</div>
+          <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.4);">We'll set up a demo for your school</div>
+        </div>
+        <form id="ps-trial-form" class="flex items-center gap-2">
+          <input
+            id="ps-trial-email"
+            type="email"
+            placeholder="Your  email"
+            required
+            class="text-xs px-3 py-2 rounded-lg outline-none font-sans w-80"
+            style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:white;"
+          />
+          <button
+            type="submit"
+            class="text-xs font-bold px-4 py-2 rounded-lg shrink-0 transition-all duration-150 hover:-translate-y-0.5"
+            style="background:#1ecfad;color:#0f1c2e;"
+          >
+            Contact Us
+          </button>
+        </form>
+        <!-- Success state (hidden) -->
+        <div id="ps-trial-success" class="hidden items-center gap-2 text-xs font-semibold" style="color:#1ecfad;">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+          Sent! We'll be in touch.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<style>
+  .ps-tab { color: rgba(255,255,255,0.5); }
+  .ps-tab.active { background: rgba(255,255,255,0.12); color: white; }
+  .ps-tab:hover:not(.active) { color: rgba(255,255,255,0.8); }
+
+  .ps-feature-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+  .ps-feature-card.active { background: rgba(30,207,173,0.1); border-color: rgba(30,207,173,0.22); }
+  .ps-feature-card:hover:not(.active) { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.15); transform: translateY(-1px); }
+
+  @keyframes ps-slide-up {
+    from { opacity:0; transform:translateY(24px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  #ps-overlay[data-open] {
+    animation: ps-slide-up 0.35s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+
+  .ps-dot { width:6px; height:6px; border-radius:999px; background:#c2d9d3; transition:all 0.2s; }
+  .ps-dot.active { width:18px; background:#1ecfad; }
+
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.5; } }
+  .animate-pulse { animation: pulse 1.5s cubic-bezier(0.4,0,0.6,1) infinite; }
+</style>
+
+<script>
+  const TOUR_STEPS = [
+    {
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="#1ecfad" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>`,
+      title: 'Welcome to Deltra!',
+      sub: 'Your all-in-one School OS',
+      body: "You're exploring a live demo of Deltra. Switch between School Admin and Teacher views using the toggle at the top. Use the feature pills above to jump between sections.",
+    },
+    {
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="#1ecfad" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>`,
+      title: 'Admin Dashboard',
+      sub: 'Live KPIs across all branches',
+      body: 'See live enrollment counts, attendance rates, pending contracts, and AI-flagged students — across every campus, in one view.',
+    },
+    {
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="#a78bfa" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m1.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>`,
+      title: 'AI Insights',
+      sub: 'Proactive student intelligence',
+      body: "Click 'AI Insights' above. Deltra automatically flags at-risk students, ranks them by urgency score, and suggests the next best action — no manual analysis needed.",
+    },
+    {
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="#fbbf24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>`,
+      title: 'Contract Automation',
+      sub: 'Save 8+ hours per week',
+      body: "Under 'Contracts', click 'Generate contract'. Deltra pulls staff data from HRIS, fills all fields automatically, and creates a ready-to-sign document — in seconds.",
+    },
+    {
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="#10b981" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>`,
+      title: 'Switch to Teacher View',
+      sub: 'See what your teachers experience',
+      body: "Click 'Teacher View' above or the role toggle in the demo. Teachers get a personalized daily briefing, AI-drafted parent feedback, a gradebook, and exam generator.",
+    },
+  ];
+
+  let tourStep = 0;
+  let iframeLoaded = false;
+
+  const overlay     = document.getElementById('ps-overlay')!;
+  const skeleton    = document.getElementById('ps-skeleton')!;
+  const iframe      = document.getElementById('ps-iframe') as HTMLIFrameElement;
+  const tour        = document.getElementById('ps-tour')!;
+  const tourTitle   = document.getElementById('ps-tour-title')!;
+  const tourSub     = document.getElementById('ps-tour-sub')!;
+  const tourBody    = document.getElementById('ps-tour-body')!;
+  const tourDots    = document.getElementById('ps-tour-dots')!;
+  const tourIcon    = document.getElementById('ps-tour-icon')!;
+  const tourNext    = document.getElementById('ps-tour-next')!;
+  const tourPrev    = document.getElementById('ps-tour-prev')!;
+  const tourSkip    = document.getElementById('ps-tour-skip')!;
+  const tourRestart = document.getElementById('ps-tour-restart')!;
+  const tabs        = document.querySelectorAll<HTMLElement>('.ps-tab');
+  const pills       = document.querySelectorAll<HTMLElement>('.ps-feature-card');
+  const closeBtn    = document.getElementById('ps-close')!;
+  const fsBtn       = document.getElementById('ps-fullscreen')!;
+  const trialForm   = document.getElementById('ps-trial-form') as HTMLFormElement;
+  const trialEmail  = document.getElementById('ps-trial-email') as HTMLInputElement;
+  const trialSuccess = document.getElementById('ps-trial-success')!;
+
+  // ── Tab map ──────────────────────────────────────────────
+  const TAB_MAP: Record<string, {role?:string; page:string}> = {
+    dashboard: { page: 'admin-dashboard' },
+    students:  { page: 'admin-students' },
+    ai:        { page: 'admin-ai' },
+    contracts: { page: 'admin-contracts' },
+    teacher:   { role: 'teacher', page: 'teacher-dashboard' },
+  };
+
+  // ── Open / Close ─────────────────────────────────────────
+  function openShowcase(tab?: string) {
+    overlay.style.display = 'flex';
+    overlay.setAttribute('data-open', '');
+    document.body.style.overflow = 'hidden';
+    loadIframe();
+    animateCounters();
+    setTimeout(startTour, 400);
+    if (tab) setTimeout(() => navigateTab(tab), 900);
+  }
+
+  function closeShowcase() {
+    overlay.style.display = 'none';
+    overlay.removeAttribute('data-open');
+    document.body.style.overflow = '';
+    tour.style.display = 'none';
+  }
+
+  (window as any).openProductShowcase = openShowcase;
+
+  closeBtn.addEventListener('click', closeShowcase);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeShowcase(); });
+
+  // ── Load iframe (lazy, only once) ───────────────────────
+  function loadIframe() {
+    if (iframeLoaded) return;
+    iframeLoaded = true;
+    iframe.src = '/demo/index.html';
+    iframe.addEventListener('load', () => {
+      skeleton.style.opacity = '0';
+      iframe.style.opacity = '1';
+      setTimeout(() => { skeleton.style.display = 'none'; }, 400);
+    });
+  }
+
+  // ── Tab / pill navigation ────────────────────────────────
+  function navigateTab(tab: string) {
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+    pills.forEach(p => p.classList.toggle('active', p.dataset.feature === tab));
+    const target = TAB_MAP[tab];
+    if (!target || !iframe.contentWindow) return;
+    try {
+      const win = iframe.contentWindow as any;
+      if (target.role === 'teacher') {
+        win.switchRole?.('teacher');
+      } else {
+        win.switchRole?.('admin');
+        const navEl = iframe.contentDocument?.querySelector(`[onclick*="'${target.page}'"]`) as HTMLElement;
+        win.goToPage?.(target.page, navEl);
+      }
+    } catch { /* cross-origin guard */ }
+  }
+
+  tabs.forEach(tab => tab.addEventListener('click', () => navigateTab(tab.dataset.tab!)));
+  pills.forEach(pill => pill.addEventListener('click', () => navigateTab(pill.dataset.feature!)));
+
+  // ── Fullscreen ───────────────────────────────────────────
+  let isFullscreen = false;
+  fsBtn.addEventListener('click', () => {
+    if (!isFullscreen) {
+      overlay.requestFullscreen?.().catch(() => {});
+    } else {
+      document.exitFullscreen?.().catch(() => {});
+    }
+    isFullscreen = !isFullscreen;
+  });
+
+  // ── Tour ─────────────────────────────────────────────────
+  function startTour() {
+    tourStep = 0;
+    tour.style.display = 'block';
+    renderTourStep();
+  }
+
+  function renderTourStep() {
+    const step = TOUR_STEPS[tourStep];
+    tourIcon.innerHTML = step.icon;
+    tourTitle.textContent = step.title;
+    tourSub.textContent = step.sub;
+    tourBody.textContent = step.body;
+    tourPrev.style.visibility = tourStep === 0 ? 'hidden' : 'visible';
+    tourNext.textContent = tourStep === TOUR_STEPS.length - 1 ? 'Finish ✓' : 'Next →';
+    tourDots.innerHTML = TOUR_STEPS.map((_, i) =>
+      `<div class="ps-dot ${i === tourStep ? 'active' : ''}"></div>`
+    ).join('');
+  }
+
+  tourNext.addEventListener('click', () => {
+    if (tourStep < TOUR_STEPS.length - 1) { tourStep++; renderTourStep(); }
+    else finishTour();
+  });
+  tourPrev.addEventListener('click', () => {
+    if (tourStep > 0) { tourStep--; renderTourStep(); }
+  });
+  tourSkip.addEventListener('click', finishTour);
+  tourRestart.addEventListener('click', startTour);
+
+  // ── Trial form ───────────────────────────────────────────
+  trialForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = trialEmail.value.trim();
+    if (!email) return;
+    try {
+      await fetch('https://formsubmit.co/ajax/hello@deltratech.id', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ email, subject: 'Demo Trial Request', message: `Trial request from: ${email}` }),
+      });
+    } catch { /* best-effort */ }
+    trialForm.classList.add('hidden');
+    trialSuccess.classList.remove('hidden');
+    trialSuccess.classList.add('flex');
+  });
+
+  function finishTour() {
+    localStorage.setItem('deltra_tour_done', '1');
+    tour.style.display = 'none';
+  }
+
+  // ── Animated counters ────────────────────────────────────
+  function animateCounters() {
+    document.querySelectorAll<HTMLElement>('.ps-counter').forEach(el => {
+      const target = parseInt(el.dataset.target || '0', 10);
+      let current = 0;
+      const step = target / (1200 / 16);
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        el.textContent = Math.floor(current).toLocaleString();
+        if (current >= target) clearInterval(timer);
+      }, 16);
+    });
+  }
+
+  // ── Listen for Nav event ─────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('open-product-showcase', (e: any) => {
+      openShowcase(e.detail?.tab);
+    });
+  });
+</script>

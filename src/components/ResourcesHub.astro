@@ -39,41 +39,42 @@ type Post = {
   slug: string;
 };
 
-const FALLBACK_POSTS: Post[] = [
-  {
-    tag: 'AI in Education',
-    tagColor: TAG_COLORS[0],
-    title: 'How AI Early-Warning Systems Are Preventing Student Dropouts in Indonesian Schools',
-    excerpt: 'A look at how predictive analytics — applied to attendance, grades, and engagement data — are helping teachers intervene before it\'s too late.',
-    readTime: '6 min read',
-    date: 'Apr 28, 2025',
-    photo: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&h=360&fit=crop&auto=format&q=80',
-    slug: '',
-  },
-  {
-    tag: 'School Operations',
-    tagColor: TAG_COLORS[1],
-    title: 'The Hidden Cost of Manual Attendance: Why Indonesian Teachers Lose 40% of Their Time',
-    excerpt: 'We surveyed 500+ school administrators across Java and Sumatra. Here\'s what they told us about administrative overload — and how to fix it.',
-    readTime: '5 min read',
-    date: 'Apr 14, 2025',
-    photo: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=360&fit=crop&auto=format&q=80',
-    slug: '',
-  },
-  {
-    tag: 'Digital Transformation',
-    tagColor: TAG_COLORS[2],
-    title: 'From Spreadsheets to Smart Systems: A 90-Day Digital Transformation Playbook for K-12 Schools',
-    excerpt: 'A practical, step-by-step guide for principals and IT leads navigating the transition from legacy workflows to a modern school management platform.',
-    readTime: '8 min read',
-    date: 'Mar 31, 2025',
-    photo: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=600&h=360&fit=crop&auto=format&q=80',
-    slug: '',
-  },
-];
+// const FALLBACK_POSTS: Post[] = [
+//   {
+//     tag: 'AI in Education',
+//     tagColor: TAG_COLORS[0],
+//     title: 'How AI Early-Warning Systems Are Preventing Student Dropouts in Indonesian Schools',
+//     excerpt: 'A look at how predictive analytics — applied to attendance, grades, and engagement data — are helping teachers intervene before it\'s too late.',
+//     readTime: '6 min read',
+//     date: 'Apr 28, 2025',
+//     photo: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&h=360&fit=crop&auto=format&q=80',
+//     slug: '',
+//   },
+//   {
+//     tag: 'School Operations',
+//     tagColor: TAG_COLORS[1],
+//     title: 'The Hidden Cost of Manual Attendance: Why Indonesian Teachers Lose 40% of Their Time',
+//     excerpt: 'We surveyed 500+ school administrators across Java and Sumatra. Here\'s what they told us about administrative overload — and how to fix it.',
+//     readTime: '5 min read',
+//     date: 'Apr 14, 2025',
+//     photo: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=360&fit=crop&auto=format&q=80',
+//     slug: '',
+//   },
+//   {
+//     tag: 'Digital Transformation',
+//     tagColor: TAG_COLORS[2],
+//     title: 'From Spreadsheets to Smart Systems: A 90-Day Digital Transformation Playbook for K-12 Schools',
+//     excerpt: 'A practical, step-by-step guide for principals and IT leads navigating the transition from legacy workflows to a modern school management platform.',
+//     readTime: '8 min read',
+//     date: 'Mar 31, 2025',
+//     photo: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?w=600&h=360&fit=crop&auto=format&q=80',
+//     slug: '',
+//   },
+// ];
 
-let posts: Post[] = FALLBACK_POSTS;
+// let posts: Post[] = FALLBACK_POSTS;
 
+let posts: Post[] = [];
 try {
   const res = await fetch(`${API_BASE}/posts/published`);
   if (res.ok) {
@@ -92,9 +93,11 @@ try {
       }));
     }
   }
+  
 } catch {
   // API unavailable — render with fallback posts
 }
+
 
 const resources = [
   {
@@ -146,6 +149,8 @@ const faqs = [
     a: 'Pricing is structured per school, not per student — so you won\'t face surprise costs as enrollment grows. Each plan includes unlimited students, with tiered pricing based on the number of active staff accounts and feature set. Contact us for a custom quote.',
   },
 ];
+
+
 ---
 
 <section class="bg-accent py-20 md:py-28" id="resources">
@@ -162,7 +167,7 @@ const faqs = [
             Insights for Indonesian School Leaders
           </h2>
         </div>
-        <a href="#" class="font-sans font-semibold text-sm text-accent hover:underline underline-offset-4 shrink-0">
+        <a href="/blog" class="font-sans font-semibold text-sm text-accent hover:underline underline-offset-4 shrink-0">
           View all articles →
         </a>
       </div>
@@ -289,7 +294,7 @@ const faqs = [
    
 
   <!-- ── FAQ ────────────────────────────────────────────── -->
-<section class="bg-blue-50 py-20 md:py-28" id="resources">
+<section class="bg-blue-50 py-20 md:py-28" id="faq">
   <div class="max-w-6xl mx-auto px-4 md:px-8 space-y-24">      
     <div>
         <div class="text-center mb-10" data-reveal>

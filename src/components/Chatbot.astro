@@ -558,8 +558,31 @@
     'Can I request a demo?',
   ];
 
-  // Conversation history sent to the API for context
-  const chatHistory: { role: 'user' | 'assistant'; content: string }[] = [];
+  const answers: Record<string, string> = {
+    'What is Deltra?':
+      'Deltra is an all-in-one AI-powered school management platform built for Indonesian K-12 schools. It combines attendance, grading, parent communication, and analytics into a single system — so your team can focus on students, not paperwork.',
+    'What features are included?':
+      'Deltra includes: smart attendance tracking, digital gradebook, parent & student portal, WhatsApp notifications, AI early-warning for at-risk students, DAPODIK & SisPenA integration, and a real-time analytics dashboard.',
+    'How does the AI work?':
+      'Our AI analyses attendance patterns, academic performance, and engagement signals to flag students who may be at risk of falling behind — before it\'s too late. Teachers get actionable alerts, not just raw data.',
+    'How much does it cost?':
+      'Pricing is per school, not per student, so costs don\'t grow as enrollment does. Plans start for small schools and scale up to foundation (Yayasan) level. <a href="/#contact" style="color:var(--color-accent);text-decoration:underline;">Contact us</a> for a custom quote.',
+    'Can I request a demo?':
+      'Absolutely! Click the <strong>Request Demo</strong> button at the top of the page, or <a href="/#contact" style="color:var(--color-accent);text-decoration:underline;">fill out the contact form</a> and our team will reach out within one business day.',
+  };
+
+  const fallbackAnswer =
+    'Great question! For detailed information, please <a href="/#contact" style="color:var(--color-accent);text-decoration:underline;">reach out to our team</a> or pick one of the quick questions below.';
+
+  function getAnswer(text: string): string {
+    const exact = answers[text];
+    if (exact) return exact;
+    const lower = text.toLowerCase();
+    for (const [key, val] of Object.entries(answers)) {
+      if (lower.includes(key.toLowerCase().split(' ').slice(1).join(' '))) return val;
+    }
+    return fallbackAnswer;
+  }
 
   function scrollToBottom() {
     messages.scrollTop = messages.scrollHeight;
@@ -605,7 +628,7 @@
     scrollToBottom();
   }
 
-  async function sendMessage(text: string) {
+  function sendMessage(text: string) {
     const trimmed = text.trim();
     if (!trimmed) return;
 
@@ -615,33 +638,15 @@
 
     const typingEl = document.createElement('div');
     typingEl.className = 'chatbot-msg bot';
-    typingEl.id = 'chatbot-typing';
     typingEl.innerHTML = `<div class="chatbot-typing"><span></span><span></span><span></span></div>`;
     messages.appendChild(typingEl);
     scrollToBottom();
 
-    chatHistory.push({ role: 'user', content: trimmed });
-
-    try {
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: trimmed, history: chatHistory.slice(0, -1) }),
-      });
-
-      const data = await res.json();
-      const reply: string = data.reply ?? data.error ?? "Sorry, something went wrong. Please try again.";
-
-      chatHistory.push({ role: 'assistant', content: reply });
-
+    setTimeout(() => {
       typingEl.remove();
-      addMessage(reply, 'bot');
-    } catch {
-      typingEl.remove();
-      addMessage("Network error — please check your connection and try again.", 'bot');
-    } finally {
+      addMessage(getAnswer(trimmed), 'bot');
       sendBtn.disabled = false;
-    }
+    }, 600);
   }
 
   function openChat() {
