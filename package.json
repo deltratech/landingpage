@@ -14,9 +14,11 @@
   "dependencies": {
     "@astrojs/netlify": "^7.0.8",
     "@tailwindcss/vite": "^4.2.4",
+    "@types/nodemailer": "^8.0.0",
     "astro": "^6.2.1",
     "gsap": "^3.15.0",
     "iconoir": "^7.11.0",
+    "nodemailer": "^8.0.7",
     "openai": "^6.36.0",
     "tailwindcss": "^4.2.4",
     "textify.js": "^3.0.1",

@@ -171,8 +171,6 @@ const sizes = [
 </section>
 
 <script>
-  const API_BASE = import.meta.env.PUBLIC_API_URL;
-
   const form   = document.getElementById('demo-form') as HTMLFormElement;
   const btn    = document.getElementById('demo-submit') as HTMLButtonElement;
   const status = document.getElementById('demo-status') as HTMLDivElement;
@@ -188,13 +186,13 @@ const sizes = [
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const name          = (document.getElementById('contactName') as HTMLInputElement).value.trim();
-    const schoolName    = (document.getElementById('schoolName') as HTMLInputElement).value.trim();
-    const schoolRole    = (document.getElementById('role') as HTMLSelectElement).value;
+    const name             = (document.getElementById('contactName') as HTMLInputElement).value.trim();
+    const schoolName       = (document.getElementById('schoolName') as HTMLInputElement).value.trim();
+    const schoolRole       = (document.getElementById('role') as HTMLSelectElement).value;
     const numberOfStudents = (document.getElementById('schoolSize') as HTMLSelectElement).value;
-    const email         = (document.getElementById('contactEmail') as HTMLInputElement).value.trim();
-    const phone         = (document.getElementById('whatsapp') as HTMLInputElement).value.trim();
-    const message       = (document.getElementById('message') as HTMLTextAreaElement).value.trim();
+    const email            = (document.getElementById('contactEmail') as HTMLInputElement).value.trim();
+    const phone            = (document.getElementById('whatsapp') as HTMLInputElement).value.trim();
+    const message          = (document.getElementById('message') as HTMLTextAreaElement).value.trim();
 
     if (!name || !email || !schoolName || !schoolRole || !numberOfStudents || !phone) {
       showStatus('Please fill in all required fields.', false);
@@ -206,19 +204,19 @@ const sizes = [
     status.classList.add('hidden');
 
     try {
-      const res = await fetch(`${API_BASE}/contact`, {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, phone, message, schoolName, schoolRole, numberOfStudents }),
       });
 
-      const json = await res.json();
+      const data = await res.json();
 
-      if (res.ok && json.success) {
+      if (res.ok && data.success) {
         showStatus('Thanks! Our team will reach out within 24 hours.', true);
         form.reset();
       } else {
-        showStatus(json.message ?? 'Something went wrong. Please try again.', false);
+        showStatus(data.message ?? 'Something went wrong. Please try again.', false);
       }
     } catch {
       showStatus('Unable to send. Please try WhatsApp or email us directly.', false);

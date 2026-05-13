@@ -333,10 +333,10 @@
     const email = trialEmail.value.trim();
     if (!email) return;
     try {
-      await fetch('https://formsubmit.co/ajax/hello@deltratech.id', {
+      await fetch('/api/trial', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ email, subject: 'Demo Trial Request', message: `Trial request from: ${email}` }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
       });
     } catch { /* best-effort */ }
     trialForm.classList.add('hidden');
