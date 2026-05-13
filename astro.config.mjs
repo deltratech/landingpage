@@ -1,11 +1,11 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import netlify from '@astrojs/netlify';
+import vercel from '@astrojs/vercel';
 import tailwindcss from '@tailwindcss/vite';
 
-// https://astro.build/config
+// https://astro.dev/config
 export default defineConfig({
-  adapter: netlify(),
+  adapter: vercel(),
   devToolbar: { enabled: false },
   vite: {
     plugins: [tailwindcss()]
