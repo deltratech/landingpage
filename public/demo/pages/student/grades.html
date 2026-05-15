@@ -1,0 +1,47 @@
+<div class="flex items-center justify-between mb-6">
+        <div><h1 class="text-2xl font-bold text-slate-900">My Grades</h1><p class="text-sm text-slate-500 mt-1">Aditya Pratama · Grade 11 IPA-2 · Semester 2 · 2025/2026</p></div>
+        <div class="flex gap-2"><button class="btn-secondary"><i data-lucide="download" class="w-4 h-4"></i>Download report</button><button class="btn-secondary"><i data-lucide="file-text" class="w-4 h-4"></i>Report card</button></div>
+      </div>
+      <div class="grid grid-cols-4 gap-4 mb-6">
+        <div class="kpi-card"><div class="flex items-center justify-between mb-2"><span class="text-xs font-semibold text-slate-500 uppercase">Semester Avg</span><i data-lucide="bar-chart-2" class="w-4 h-4 text-slate-400"></i></div><div class="text-2xl font-bold text-emerald-600">91.2</div><div class="text-xs text-slate-500 mt-1">Predikat: Sangat Baik</div></div>
+        <div class="kpi-card"><div class="flex items-center justify-between mb-2"><span class="text-xs font-semibold text-slate-500 uppercase">Class Rank</span><i data-lucide="trophy" class="w-4 h-4 text-slate-400"></i></div><div class="text-2xl font-bold text-indigo-600">#3</div><div class="text-xs text-slate-500 mt-1">Of 32 students</div></div>
+        <div class="kpi-card"><div class="flex items-center justify-between mb-2"><span class="text-xs font-semibold text-slate-500 uppercase">Best Subject</span><i data-lucide="star" class="w-4 h-4 text-slate-400"></i></div><div class="text-2xl font-bold text-emerald-600">Biology</div><div class="text-xs text-emerald-600 mt-1">Avg 94.5 · Top of class</div></div>
+        <div class="kpi-card"><div class="flex items-center justify-between mb-2"><span class="text-xs font-semibold text-slate-500 uppercase">Predicted Final</span><i data-lucide="trending-up" class="w-4 h-4 text-slate-400"></i></div><div class="text-2xl font-bold text-indigo-600">92.4</div><div class="text-xs text-indigo-600 mt-1">AI projection</div></div>
+      </div>
+      <div class="grid grid-cols-3 gap-4 mb-5">
+        <div class="col-span-2 card">
+          <div class="px-5 py-3 border-b border-slate-100 flex items-center justify-between"><h3 class="font-semibold text-slate-900">Subject Breakdown</h3><select class="text-xs border border-slate-200 rounded px-2 py-1"><option>Semester 2</option><option>Semester 1</option></select></div>
+          <table><thead><tr><th>Subject</th><th>Tasks</th><th>Quizzes</th><th>Mid-Term</th><th>Average</th><th>vs Class</th><th>Predikat</th></tr></thead><tbody>
+            <tr><td class="font-medium text-slate-900">Mathematics</td><td>89</td><td>90</td><td class="font-bold text-emerald-600">92</td><td class="font-bold text-emerald-600">90.5</td><td><span class="text-xs text-emerald-600">+12.5</span></td><td><span class="badge badge-green">Sangat Baik</span></td></tr>
+            <tr><td class="font-medium text-slate-900">Physics</td><td>85</td><td>86</td><td class="font-bold text-emerald-600">88</td><td class="font-bold text-emerald-600">86.5</td><td><span class="text-xs text-emerald-600">+12.5</span></td><td><span class="badge badge-green">Sangat Baik</span></td></tr>
+            <tr><td class="font-medium text-slate-900">Biology</td><td>94</td><td class="font-bold text-emerald-600">95</td><td>94</td><td class="font-bold text-emerald-600">94.5</td><td><span class="text-xs text-emerald-600">+13.5</span></td><td><span class="badge badge-green">Sangat Baik</span></td></tr>
+            <tr><td class="font-medium text-slate-900">Chemistry</td><td>89</td><td>88</td><td class="font-bold text-emerald-600">91</td><td class="font-bold text-emerald-600">90.5</td><td><span class="text-xs text-emerald-600">+13.5</span></td><td><span class="badge badge-green">Sangat Baik</span></td></tr>
+            <tr><td class="font-medium text-slate-900">English</td><td>87</td><td>85</td><td class="text-slate-400">—</td><td class="font-bold text-slate-700">88.0</td><td><span class="text-xs text-emerald-600">+13.0</span></td><td><span class="badge badge-green">Sangat Baik</span></td></tr>
+            <tr><td class="font-medium text-slate-900">Bahasa Indonesia</td><td>82</td><td>80</td><td>84</td><td class="font-bold text-slate-700">83.0</td><td><span class="text-xs text-amber-600">+7.0</span></td><td><span class="badge badge-blue">Baik</span></td></tr>
+          </tbody></table>
+        </div>
+        <div class="card p-5">
+          <h3 class="font-semibold text-slate-900 mb-3 text-sm">Subject Performance Radar</h3>
+          <div style="position:relative;height:220px;"><canvas id="studentRadarChart"></canvas></div>
+        </div>
+      </div>
+      <!-- Achievement badges -->
+      <div class="card p-5 mb-4">
+        <h3 class="font-semibold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="award" class="w-4 h-4 text-amber-500"></i>Achievement Badges</h3>
+        <div class="flex flex-wrap gap-3">
+          <div class="flex items-center gap-2.5 px-4 py-2.5 rounded-xl" style="background:linear-gradient(135deg,#fef3c7,#fffbeb);border:1px solid #fde68a;"><div class="text-xl">🏆</div><div><div class="text-xs font-bold text-amber-800">Top 10 Scholar</div><div class="text-xs text-amber-600">Semester 2 · 2025/26</div></div></div>
+          <div class="flex items-center gap-2.5 px-4 py-2.5 rounded-xl" style="background:linear-gradient(135deg,#ecfdf5,#f0fdf9);border:1px solid #a7f3d0;"><div class="text-xl">🌿</div><div><div class="text-xs font-bold text-emerald-800">Biology Champion</div><div class="text-xs text-emerald-600">Highest in class · Avg 94.5</div></div></div>
+          <div class="flex items-center gap-2.5 px-4 py-2.5 rounded-xl" style="background:linear-gradient(135deg,#eef2ff,#f5f3ff);border:1px solid #c7d2fe;"><div class="text-xl">📈</div><div><div class="text-xs font-bold text-indigo-800">Consistent Achiever</div><div class="text-xs text-indigo-600">3 semesters above 90</div></div></div>
+          <div class="flex items-center gap-2.5 px-4 py-2.5 rounded-xl" style="background:linear-gradient(135deg,#eff6ff,#f0f9ff);border:1px solid #bfdbfe;"><div class="text-xl">✅</div><div><div class="text-xs font-bold text-blue-800">Perfect Attendance</div><div class="text-xs text-blue-600">98% · Feb–May 2026</div></div></div>
+          <div class="flex items-center gap-2.5 px-4 py-2.5 rounded-xl" style="background:linear-gradient(135deg,#fdf4ff,#fae8ff);border:1px solid #e9d5ff;"><div class="text-xl">🔬</div><div><div class="text-xs font-bold text-purple-800">Science Fair Finalist</div><div class="text-xs text-purple-600">2025 · Team project</div></div></div>
+          <div class="flex items-center gap-2.5 px-4 py-2.5 rounded-xl opacity-40" style="border:1px dashed #e2e8f0;"><div class="text-xl">🥇</div><div><div class="text-xs font-bold text-slate-500">Top of Grade</div><div class="text-xs text-slate-400">Reach avg 93+ to unlock</div></div></div>
+        </div>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-semibold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="sparkles" class="w-4 h-4 text-indigo-500"></i>AI Grade Analysis</h3>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="p-3 rounded-xl" style="background:#ecfdf5;"><div class="text-xs font-semibold text-emerald-800 mb-1">Strongest subjects</div><div class="text-sm text-emerald-700">Biology (94.5), Chemistry (90.5), Math (90.5) — consistently above class average by 12+ points.</div></div>
+          <div class="p-3 rounded-xl" style="background:#fef3c7;"><div class="text-xs font-semibold text-amber-800 mb-1">Growth opportunity</div><div class="text-sm text-amber-700">Bahasa Indonesia (83.0) — focus on reading comprehension to push this above 88 and unlock Top 5.</div></div>
+          <div class="p-3 rounded-xl" style="background:#eef2ff;"><div class="text-xs font-semibold text-indigo-800 mb-1">Predicted final avg</div><div class="text-sm text-indigo-700">Based on current trajectory: <b>92.4</b> — on track for top 3 honors and potential scholarship eligibility.</div></div>
+        </div>
+      </div>

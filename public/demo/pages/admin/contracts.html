@@ -1,0 +1,32 @@
+<div class="flex items-center justify-between mb-6">
+        <div><h1 class="text-2xl font-bold text-slate-900">Contract Automation</h1><p class="text-sm text-slate-500 mt-1">Auto-generate teacher & staff contracts from HRIS data</p></div>
+        <div class="flex gap-2"><button class="btn-secondary"><i data-lucide="file-text" class="w-4 h-4"></i>Templates</button><button class="btn-primary" onclick="openModal('contractModal')"><i data-lucide="sparkles" class="w-4 h-4"></i>Generate contract</button></div>
+      </div>
+      <div class="grid grid-cols-4 gap-4 mb-6">
+        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Generated this month</div><div class="text-2xl font-bold">94</div><div class="text-xs text-emerald-600 mt-1">↑ 8.2 hrs saved/wk</div></div>
+        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Pending signature</div><div class="text-2xl font-bold">17</div><div class="text-xs text-amber-600 mt-1">3 overdue</div></div>
+        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Renewals due (60d)</div><div class="text-2xl font-bold">23</div><div class="text-xs text-slate-400 mt-1">Auto-prepared</div></div>
+        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Templates active</div><div class="text-2xl font-bold">9</div><div class="text-xs text-slate-400 mt-1">Permanent, contract…</div></div>
+      </div>
+      <div class="grid grid-cols-3 gap-4">
+        <div class="card p-5 col-span-2">
+          <h3 class="font-semibold text-slate-900 mb-4">Recent Contracts</h3>
+          <table><thead><tr><th>Staff</th><th>Type</th><th>Period</th><th>Generated</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="font-medium">Mr. Budi Santoso</td><td>Renewal · Permanent</td><td>Aug 2026 – Jul 2028</td><td>Yesterday</td><td><span class="badge badge-yellow">Awaiting principal</span></td></tr>
+            <tr><td class="font-medium">Ms. Linda Hartono</td><td>New · Contract 1y</td><td>May 2026 – Apr 2027</td><td>2 days ago</td><td><span class="badge badge-yellow">Awaiting staff</span></td></tr>
+            <tr><td class="font-medium">Mr. Joko Pranoto</td><td>Renewal · Permanent</td><td>Jul 2026 – Jul 2029</td><td>3 days ago</td><td><span class="badge badge-green"><i data-lucide="check" class="w-3 h-3"></i>Signed</span></td></tr>
+            <tr><td class="font-medium">Ms. Rina Pertiwi</td><td>New · Probation</td><td>Jun 2026 – Dec 2026</td><td>5 days ago</td><td><span class="badge badge-green"><i data-lucide="check" class="w-3 h-3"></i>Signed</span></td></tr>
+            <tr><td class="font-medium">Ms. Dewi Sari</td><td>Renewal · Permanent</td><td>Aug 2026 – Jul 2029</td><td>1 week ago</td><td><span class="badge badge-red">Action needed</span></td></tr>
+          </tbody></table>
+        </div>
+        <div class="card p-5">
+          <h3 class="font-semibold text-slate-900 mb-4">Templates</h3>
+          <div class="space-y-3">
+            <div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 cursor-pointer"><div class="font-semibold text-sm text-slate-900">Teaching · Permanent</div><div class="text-xs text-slate-500 mt-1">Used 47 times this term</div></div>
+            <div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 cursor-pointer"><div class="font-semibold text-sm text-slate-900">Teaching · 1-year contract</div><div class="text-xs text-slate-500 mt-1">Used 28 times</div></div>
+            <div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 cursor-pointer"><div class="font-semibold text-sm text-slate-900">Teaching · Probation</div><div class="text-xs text-slate-500 mt-1">Used 12 times</div></div>
+            <button class="btn-secondary w-full justify-center mt-2"><i data-lucide="plus" class="w-3 h-3"></i>New template</button>
+          </div>
+        </div>
+      </div>

@@ -1,0 +1,32 @@
+<div class="flex items-center justify-between mb-6">
+        <div>
+          <h1 class="text-2xl font-bold text-slate-900">Announcements</h1>
+          <p class="text-sm text-slate-500 mt-1">School-wide and class announcements · 2 unread</p>
+        </div>
+        <div class="flex gap-2">
+          <button class="btn-secondary"><i data-lucide="bell" class="w-4 h-4"></i>Mark all read</button>
+          <button class="btn-primary" onclick="openModal('createAnnouncementModal')"><i data-lucide="plus" class="w-4 h-4"></i>Send to My Class</button>
+        </div>
+      </div>
+      <div class="flex gap-4">
+        <div class="flex-1 space-y-3" id="teacherAnnouncementFeed"></div>
+        <div class="w-64 flex flex-col gap-4 shrink-0">
+          <div class="card p-4">
+            <h3 class="font-semibold text-slate-900 text-sm mb-3">Filter</h3>
+            <div class="space-y-1">
+              <div class="flex items-center justify-between text-sm py-1.5 px-2 rounded-lg font-semibold cursor-pointer" style="background:#e8f5f1;color:#0ea88a;">All <span class="text-xs px-1.5 py-0.5 rounded-full" style="background:#d1fae5;">5</span></div>
+              <div class="flex items-center justify-between text-sm py-1.5 px-2 rounded-lg text-slate-600 cursor-pointer hover:bg-slate-50">Unread <span class="badge badge-blue">2</span></div>
+              <div class="flex items-center justify-between text-sm py-1.5 px-2 rounded-lg text-slate-600 cursor-pointer hover:bg-slate-50">Urgent <span class="badge badge-red">2</span></div>
+              <div class="flex items-center justify-between text-sm py-1.5 px-2 rounded-lg text-slate-600 cursor-pointer hover:bg-slate-50">Pinned <span class="text-xs text-slate-400">2</span></div>
+            </div>
+          </div>
+          <div class="card p-4">
+            <h3 class="font-semibold text-slate-900 text-sm mb-2">My Class Stats</h3>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between"><span class="text-slate-600">Sent this month</span><span class="font-semibold">4</span></div>
+              <div class="flex justify-between"><span class="text-slate-600">Avg read rate</span><span class="font-semibold text-emerald-600">91%</span></div>
+              <div class="flex justify-between"><span class="text-slate-600">Last sent</span><span class="font-semibold">2 days ago</span></div>
+            </div>
+          </div>
+        </div>
+      </div>

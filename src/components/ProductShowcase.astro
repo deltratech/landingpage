@@ -3,6 +3,76 @@
 
 <div id="product-showcase-root">
 
+  <!-- ── Email gate modal ── -->
+  <div
+    id="ps-gate"
+    class="fixed inset-0 z-[300] flex items-center justify-center p-4"
+    style="display:none; background:rgba(10,21,37,0.85); backdrop-filter:blur(6px);"
+  >
+    <div id="ps-gate-card" class="w-full max-w-md rounded-3xl shadow-2xl overflow-hidden" style="background:#fff; transform:scale(0.92);opacity:0;transition:transform 0.28s cubic-bezier(0.34,1.56,0.64,1),opacity 0.2s ease;">
+      <!-- Card header -->
+      <div class="px-8 pt-8 pb-6" style="background:#0f1c2e;">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-9 h-9 rounded-xl flex items-center justify-center shrink-0" style="background:linear-gradient(135deg,#1ecfad,#0ea88a);">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div>
+            <div class="text-white font-bold text-sm font-sans">Deltra School</div>
+            <div class="text-xs font-medium px-2 py-0.5 rounded-full w-fit mt-0.5" style="background:rgba(30,207,173,0.15);color:#1ecfad;">Interactive Demo</div>
+          </div>
+        </div>
+        <h2 class="font-display font-bold text-2xl text-white leading-snug mb-1">
+          See Deltra in action
+        </h2>
+        <p class="font-sans text-sm" style="color:rgba(255,255,255,0.5);">
+          Enter your work email to access the live interactive demo — free, no commitment.
+        </p>
+      </div>
+
+      <!-- Form -->
+      <div class="px-8 py-6">
+        <form id="ps-gate-form" class="flex flex-col gap-3">
+          <div class="flex flex-col gap-1.5">
+            <label for="ps-gate-name" class="font-sans font-semibold text-xs" style="color:#0f1c2e;">Your Name</label>
+            <input
+              id="ps-gate-name"
+              type="text"
+              placeholder="Bapak / Ibu ..."
+              required
+              autocomplete="name"
+              class="font-sans text-sm px-4 py-3 rounded-xl outline-none transition-all duration-200"
+              style="background:#f4faf8;border:1.5px solid #c2d9d3;color:#0f1c2e;"
+            />
+          </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="ps-gate-email" class="font-sans font-semibold text-xs" style="color:#0f1c2e;">Work Email</label>
+            <input
+              id="ps-gate-email"
+              type="email"
+              placeholder="admin@sekolah.sch.id"
+              required
+              autocomplete="email"
+              class="font-sans text-sm px-4 py-3 rounded-xl outline-none transition-all duration-200"
+              style="background:#f4faf8;border:1.5px solid #c2d9d3;color:#0f1c2e;"
+            />
+          </div>
+          <button
+            type="submit"
+            id="ps-gate-submit"
+            class="w-full font-sans font-bold text-sm py-3.5 rounded-xl transition-all duration-200 mt-1"
+            style="background:#1ecfad;color:#0f1c2e;"
+          >
+            Access the Demo →
+          </button>
+          <p class="font-sans text-xs text-center" style="color:#6b8f88;">
+            No spam. We'll only reach out if you request a follow-up.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Demo overlay ── -->
   <div
     id="ps-overlay"
     role="dialog"
@@ -47,7 +117,6 @@
 
     <!-- ── Iframe area ── -->
     <div class="flex-1 relative overflow-hidden">
-      <!-- Skeleton loader -->
       <div id="ps-skeleton" class="absolute inset-0 flex flex-col gap-4 p-6" style="background:#f8fafc;z-index:10;transition:opacity 0.4s ease;">
         <div class="flex gap-4 h-full">
           <div class="w-48 rounded-xl animate-pulse shrink-0" style="background:#e2e8f0;opacity:0.5;"></div>
@@ -67,7 +136,6 @@
           </div>
         </div>
       </div>
-      <!-- The actual iframe -->
       <iframe
         id="ps-iframe"
         src=""
@@ -101,40 +169,6 @@
       </div>
     </div>
 
-    <!-- ── Bottom bar: feature cards + contact form ── -->
-    <div class="shrink-0 flex items-stretch" style="border-top:1px solid rgba(255,255,255,0.08);background:#0a1525;">
-      <!-- Contact / trial form -->
-      <div class="shrink-0 flex items-center gap-4 px-5 py-3">
-        <div class="hidden md:block">
-          <div class="text-2xl font-bold text-white leading-tight">Ready to try it live?</div>
-          <div class="text-xs mt-0.5" style="color:rgba(255,255,255,0.4);">We'll set up a demo for your school</div>
-        </div>
-        <form id="ps-trial-form" class="flex items-center gap-2">
-          <input
-            id="ps-trial-email"
-            type="email"
-            placeholder="Your  email"
-            required
-            class="text-xs px-3 py-2 rounded-lg outline-none font-sans w-80"
-            style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:white;"
-          />
-          <button
-            type="submit"
-            class="text-xs font-bold px-4 py-2 rounded-lg shrink-0 transition-all duration-150 hover:-translate-y-0.5"
-            style="background:#1ecfad;color:#0f1c2e;"
-          >
-            Contact Us
-          </button>
-        </form>
-        <!-- Success state (hidden) -->
-        <div id="ps-trial-success" class="hidden items-center gap-2 text-xs font-semibold" style="color:#1ecfad;">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-          Sent! We'll be in touch.
-        </div>
-      </div>
-
-    </div>
-
   </div>
 
 </div>
@@ -143,10 +177,6 @@
   .ps-tab { color: rgba(255,255,255,0.5); }
   .ps-tab.active { background: rgba(255,255,255,0.12); color: white; }
   .ps-tab:hover:not(.active) { color: rgba(255,255,255,0.8); }
-
-  .ps-feature-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
-  .ps-feature-card.active { background: rgba(30,207,173,0.1); border-color: rgba(30,207,173,0.22); }
-  .ps-feature-card:hover:not(.active) { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.15); transform: translateY(-1px); }
 
   @keyframes ps-slide-up {
     from { opacity:0; transform:translateY(24px); }
@@ -161,6 +191,17 @@
 
   @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.5; } }
   .animate-pulse { animation: pulse 1.5s cubic-bezier(0.4,0,0.6,1) infinite; }
+
+  #ps-gate-email:focus,
+  #ps-gate-name:focus {
+    border-color: #1ecfad !important;
+    box-shadow: 0 0 0 3px rgba(30,207,173,0.15);
+  }
+
+  #ps-gate-submit:hover {
+    background: #18b899 !important;
+    transform: translateY(-1px);
+  }
 </style>
 
 <script>
@@ -199,6 +240,14 @@
 
   let tourStep = 0;
   let iframeLoaded = false;
+  let pendingTab: string | undefined;
+
+  const gate        = document.getElementById('ps-gate')!;
+  const gateCard    = document.getElementById('ps-gate-card')!;
+  const gateForm    = document.getElementById('ps-gate-form') as HTMLFormElement;
+  const gateName    = document.getElementById('ps-gate-name') as HTMLInputElement;
+  const gateEmail   = document.getElementById('ps-gate-email') as HTMLInputElement;
+  const gateSubmit  = document.getElementById('ps-gate-submit') as HTMLButtonElement;
 
   const overlay     = document.getElementById('ps-overlay')!;
   const skeleton    = document.getElementById('ps-skeleton')!;
@@ -214,14 +263,9 @@
   const tourSkip    = document.getElementById('ps-tour-skip')!;
   const tourRestart = document.getElementById('ps-tour-restart')!;
   const tabs        = document.querySelectorAll<HTMLElement>('.ps-tab');
-  const pills       = document.querySelectorAll<HTMLElement>('.ps-feature-card');
   const closeBtn    = document.getElementById('ps-close')!;
   const fsBtn       = document.getElementById('ps-fullscreen')!;
-  const trialForm   = document.getElementById('ps-trial-form') as HTMLFormElement;
-  const trialEmail  = document.getElementById('ps-trial-email') as HTMLInputElement;
-  const trialSuccess = document.getElementById('ps-trial-success')!;
 
-  // ── Tab map ──────────────────────────────────────────────
   const TAB_MAP: Record<string, {role?:string; page:string}> = {
     dashboard: { page: 'admin-dashboard' },
     students:  { page: 'admin-students' },
@@ -230,8 +274,68 @@
     teacher:   { role: 'teacher', page: 'teacher-dashboard' },
   };
 
-  // ── Open / Close ─────────────────────────────────────────
+  // ── Email gate ───────────────────────────────────────────
+  function showGate(tab?: string) {
+    pendingTab = tab;
+    gate.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => {
+      gateCard.style.transform = 'scale(1)';
+      gateCard.style.opacity = '1';
+    });
+    setTimeout(() => gateName.focus(), 100);
+  }
+
+  function hideGate() {
+    gateCard.style.transform = 'scale(0.92)';
+    gateCard.style.opacity = '0';
+    setTimeout(() => { gate.style.display = 'none'; }, 200);
+  }
+
+  gateForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name  = gateName.value.trim();
+    const email = gateEmail.value.trim();
+    if (!name || !email) return;
+
+    gateSubmit.disabled = true;
+    gateSubmit.textContent = 'Opening demo…';
+
+    try {
+      await fetch('/api/request-demo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fullname: name, email }),
+      });
+    } catch { /* best-effort */ }
+
+    localStorage.setItem('deltra_demo_access', '1');
+    hideGate();
+    setTimeout(() => openDemo(pendingTab), 220);
+  });
+
+  // close gate on backdrop click
+  gate.addEventListener('click', (e) => {
+    if (e.target === gate) {
+      gateCard.style.transform = 'scale(0.92)';
+      gateCard.style.opacity = '0';
+      setTimeout(() => {
+        gate.style.display = 'none';
+        document.body.style.overflow = '';
+      }, 200);
+    }
+  });
+
+  // ── Open showcase (with or without gate) ────────────────
   function openShowcase(tab?: string) {
+    if (localStorage.getItem('deltra_demo_access')) {
+      openDemo(tab);
+    } else {
+      showGate(tab);
+    }
+  }
+
+  function openDemo(tab?: string) {
     overlay.style.display = 'flex';
     overlay.setAttribute('data-open', '');
     document.body.style.overflow = 'hidden';
@@ -251,9 +355,14 @@
   (window as any).openProductShowcase = openShowcase;
 
   closeBtn.addEventListener('click', closeShowcase);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeShowcase(); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      if (overlay.style.display !== 'none') closeShowcase();
+      else if (gate.style.display !== 'none') gate.click();
+    }
+  });
 
-  // ── Load iframe (lazy, only once) ───────────────────────
+  // ── Load iframe ──────────────────────────────────────────
   function loadIframe() {
     if (iframeLoaded) return;
     iframeLoaded = true;
@@ -265,10 +374,9 @@
     });
   }
 
-  // ── Tab / pill navigation ────────────────────────────────
+  // ── Tab navigation ───────────────────────────────────────
   function navigateTab(tab: string) {
     tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
-    pills.forEach(p => p.classList.toggle('active', p.dataset.feature === tab));
     const target = TAB_MAP[tab];
     if (!target || !iframe.contentWindow) return;
     try {
@@ -284,16 +392,12 @@
   }
 
   tabs.forEach(tab => tab.addEventListener('click', () => navigateTab(tab.dataset.tab!)));
-  pills.forEach(pill => pill.addEventListener('click', () => navigateTab(pill.dataset.feature!)));
 
   // ── Fullscreen ───────────────────────────────────────────
   let isFullscreen = false;
   fsBtn.addEventListener('click', () => {
-    if (!isFullscreen) {
-      overlay.requestFullscreen?.().catch(() => {});
-    } else {
-      document.exitFullscreen?.().catch(() => {});
-    }
+    if (!isFullscreen) overlay.requestFullscreen?.().catch(() => {});
+    else document.exitFullscreen?.().catch(() => {});
     isFullscreen = !isFullscreen;
   });
 
@@ -326,23 +430,6 @@
   });
   tourSkip.addEventListener('click', finishTour);
   tourRestart.addEventListener('click', startTour);
-
-  // ── Trial form ───────────────────────────────────────────
-  trialForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const email = trialEmail.value.trim();
-    if (!email) return;
-    try {
-      await fetch('/api/trial', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
-      });
-    } catch { /* best-effort */ }
-    trialForm.classList.add('hidden');
-    trialSuccess.classList.remove('hidden');
-    trialSuccess.classList.add('flex');
-  });
 
   function finishTour() {
     localStorage.setItem('deltra_tour_done', '1');

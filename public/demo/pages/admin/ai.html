@@ -1,0 +1,47 @@
+<div class="flex items-center justify-between mb-6">
+        <div><h1 class="text-2xl font-bold gradient-text">AI Insights</h1><p class="text-sm text-slate-500 mt-1">School-wide intelligence powered by TeacherPal AI</p></div>
+        <button class="btn-secondary"><i data-lucide="settings-2" class="w-4 h-4"></i>Configure thresholds</button>
+      </div>
+      <div class="ai-card mb-6">
+        <div class="flex items-start gap-3">
+          <div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center flex-shrink-0"><i data-lucide="sparkles" class="w-5 h-5 text-indigo-600"></i></div>
+          <div class="flex-1">
+            <h3 class="font-semibold text-slate-900 mb-1">This week's summary</h3>
+            <p class="text-sm text-slate-700 leading-relaxed">Your schools generally performed well this week. Average attendance held at <b>94.6%</b>. However, <b>23 students</b> were flagged for declining performance — primarily in <b>Grade 9 Mathematics</b> at Bekasi (8 students) and <b>Grade 11 Physics</b> at Duren Sawit (6 students). Contract automation saved an estimated <b>8.2 hours</b> of admin time this week.</p>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-4 mb-6">
+        <div class="card p-5"><h3 class="font-semibold text-slate-900 mb-4">Risk Distribution by Grade</h3><div style="position:relative;height:200px;"><canvas id="riskChart"></canvas></div></div>
+        <div class="card p-5">
+          <h3 class="font-semibold text-slate-900 mb-4">Subject-Level Alerts</h3>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-sm"><div><div class="font-medium text-slate-900">Mathematics — Grade 9</div><div class="text-xs text-slate-500">Bekasi · 8 students below threshold</div></div><span class="badge badge-red">High</span></div>
+            <div class="flex items-center justify-between text-sm"><div><div class="font-medium text-slate-900">Physics — Grade 11</div><div class="text-xs text-slate-500">Duren Sawit · 6 students declining</div></div><span class="badge badge-red">High</span></div>
+            <div class="flex items-center justify-between text-sm"><div><div class="font-medium text-slate-900">English — Grade 10</div><div class="text-xs text-slate-500">Bogor · 4 students need follow-up</div></div><span class="badge badge-yellow">Medium</span></div>
+            <div class="flex items-center justify-between text-sm"><div><div class="font-medium text-slate-900">Chemistry — Grade 12</div><div class="text-xs text-slate-500">Bekasi · 3 students borderline</div></div><span class="badge badge-yellow">Medium</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card overflow-hidden">
+        <div class="px-5 py-4 border-b border-slate-100"><h3 class="font-semibold text-slate-900">Students Flagged This Week</h3></div>
+        <table><thead><tr><th>Student</th><th>Class</th><th>Risk Signals</th><th>Risk Score</th><th>Suggested Action</th><th></th></tr></thead>
+        <tbody>
+          <tr>
+            <td><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center text-xs font-semibold">RA</div><div><div class="font-medium">Raka Adi</div><div class="text-xs text-slate-500">NIS 110823</div></div></div></td>
+            <td>11 IPA-2 · Bekasi</td>
+            <td class="text-xs"><span class="badge badge-red">3 grades dropped</span> <span class="badge badge-yellow">Attendance ↓</span></td>
+            <td><div class="flex items-center gap-2"><div class="w-16 progress-bar"><div class="progress-fill" style="width:82%; background:#dc2626;"></div></div><span class="text-xs font-semibold text-rose-600">82</span></div></td>
+            <td class="text-xs">Schedule parent meeting</td>
+            <td><button class="btn-secondary text-xs">Open</button></td>
+          </tr>
+          <tr>
+            <td><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-semibold">SP</div><div><div class="font-medium">Siti Putri</div><div class="text-xs text-slate-500">NIS 110934</div></div></div></td>
+            <td>9-A · Bekasi</td>
+            <td class="text-xs"><span class="badge badge-yellow">Math grade ↓</span></td>
+            <td><div class="flex items-center gap-2"><div class="w-16 progress-bar"><div class="progress-fill" style="width:67%; background:#d97706;"></div></div><span class="text-xs font-semibold text-amber-600">67</span></div></td>
+            <td class="text-xs">Tutoring session</td>
+            <td><button class="btn-secondary text-xs">Open</button></td>
+          </tr>
+        </tbody></table>
+      </div>

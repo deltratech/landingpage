@@ -185,6 +185,19 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+  /* Calendar */
+  .cal-day { min-height: 90px; border-right: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; padding: 5px; vertical-align: top; }
+  .cal-day.other-month { background: #fafbfc; }
+  .day-num { font-size: 12px; font-weight: 500; color: #64748b; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 999px; margin-bottom: 3px; }
+  .day-num.today-num { background: #1ecfad; color: white; font-weight: 700; }
+  .cal-event { font-size: 11px; font-weight: 500; padding: 2px 5px; border-radius: 4px; margin-bottom: 2px; cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; display: block; transition: filter 0.1s; }
+  .cal-event:hover { filter: brightness(0.93); }
+  /* Announcements */
+  .announcement-card { background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; transition: box-shadow 0.2s; }
+  .announcement-card:hover { box-shadow: 0 4px 16px rgba(15,23,42,0.06); }
+  .announcement-card.pinned { border-left: 3px solid #1ecfad; }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
@@ -204,6 +217,8 @@
       <div class="role-toggle">
         <button id="roleAdmin" class="active" onclick="switchRole('admin')">School Admin</button>
         <button id="roleTeacher" onclick="switchRole('teacher')">Teacher</button>
+        <button id="roleParent" onclick="switchRole('parent')">Parent</button>
+        <button id="roleStudent" onclick="switchRole('student')">Student</button>
       </div>
       <div id="branchSelector" class="flex items-center gap-2 text-sm text-slate-600 px-3 py-1.5 border border-slate-200 rounded-lg bg-slate-50">
         <i data-lucide="building-2" class="w-4 h-4"></i>
@@ -246,11 +261,24 @@
       <div class="nav-item" onclick="goToPage('admin-staff', this)"><i data-lucide="user-cog" class="w-4 h-4"></i>Staff & Teachers</div>
       <div class="nav-item" onclick="goToPage('admin-contracts', this)"><i data-lucide="file-signature" class="w-4 h-4"></i>Contracts</div>
       <div class="nav-item" onclick="goToPage('admin-reports', this)"><i data-lucide="file-text" class="w-4 h-4"></i>Report Cards</div>
+      <div class="nav-section-title">Campus Services</div>
+      <div class="nav-item" onclick="goToPage('admin-library', this)"><i data-lucide="book-open" class="w-4 h-4"></i>Library</div>
+      <div class="nav-item" onclick="goToPage('admin-health', this)"><i data-lucide="heart-pulse" class="w-4 h-4"></i>Health & Clinic</div>
+      <div class="nav-item" onclick="goToPage('admin-transport', this)"><i data-lucide="bus" class="w-4 h-4"></i>Transportation</div>
+      <div class="nav-item" onclick="goToPage('admin-clubs', this)"><i data-lucide="trophy" class="w-4 h-4"></i>Clubs & Activities</div>
       <div class="nav-section-title">AI & Insights</div>
       <div class="nav-item" onclick="goToPage('admin-ai', this)"><i data-lucide="sparkles" class="w-4 h-4"></i>AI Insights</div>
       <div class="nav-item" onclick="goToPage('admin-compliance', this)"><i data-lucide="shield-check" class="w-4 h-4"></i>Compliance</div>
+      
+      <div class="nav-section-title">School Life</div>
+      <div class="nav-item" onclick="goToPage('admin-calendar', this)"><i data-lucide="calendar" class="w-4 h-4"></i>Academic Calendar</div>
+      <div class="nav-item" onclick="goToPage('admin-announcements', this)"><i data-lucide="megaphone" class="w-4 h-4"></i>Announcements</div>
+      <div class="nav-section-title">Finance & HR</div>
+      <div class="nav-item" onclick="goToPage('admin-finance', this)"><i data-lucide="banknote" class="w-4 h-4"></i>Finance & Billing</div>
+      <div class="nav-item" onclick="goToPage('admin-hr', this)"><i data-lucide="briefcase" class="w-4 h-4"></i>HR & Payroll</div>
       <div class="nav-section-title">System</div>
       <div class="nav-item" onclick="goToPage('admin-settings', this)"><i data-lucide="settings" class="w-4 h-4"></i>Settings</div>
+      <div class="nav-item" onclick="goToPage('admin-integrations', this)"><i data-lucide="plug" class="w-4 h-4"></i>Integration Hub</div>
     </nav>
     <nav id="teacherNav" style="display:none;">
       <div class="nav-section-title">Workspace</div>
@@ -262,8 +290,40 @@
       <div class="nav-item" onclick="goToPage('teacher-feedback', this)"><i data-lucide="message-square-heart" class="w-4 h-4"></i>Parent Feedback</div>
       <div class="nav-item" onclick="goToPage('teacher-exam', this)"><i data-lucide="file-question" class="w-4 h-4"></i>Exam Generator</div>
       <div class="nav-item" onclick="goToPage('teacher-teacherpal', this)"><i data-lucide="brain-circuit" class="w-4 h-4"></i>TeacherPal AI</div>
+      <div class="nav-item" onclick="goToPage('teacher-curriculum', this)"><i data-lucide="wand-2" class="w-4 h-4"></i>Curriculum Builder</div>
       <div class="nav-section-title">Resources</div>
       <div class="nav-item" onclick="goToPage('teacher-materials', this)"><i data-lucide="library" class="w-4 h-4"></i>Materials</div>
+      <div class="nav-section-title">School Life</div>
+      <div class="nav-item" onclick="goToPage('teacher-calendar', this)"><i data-lucide="calendar" class="w-4 h-4"></i>Academic Calendar</div>
+      <div class="nav-item" onclick="goToPage('teacher-announcements', this)"><i data-lucide="megaphone" class="w-4 h-4"></i>Announcements</div>
+    </nav>
+    <nav id="parentNav" style="display:none;">
+      <div class="nav-section-title">My Child</div>
+      <div class="nav-item active" onclick="goToPage('parent-dashboard', this)"><i data-lucide="layout-dashboard" class="w-4 h-4"></i>Overview</div>
+      <div class="nav-item" onclick="goToPage('parent-progress', this)"><i data-lucide="trending-up" class="w-4 h-4"></i>Progress & Grades</div>
+      <div class="nav-item" onclick="goToPage('parent-schedule', this)"><i data-lucide="calendar-days" class="w-4 h-4"></i>Class Schedule</div>
+      <div class="nav-item" onclick="goToPage('parent-health', this)"><i data-lucide="heart-pulse" class="w-4 h-4"></i>Health Records</div>
+      <div class="nav-section-title">School</div>
+      <div class="nav-item" onclick="goToPage('parent-payments', this)"><i data-lucide="credit-card" class="w-4 h-4"></i>Payments & Fees</div>
+      <div class="nav-item" onclick="goToPage('parent-announcements', this)"><i data-lucide="megaphone" class="w-4 h-4"></i>Announcements</div>
+      <div class="nav-item" onclick="goToPage('parent-messages', this)"><i data-lucide="message-circle" class="w-4 h-4"></i>Messages</div>
+    </nav>
+    <nav id="studentNav" style="display:none;">
+      <div class="nav-section-title">My Learning</div>
+      <div class="nav-item active" onclick="goToPage('student-dashboard', this)"><i data-lucide="layout-dashboard" class="w-4 h-4"></i>Dashboard</div>
+      <div class="nav-item" onclick="goToPage('student-subjects', this)"><i data-lucide="book-open" class="w-4 h-4"></i>My Subjects</div>
+      <div class="nav-item" onclick="goToPage('student-assignments', this)"><i data-lucide="clipboard-list" class="w-4 h-4"></i>Assignments</div>
+      <div class="nav-item" onclick="goToPage('student-exams', this)"><i data-lucide="file-check-2" class="w-4 h-4"></i>Exams & CBT</div>
+      <div class="nav-item" onclick="goToPage('student-materials', this)"><i data-lucide="library" class="w-4 h-4"></i>Materials</div>
+      <div class="nav-item" onclick="goToPage('student-grades', this)"><i data-lucide="bar-chart-2" class="w-4 h-4"></i>My Grades</div>
+      <div class="nav-section-title">Campus</div>
+      <div class="nav-item" onclick="goToPage('student-attendance', this)"><i data-lucide="calendar-check" class="w-4 h-4"></i>Attendance</div>
+      <div class="nav-item" onclick="goToPage('student-schedule', this)"><i data-lucide="calendar-days" class="w-4 h-4"></i>Schedule</div>
+      <div class="nav-item" onclick="goToPage('student-calendar', this)"><i data-lucide="calendar" class="w-4 h-4"></i>Academic Calendar</div>
+      <div class="nav-section-title">Connect</div>
+      <div class="nav-item" onclick="goToPage('student-announcements', this)"><i data-lucide="megaphone" class="w-4 h-4"></i>Announcements</div>
+      <div class="nav-item" onclick="goToPage('student-messages', this)"><i data-lucide="message-circle" class="w-4 h-4"></i>Messages</div>
+      <div class="nav-item" onclick="goToPage('student-profile', this)"><i data-lucide="user-circle" class="w-4 h-4"></i>My Profile</div>
     </nav>
     <div class="mt-8 ai-card">
       <div class="flex items-center gap-2 mb-2">
@@ -275,523 +335,294 @@
     </div>
   </aside>
 
-  <main class="flex-1 p-8 max-w-[1600px]">
-
-    <!-- ADMIN: DASHBOARD -->
-    <div id="page-admin-dashboard" class="page active">
-      <div class="flex items-center justify-between mb-6">
-        <div>
-          <h1 class="text-2xl font-bold text-slate-900">Good morning, Dr. Sari</h1>
-          <p class="text-sm text-slate-500 mt-1">Tuesday, May 12 2026 · 3 active branches · 2,847 enrolled students</p>
-        </div>
-        <div class="flex gap-2">
-          <button class="btn-secondary"><i data-lucide="download" class="w-4 h-4"></i>Export</button>
-          <button class="btn-primary"><i data-lucide="plus" class="w-4 h-4"></i>Quick action</button>
-        </div>
-      </div>
-      <div class="grid grid-cols-4 gap-4 mb-6">
-        <div class="kpi-card">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Active Students</span>
-            <i data-lucide="users" class="w-4 h-4 text-slate-400"></i>
-          </div>
-          <div class="text-2xl font-bold text-slate-900">2,847</div>
-          <div class="text-xs text-emerald-600 font-medium mt-1 flex items-center gap-1"><i data-lucide="trending-up" class="w-3 h-3"></i>+124 this term</div>
-        </div>
-        <div class="kpi-card">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Attendance Today</span>
-            <i data-lucide="check-square" class="w-4 h-4 text-slate-400"></i>
-          </div>
-          <div class="text-2xl font-bold text-slate-900">94.6%</div>
-          <div class="text-xs text-emerald-600 font-medium mt-1 flex items-center gap-1"><i data-lucide="trending-up" class="w-3 h-3"></i>+1.2% vs last week</div>
-        </div>
-        <div class="kpi-card">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Contracts Pending</span>
-            <i data-lucide="file-signature" class="w-4 h-4 text-slate-400"></i>
-          </div>
-          <div class="text-2xl font-bold text-slate-900">17</div>
-          <div class="text-xs text-amber-600 font-medium mt-1 flex items-center gap-1"><i data-lucide="clock" class="w-3 h-3"></i>4 expire this month</div>
-        </div>
-        <div class="kpi-card">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wide">Students at Risk</span>
-            <i data-lucide="alert-triangle" class="w-4 h-4 text-slate-400"></i>
-          </div>
-          <div class="text-2xl font-bold text-slate-900">23</div>
-          <div class="text-xs text-rose-600 font-medium mt-1 flex items-center gap-1"><i data-lucide="brain-circuit" class="w-3 h-3"></i>AI flagged this week</div>
-        </div>
-      </div>
-      <div class="grid grid-cols-3 gap-4 mb-6">
-        <div class="card p-5 col-span-2">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="font-semibold text-slate-900">Enrollment & Attendance Trends</h3>
-            <select class="text-xs border border-slate-200 rounded px-2 py-1"><option>Last 6 months</option><option>This term</option></select>
-          </div>
-          <div style="position:relative;height:200px;"><canvas id="enrollChart"></canvas></div>
-        </div>
-        <div class="card p-5">
-          <h3 class="font-semibold text-slate-900 mb-4">Branch Performance</h3>
-          <div class="space-y-4">
-            <div>
-              <div class="flex justify-between text-sm mb-1"><span class="font-medium text-slate-700">Bekasi Campus</span><span class="text-slate-600">96.2%</span></div>
-              <div class="progress-bar"><div class="progress-fill" style="width:96.2%"></div></div>
-              <div class="text-xs text-slate-500 mt-1">1,124 students · Live since Jul 2026</div>
-            </div>
-            <div>
-              <div class="flex justify-between text-sm mb-1"><span class="font-medium text-slate-700">Duren Sawit Campus</span><span class="text-slate-600">94.1%</span></div>
-              <div class="progress-bar"><div class="progress-fill" style="width:94.1%; background:#7c3aed;"></div></div>
-              <div class="text-xs text-slate-500 mt-1">982 students · Live since Sep 2026</div>
-            </div>
-            <div>
-              <div class="flex justify-between text-sm mb-1"><span class="font-medium text-slate-700">Bogor Campus</span><span class="text-slate-600">93.5%</span></div>
-              <div class="progress-bar"><div class="progress-fill" style="width:93.5%; background:#0ea5e9;"></div></div>
-              <div class="text-xs text-slate-500 mt-1">741 students · Live since Nov 2026</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="grid grid-cols-3 gap-4">
-        <div class="card p-5 col-span-2">
-          <div class="flex items-center justify-between mb-4">
-            <h3 class="font-semibold text-slate-900">Recent Activity</h3>
-            <a class="text-xs text-indigo-600 font-semibold cursor-pointer">View all</a>
-          </div>
-          <div class="space-y-3">
-            <div class="flex items-start gap-3 pb-3 border-b border-slate-100">
-              <div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0"><i data-lucide="file-check" class="w-4 h-4 text-emerald-600"></i></div>
-              <div class="flex-1">
-                <div class="text-sm text-slate-900"><b>147 report cards</b> generated for Grade 11 — Bekasi</div>
-                <div class="text-xs text-slate-500 mt-0.5">Auto-distributed to parents · 2 hours ago</div>
-              </div>
-            </div>
-            <div class="flex items-start gap-3 pb-3 border-b border-slate-100">
-              <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0"><i data-lucide="sparkles" class="w-4 h-4 text-indigo-600"></i></div>
-              <div class="flex-1">
-                <div class="text-sm text-slate-900">TeacherPal AI flagged <b>8 students</b> needing follow-up in Grade 9</div>
-                <div class="text-xs text-slate-500 mt-0.5">Drop in Mathematics performance · 4 hours ago</div>
-              </div>
-            </div>
-            <div class="flex items-start gap-3 pb-3 border-b border-slate-100">
-              <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center flex-shrink-0"><i data-lucide="file-signature" class="w-4 h-4 text-amber-600"></i></div>
-              <div class="flex-1">
-                <div class="text-sm text-slate-900"><b>Mr. Budi Santoso's</b> teaching contract auto-prepared for renewal</div>
-                <div class="text-xs text-slate-500 mt-0.5">Awaiting principal signature · Yesterday</div>
-              </div>
-            </div>
-            <div class="flex items-start gap-3">
-              <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0"><i data-lucide="message-square" class="w-4 h-4 text-blue-600"></i></div>
-              <div class="flex-1">
-                <div class="text-sm text-slate-900"><b>423 parent feedback messages</b> generated for Grade 7-8</div>
-                <div class="text-xs text-slate-500 mt-0.5">Reviewed by 12 teachers · Yesterday</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="card p-5">
-          <h3 class="font-semibold text-slate-900 mb-4">Compliance & Rollout</h3>
-          <div class="space-y-3">
-            <div class="flex items-center justify-between text-sm"><span class="text-slate-700">Bekasi onboarding</span><span class="badge badge-green"><i data-lucide="check" class="w-3 h-3"></i>Complete</span></div>
-            <div class="flex items-center justify-between text-sm"><span class="text-slate-700">Duren Sawit onboarding</span><span class="badge badge-green"><i data-lucide="check" class="w-3 h-3"></i>Complete</span></div>
-            <div class="flex items-center justify-between text-sm"><span class="text-slate-700">Bogor onboarding</span><span class="badge badge-blue">In progress · 78%</span></div>
-            <div class="flex items-center justify-between text-sm"><span class="text-slate-700">Data audit Q2</span><span class="badge badge-yellow">Due May 30</span></div>
-            <div class="flex items-center justify-between text-sm"><span class="text-slate-700">Stakeholder report</span><span class="badge badge-green"><i data-lucide="check" class="w-3 h-3"></i>Sent</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ADMIN: BRANCHES -->
-    <div id="page-admin-branches" class="page">
-      <div class="flex items-center justify-between mb-6">
-        <div><h1 class="text-2xl font-bold text-slate-900">Branches</h1><p class="text-sm text-slate-500 mt-1">Multi-campus rollout overview · 3 of 18 partner branches live</p></div>
-        <button class="btn-primary"><i data-lucide="plus" class="w-4 h-4"></i>Onboard branch</button>
-      </div>
-      <div class="grid grid-cols-3 gap-4 mb-6">
-        <div class="card p-5">
-          <div class="flex items-center justify-between mb-3"><div><h3 class="font-semibold text-slate-900">Bekasi Campus</h3><p class="text-xs text-slate-500">SMA Tunas Bangsa Bekasi</p></div><span class="badge badge-green">Live</span></div>
-          <div class="grid grid-cols-2 gap-3 text-sm mb-4">
-            <div><div class="text-xs text-slate-500">Students</div><div class="font-semibold text-slate-900">1,124</div></div>
-            <div><div class="text-xs text-slate-500">Teachers</div><div class="font-semibold text-slate-900">68</div></div>
-            <div><div class="text-xs text-slate-500">Adoption</div><div class="font-semibold text-emerald-600">98%</div></div>
-            <div><div class="text-xs text-slate-500">Live since</div><div class="font-semibold text-slate-900">Jul 2026</div></div>
-          </div>
-          <div class="border-t border-slate-100 pt-3 flex items-center justify-between text-xs text-slate-500"><span>Bekasi Selatan, Jawa Barat</span><a class="text-indigo-600 font-semibold cursor-pointer">Manage →</a></div>
-        </div>
-        <div class="card p-5">
-          <div class="flex items-center justify-between mb-3"><div><h3 class="font-semibold text-slate-900">Duren Sawit Campus</h3><p class="text-xs text-slate-500">SMA Tunas Bangsa Duren Sawit</p></div><span class="badge badge-green">Live</span></div>
-          <div class="grid grid-cols-2 gap-3 text-sm mb-4">
-            <div><div class="text-xs text-slate-500">Students</div><div class="font-semibold text-slate-900">982</div></div>
-            <div><div class="text-xs text-slate-500">Teachers</div><div class="font-semibold text-slate-900">54</div></div>
-            <div><div class="text-xs text-slate-500">Adoption</div><div class="font-semibold text-emerald-600">94%</div></div>
-            <div><div class="text-xs text-slate-500">Live since</div><div class="font-semibold text-slate-900">Sep 2026</div></div>
-          </div>
-          <div class="border-t border-slate-100 pt-3 flex items-center justify-between text-xs text-slate-500"><span>Duren Sawit, DKI Jakarta</span><a class="text-indigo-600 font-semibold cursor-pointer">Manage →</a></div>
-        </div>
-        <div class="card p-5">
-          <div class="flex items-center justify-between mb-3"><div><h3 class="font-semibold text-slate-900">Bogor Campus</h3><p class="text-xs text-slate-500">SMA Tunas Bangsa Bogor</p></div><span class="badge badge-blue">Onboarding</span></div>
-          <div class="grid grid-cols-2 gap-3 text-sm mb-4">
-            <div><div class="text-xs text-slate-500">Students</div><div class="font-semibold text-slate-900">741</div></div>
-            <div><div class="text-xs text-slate-500">Teachers</div><div class="font-semibold text-slate-900">42</div></div>
-            <div><div class="text-xs text-slate-500">Adoption</div><div class="font-semibold text-amber-600">78%</div></div>
-            <div><div class="text-xs text-slate-500">Live since</div><div class="font-semibold text-slate-900">Nov 2026</div></div>
-          </div>
-          <div class="border-t border-slate-100 pt-3 flex items-center justify-between text-xs text-slate-500"><span>Bogor Tengah, Jawa Barat</span><a class="text-indigo-600 font-semibold cursor-pointer">Manage →</a></div>
-        </div>
-      </div>
-      <div class="card p-5">
-        <h3 class="font-semibold text-slate-900 mb-4">Rollout Pipeline — Next Branches</h3>
-        <table><thead><tr><th>Branch</th><th>Region</th><th>Students (est.)</th><th>Target Go-Live</th><th>Status</th></tr></thead>
-        <tbody>
-          <tr><td class="font-medium">Tangerang Campus</td><td>Banten</td><td>~890</td><td>Aug 2026</td><td><span class="badge badge-blue">Site survey</span></td></tr>
-          <tr><td class="font-medium">Depok Campus</td><td>Jawa Barat</td><td>~620</td><td>Oct 2026</td><td><span class="badge badge-yellow">Contract drafting</span></td></tr>
-          <tr><td class="font-medium">Bandung Campus</td><td>Jawa Barat</td><td>~1,050</td><td>Jan 2027</td><td><span class="badge badge-gray">Discovery</span></td></tr>
-          <tr><td class="font-medium">Cibubur Campus</td><td>DKI Jakarta</td><td>~480</td><td>Feb 2027</td><td><span class="badge badge-gray">Discovery</span></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-
-    <!-- ADMIN: STUDENTS -->
-    <div id="page-admin-students" class="page">
-      <div class="flex items-center justify-between mb-6">
-        <div><h1 class="text-2xl font-bold text-slate-900">Students</h1><p class="text-sm text-slate-500 mt-1">2,847 enrolled across 3 branches</p></div>
-        <div class="flex gap-2"><button class="btn-secondary"><i data-lucide="upload" class="w-4 h-4"></i>Import CSV</button><button class="btn-primary"><i data-lucide="user-plus" class="w-4 h-4"></i>Add student</button></div>
-      </div>
-      <div class="card mb-4 p-4 flex items-center gap-3 flex-wrap">
-        <div class="relative flex-1 min-w-[250px]"><input type="text" placeholder="Search by name, NIS, or class..." class="input pl-9" /><i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i></div>
-        <select class="input w-auto"><option>All grades</option><option>Grade 7-9</option><option>Grade 10-12</option></select>
-        <select class="input w-auto"><option>All branches</option><option>Bekasi</option><option>Duren Sawit</option><option>Bogor</option></select>
-        <select class="input w-auto"><option>All status</option><option>Active</option><option>At risk</option><option>Honors</option></select>
-      </div>
-      <div class="card overflow-hidden">
-        <table>
-          <thead><tr><th><input type="checkbox" /></th><th>NIS</th><th>Student</th><th>Grade / Class</th><th>Branch</th><th>Avg Grade</th><th>Attendance</th><th>Status</th><th></th></tr></thead>
-          <tbody id="studentsTable"></tbody>
-        </table>
-        <div class="px-4 py-3 flex items-center justify-between border-t border-slate-100 bg-slate-50">
-          <span class="text-xs text-slate-500">Showing 1–10 of 2,847</span>
-          <div class="flex gap-1">
-            <button class="btn-secondary text-xs">Previous</button>
-            <button class="btn-secondary text-xs" style="background:#e8f5f1;color:#0ea88a;">1</button>
-            <button class="btn-secondary text-xs">2</button>
-            <button class="btn-secondary text-xs">Next</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ADMIN: STAFF -->
-    <div id="page-admin-staff" class="page">
-      <div class="flex items-center justify-between mb-6">
-        <div><h1 class="text-2xl font-bold text-slate-900">Staff & Teachers</h1><p class="text-sm text-slate-500 mt-1">164 staff across all branches · HRIS-linked</p></div>
-        <div class="flex gap-2"><button class="btn-secondary"><i data-lucide="download" class="w-4 h-4"></i>Export</button><button class="btn-primary"><i data-lucide="user-plus" class="w-4 h-4"></i>Add staff</button></div>
-      </div>
-      <div class="grid grid-cols-4 gap-4 mb-6">
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Total Staff</div><div class="text-2xl font-bold">164</div><div class="text-xs text-slate-400 mt-1">Across 3 branches</div></div>
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Active Teachers</div><div class="text-2xl font-bold">142</div><div class="text-xs text-emerald-600 mt-1">+8 new this term</div></div>
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Contracts Expiring</div><div class="text-2xl font-bold">17</div><div class="text-xs text-amber-600 mt-1">Within 60 days</div></div>
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Avg Tenure</div><div class="text-2xl font-bold">4.2y</div><div class="text-xs text-slate-400 mt-1">Healthy retention</div></div>
-      </div>
-      <div class="card overflow-hidden"><table><thead><tr><th>Staff</th><th>Role</th><th>Branch</th><th>Subject</th><th>Contract</th><th>Status</th><th></th></tr></thead><tbody id="staffTable"></tbody></table></div>
-    </div>
-
-    <!-- ADMIN: CONTRACTS -->
-    <div id="page-admin-contracts" class="page">
-      <div class="flex items-center justify-between mb-6">
-        <div><h1 class="text-2xl font-bold text-slate-900">Contract Automation</h1><p class="text-sm text-slate-500 mt-1">Auto-generate teacher & staff contracts from HRIS data</p></div>
-        <div class="flex gap-2"><button class="btn-secondary"><i data-lucide="file-text" class="w-4 h-4"></i>Templates</button><button class="btn-primary" onclick="openModal('contractModal')"><i data-lucide="sparkles" class="w-4 h-4"></i>Generate contract</button></div>
-      </div>
-      <div class="grid grid-cols-4 gap-4 mb-6">
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Generated this month</div><div class="text-2xl font-bold">94</div><div class="text-xs text-emerald-600 mt-1">↑ 8.2 hrs saved/wk</div></div>
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Pending signature</div><div class="text-2xl font-bold">17</div><div class="text-xs text-amber-600 mt-1">3 overdue</div></div>
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Renewals due (60d)</div><div class="text-2xl font-bold">23</div><div class="text-xs text-slate-400 mt-1">Auto-prepared</div></div>
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Templates active</div><div class="text-2xl font-bold">9</div><div class="text-xs text-slate-400 mt-1">Permanent, contract…</div></div>
-      </div>
-      <div class="grid grid-cols-3 gap-4">
-        <div class="card p-5 col-span-2">
-          <h3 class="font-semibold text-slate-900 mb-4">Recent Contracts</h3>
-          <table><thead><tr><th>Staff</th><th>Type</th><th>Period</th><th>Generated</th><th>Status</th></tr></thead>
-          <tbody>
-            <tr><td class="font-medium">Mr. Budi Santoso</td><td>Renewal · Permanent</td><td>Aug 2026 – Jul 2028</td><td>Yesterday</td><td><span class="badge badge-yellow">Awaiting principal</span></td></tr>
-            <tr><td class="font-medium">Ms. Linda Hartono</td><td>New · Contract 1y</td><td>May 2026 – Apr 2027</td><td>2 days ago</td><td><span class="badge badge-yellow">Awaiting staff</span></td></tr>
-            <tr><td class="font-medium">Mr. Joko Pranoto</td><td>Renewal · Permanent</td><td>Jul 2026 – Jul 2029</td><td>3 days ago</td><td><span class="badge badge-green"><i data-lucide="check" class="w-3 h-3"></i>Signed</span></td></tr>
-            <tr><td class="font-medium">Ms. Rina Pertiwi</td><td>New · Probation</td><td>Jun 2026 – Dec 2026</td><td>5 days ago</td><td><span class="badge badge-green"><i data-lucide="check" class="w-3 h-3"></i>Signed</span></td></tr>
-            <tr><td class="font-medium">Ms. Dewi Sari</td><td>Renewal · Permanent</td><td>Aug 2026 – Jul 2029</td><td>1 week ago</td><td><span class="badge badge-red">Action needed</span></td></tr>
-          </tbody></table>
-        </div>
-        <div class="card p-5">
-          <h3 class="font-semibold text-slate-900 mb-4">Templates</h3>
-          <div class="space-y-3">
-            <div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 cursor-pointer"><div class="font-semibold text-sm text-slate-900">Teaching · Permanent</div><div class="text-xs text-slate-500 mt-1">Used 47 times this term</div></div>
-            <div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 cursor-pointer"><div class="font-semibold text-sm text-slate-900">Teaching · 1-year contract</div><div class="text-xs text-slate-500 mt-1">Used 28 times</div></div>
-            <div class="border border-slate-200 rounded-lg p-3 hover:bg-slate-50 cursor-pointer"><div class="font-semibold text-sm text-slate-900">Teaching · Probation</div><div class="text-xs text-slate-500 mt-1">Used 12 times</div></div>
-            <button class="btn-secondary w-full justify-center mt-2"><i data-lucide="plus" class="w-3 h-3"></i>New template</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ADMIN: REPORT CARDS -->
-    <div id="page-admin-reports" class="page">
-      <div class="flex items-center justify-between mb-6">
-        <div><h1 class="text-2xl font-bold text-slate-900">Report Cards</h1><p class="text-sm text-slate-500 mt-1">Generate and distribute term reports across grades</p></div>
-        <button class="btn-primary"><i data-lucide="sparkles" class="w-4 h-4"></i>Bulk generate</button>
-      </div>
-      <div class="card p-5 mb-4">
-        <h3 class="font-semibold text-slate-900 mb-4">Term 2 — 2025/2026 Report Generation</h3>
-        <div class="grid grid-cols-3 gap-4 mb-4">
-          <div><label class="text-xs font-semibold text-slate-600 uppercase">Branch</label><select class="input mt-1"><option>All branches</option><option>Bekasi</option></select></div>
-          <div><label class="text-xs font-semibold text-slate-600 uppercase">Grade</label><select class="input mt-1"><option>Grade 11 – IPA</option><option>Grade 11 – IPS</option></select></div>
-          <div><label class="text-xs font-semibold text-slate-600 uppercase">Format</label><select class="input mt-1"><option>Standard Indonesian curriculum</option><option>IB MYP</option></select></div>
-        </div>
-        <div class="flex items-center justify-between border-t border-slate-100 pt-4">
-          <div class="text-sm text-slate-600">147 students · Est. ~3 minutes</div>
-          <div class="flex gap-2"><button class="btn-secondary">Preview template</button><button class="btn-primary">Generate & queue for review</button></div>
-        </div>
-      </div>
-      <div class="card overflow-hidden">
-        <table><thead><tr><th>Batch</th><th>Branch</th><th>Grade</th><th>Students</th><th>Generated</th><th>Status</th><th></th></tr></thead>
-        <tbody>
-          <tr><td class="font-medium">T2-2026-G11-IPA</td><td>Bekasi</td><td>Grade 11 IPA</td><td>147</td><td>2 hrs ago</td><td><span class="badge badge-green"><i data-lucide="check" class="w-3 h-3"></i>Distributed</span></td><td><a class="text-xs text-indigo-600 font-semibold cursor-pointer">View</a></td></tr>
-          <tr><td class="font-medium">T2-2026-G10</td><td>Bekasi</td><td>Grade 10</td><td>189</td><td>4 hrs ago</td><td><span class="badge badge-blue">Awaiting principal</span></td><td><a class="text-xs text-indigo-600 font-semibold cursor-pointer">View</a></td></tr>
-          <tr><td class="font-medium">T2-2026-G12</td><td>Duren Sawit</td><td>Grade 12</td><td>112</td><td>Yesterday</td><td><span class="badge badge-green"><i data-lucide="check" class="w-3 h-3"></i>Distributed</span></td><td><a class="text-xs text-indigo-600 font-semibold cursor-pointer">View</a></td></tr>
-        </tbody></table>
-      </div>
-    </div>
-
-    <!-- ADMIN: AI INSIGHTS -->
-    <div id="page-admin-ai" class="page">
-      <div class="flex items-center justify-between mb-6">
-        <div><h1 class="text-2xl font-bold gradient-text">AI Insights</h1><p class="text-sm text-slate-500 mt-1">School-wide intelligence powered by TeacherPal AI</p></div>
-        <button class="btn-secondary"><i data-lucide="settings-2" class="w-4 h-4"></i>Configure thresholds</button>
-      </div>
-      <div class="ai-card mb-6">
-        <div class="flex items-start gap-3">
-          <div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center flex-shrink-0"><i data-lucide="sparkles" class="w-5 h-5 text-indigo-600"></i></div>
-          <div class="flex-1">
-            <h3 class="font-semibold text-slate-900 mb-1">This week's summary</h3>
-            <p class="text-sm text-slate-700 leading-relaxed">Your schools generally performed well this week. Average attendance held at <b>94.6%</b>. However, <b>23 students</b> were flagged for declining performance — primarily in <b>Grade 9 Mathematics</b> at Bekasi (8 students) and <b>Grade 11 Physics</b> at Duren Sawit (6 students). Contract automation saved an estimated <b>8.2 hours</b> of admin time this week.</p>
-          </div>
-        </div>
-      </div>
-      <div class="grid grid-cols-2 gap-4 mb-6">
-        <div class="card p-5"><h3 class="font-semibold text-slate-900 mb-4">Risk Distribution by Grade</h3><div style="position:relative;height:200px;"><canvas id="riskChart"></canvas></div></div>
-        <div class="card p-5">
-          <h3 class="font-semibold text-slate-900 mb-4">Subject-Level Alerts</h3>
-          <div class="space-y-3">
-            <div class="flex items-center justify-between text-sm"><div><div class="font-medium text-slate-900">Mathematics — Grade 9</div><div class="text-xs text-slate-500">Bekasi · 8 students below threshold</div></div><span class="badge badge-red">High</span></div>
-            <div class="flex items-center justify-between text-sm"><div><div class="font-medium text-slate-900">Physics — Grade 11</div><div class="text-xs text-slate-500">Duren Sawit · 6 students declining</div></div><span class="badge badge-red">High</span></div>
-            <div class="flex items-center justify-between text-sm"><div><div class="font-medium text-slate-900">English — Grade 10</div><div class="text-xs text-slate-500">Bogor · 4 students need follow-up</div></div><span class="badge badge-yellow">Medium</span></div>
-            <div class="flex items-center justify-between text-sm"><div><div class="font-medium text-slate-900">Chemistry — Grade 12</div><div class="text-xs text-slate-500">Bekasi · 3 students borderline</div></div><span class="badge badge-yellow">Medium</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="card overflow-hidden">
-        <div class="px-5 py-4 border-b border-slate-100"><h3 class="font-semibold text-slate-900">Students Flagged This Week</h3></div>
-        <table><thead><tr><th>Student</th><th>Class</th><th>Risk Signals</th><th>Risk Score</th><th>Suggested Action</th><th></th></tr></thead>
-        <tbody>
-          <tr>
-            <td><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center text-xs font-semibold">RA</div><div><div class="font-medium">Raka Adi</div><div class="text-xs text-slate-500">NIS 110823</div></div></div></td>
-            <td>11 IPA-2 · Bekasi</td>
-            <td class="text-xs"><span class="badge badge-red">3 grades dropped</span> <span class="badge badge-yellow">Attendance ↓</span></td>
-            <td><div class="flex items-center gap-2"><div class="w-16 progress-bar"><div class="progress-fill" style="width:82%; background:#dc2626;"></div></div><span class="text-xs font-semibold text-rose-600">82</span></div></td>
-            <td class="text-xs">Schedule parent meeting</td>
-            <td><button class="btn-secondary text-xs">Open</button></td>
-          </tr>
-          <tr>
-            <td><div class="flex items-center gap-2"><div class="w-7 h-7 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs font-semibold">SP</div><div><div class="font-medium">Siti Putri</div><div class="text-xs text-slate-500">NIS 110934</div></div></div></td>
-            <td>9-A · Bekasi</td>
-            <td class="text-xs"><span class="badge badge-yellow">Math grade ↓</span></td>
-            <td><div class="flex items-center gap-2"><div class="w-16 progress-bar"><div class="progress-fill" style="width:67%; background:#d97706;"></div></div><span class="text-xs font-semibold text-amber-600">67</span></div></td>
-            <td class="text-xs">Tutoring session</td>
-            <td><button class="btn-secondary text-xs">Open</button></td>
-          </tr>
-        </tbody></table>
-      </div>
-    </div>
-
-    <!-- ADMIN: COMPLIANCE -->
-    <div id="page-admin-compliance" class="page">
-      <div class="flex items-center justify-between mb-6">
-        <div><h1 class="text-2xl font-bold text-slate-900">Compliance & Reporting</h1><p class="text-sm text-slate-500 mt-1">Stakeholder visibility into rollout, data quality, and audits</p></div>
-        <button class="btn-primary"><i data-lucide="file-text" class="w-4 h-4"></i>Generate stakeholder report</button>
-      </div>
-      <div class="grid grid-cols-3 gap-4 mb-6">
-        <div class="card p-5"><div class="text-xs font-semibold text-slate-500 uppercase mb-2">Bekasi Rollout</div><div class="flex items-end gap-2 mb-3"><div class="text-3xl font-bold text-slate-900">100%</div><div class="text-xs text-emerald-600 font-medium pb-1">Complete</div></div><div class="progress-bar"><div class="progress-fill" style="width:100%; background:#10b981;"></div></div><div class="text-xs text-slate-500 mt-2">All 12 milestones met · 0 open issues</div></div>
-        <div class="card p-5"><div class="text-xs font-semibold text-slate-500 uppercase mb-2">Duren Sawit Rollout</div><div class="flex items-end gap-2 mb-3"><div class="text-3xl font-bold text-slate-900">100%</div><div class="text-xs text-emerald-600 font-medium pb-1">Complete</div></div><div class="progress-bar"><div class="progress-fill" style="width:100%; background:#10b981;"></div></div><div class="text-xs text-slate-500 mt-2">All 12 milestones met · 1 minor issue</div></div>
-        <div class="card p-5"><div class="text-xs font-semibold text-slate-500 uppercase mb-2">Bogor Rollout</div><div class="flex items-end gap-2 mb-3"><div class="text-3xl font-bold text-slate-900">78%</div><div class="text-xs text-amber-600 font-medium pb-1">In progress</div></div><div class="progress-bar"><div class="progress-fill" style="width:78%;"></div></div><div class="text-xs text-slate-500 mt-2">9/12 milestones met · 2 open issues</div></div>
-      </div>
-    </div>
-
-    <!-- ADMIN: SETTINGS -->
-    <div id="page-admin-settings" class="page">
-      <div class="mb-6"><h1 class="text-2xl font-bold text-slate-900">Settings</h1><p class="text-sm text-slate-500 mt-1">Manage your organization, integrations, and preferences</p></div>
-      <div class="grid grid-cols-3 gap-4">
-        <div class="card p-5"><i data-lucide="building-2" class="w-5 h-5 text-indigo-600 mb-3"></i><h4 class="font-semibold mb-1">Organization</h4><p class="text-sm text-slate-500">SMA Tunas Bangsa Group · 18 branches</p></div>
-        <div class="card p-5"><i data-lucide="users" class="w-5 h-5 text-indigo-600 mb-3"></i><h4 class="font-semibold mb-1">Roles & Permissions</h4><p class="text-sm text-slate-500">7 role types · 164 users</p></div>
-        <div class="card p-5"><i data-lucide="plug" class="w-5 h-5 text-indigo-600 mb-3"></i><h4 class="font-semibold mb-1">Integrations</h4><p class="text-sm text-slate-500">HRIS, WhatsApp, Email, Payroll</p></div>
-        <div class="card p-5"><i data-lucide="brain-circuit" class="w-5 h-5 text-indigo-600 mb-3"></i><h4 class="font-semibold mb-1">AI Configuration</h4><p class="text-sm text-slate-500">Risk thresholds, language, tone</p></div>
-        <div class="card p-5"><i data-lucide="shield-check" class="w-5 h-5 text-indigo-600 mb-3"></i><h4 class="font-semibold mb-1">Data & Privacy</h4><p class="text-sm text-slate-500">Retention, exports, audit log</p></div>
-        <div class="card p-5"><i data-lucide="credit-card" class="w-5 h-5 text-indigo-600 mb-3"></i><h4 class="font-semibold mb-1">Billing</h4><p class="text-sm text-slate-500">2,847 students · IDR 400K/year</p></div>
-      </div>
-    </div>
-
-    <!-- TEACHER: DASHBOARD -->
-    <div id="page-teacher-dashboard" class="page">
-      <div class="mb-6"><h1 class="text-2xl font-bold text-slate-900">Welcome back, Pak Budi</h1><p class="text-sm text-slate-500 mt-1">Tuesday, May 12 2026 · You teach 4 classes · 132 students total</p></div>
-      <div class="ai-card mb-6">
-        <div class="flex items-start gap-3">
-          <div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center flex-shrink-0"><i data-lucide="sparkles" class="w-5 h-5 text-indigo-600"></i></div>
-          <div class="flex-1">
-            <div class="flex items-center justify-between mb-1"><h3 class="font-semibold text-slate-900">Your Monday Briefing</h3><span class="text-xs text-slate-500">Generated 7:00 AM · Sent to your inbox</span></div>
-            <p class="text-sm text-slate-700 leading-relaxed mb-3">Your classes are doing well overall. <b>Class 11 IPA-2</b> averaged 84.3 on last week's quiz. Watch <b>Raka Adi</b> in 11 IPA-2: his recent score dropped from 87 → 62, and he's missed 2 of last 5 submissions. The <b>Grade 11 Mid-term Mathematics exam</b> is in 9 days; consider running a review session.</p>
-            <div class="flex gap-2"><button class="btn-secondary text-xs">View student details</button><button class="btn-secondary text-xs">Generate exam questions</button></div>
-          </div>
-        </div>
-      </div>
-      <div class="grid grid-cols-4 gap-4 mb-6">
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Classes today</div><div class="text-2xl font-bold">3</div><div class="text-xs text-slate-400 mt-1">First at 8:00 AM</div></div>
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Pending grades</div><div class="text-2xl font-bold">28</div><div class="text-xs text-amber-600 mt-1">Due Friday</div></div>
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Parent feedback queue</div><div class="text-2xl font-bold">12</div><div class="text-xs text-slate-400 mt-1">AI drafts ready</div></div>
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Students at risk</div><div class="text-2xl font-bold">3</div><div class="text-xs text-rose-600 mt-1">Needs follow-up</div></div>
-      </div>
-      <div class="grid grid-cols-3 gap-4">
-        <div class="card p-5 col-span-2">
-          <h3 class="font-semibold text-slate-900 mb-4">Today's Schedule</h3>
-          <div class="space-y-3">
-            <div class="flex items-center gap-4 p-3 border border-slate-200 rounded-lg"><div class="text-center w-16"><div class="text-xs text-slate-500">8:00</div><div class="text-xs text-slate-500">9:30</div></div><div class="flex-1"><div class="font-semibold">Mathematics — Grade 11 IPA-1</div><div class="text-xs text-slate-500">Room 304 · 32 students · Differential Calculus</div></div><button class="btn-secondary text-xs">Take attendance</button></div>
-            <div class="flex items-center gap-4 p-3 border border-slate-200 rounded-lg"><div class="text-center w-16"><div class="text-xs text-slate-500">10:00</div><div class="text-xs text-slate-500">11:30</div></div><div class="flex-1"><div class="font-semibold">Mathematics — Grade 11 IPA-2</div><div class="text-xs text-slate-500">Room 304 · 34 students · Differential Calculus</div></div><button class="btn-secondary text-xs">Take attendance</button></div>
-            <div class="flex items-center gap-4 p-3 border border-slate-200 rounded-lg bg-slate-50 opacity-75"><div class="text-center w-16"><div class="text-xs text-slate-500">13:00</div><div class="text-xs text-slate-500">14:30</div></div><div class="flex-1"><div class="font-semibold">Mathematics — Grade 12 IPA-1</div><div class="text-xs text-slate-500">Room 304 · 29 students · Probability Distributions</div></div><button class="btn-secondary text-xs" disabled>Upcoming</button></div>
-          </div>
-        </div>
-        <div class="card p-5">
-          <h3 class="font-semibold text-slate-900 mb-4">Quick Actions</h3>
-          <div class="space-y-2">
-            <button class="w-full text-left p-3 rounded-lg border border-slate-200 hover:bg-slate-50 flex items-center gap-3"><i data-lucide="message-square-heart" class="w-4 h-4 text-indigo-600"></i><span class="text-sm font-medium">Generate parent feedback</span></button>
-            <button class="w-full text-left p-3 rounded-lg border border-slate-200 hover:bg-slate-50 flex items-center gap-3"><i data-lucide="file-question" class="w-4 h-4 text-indigo-600"></i><span class="text-sm font-medium">Create exam questions</span></button>
-            <button class="w-full text-left p-3 rounded-lg border border-slate-200 hover:bg-slate-50 flex items-center gap-3"><i data-lucide="upload" class="w-4 h-4 text-indigo-600"></i><span class="text-sm font-medium">Upload assignment grades</span></button>
-            <button class="w-full text-left p-3 rounded-lg border border-slate-200 hover:bg-slate-50 flex items-center gap-3"><i data-lucide="library" class="w-4 h-4 text-indigo-600"></i><span class="text-sm font-medium">Browse digital materials</span></button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TEACHER: CLASSES -->
-    <div id="page-teacher-classes" class="page">
-      <div class="flex items-center justify-between mb-6"><div><h1 class="text-2xl font-bold text-slate-900">My Classes</h1><p class="text-sm text-slate-500 mt-1">4 classes · 132 students · Term 2 — 2025/2026</p></div></div>
-      <div class="grid grid-cols-2 gap-4">
-        <div class="card p-5"><div class="flex items-center justify-between mb-3"><div><h3 class="font-semibold text-slate-900">Mathematics — Grade 11 IPA-1</h3><p class="text-xs text-slate-500">Room 304 · Mon, Wed, Fri</p></div><span class="badge badge-blue">32 students</span></div><div class="grid grid-cols-3 gap-3 text-sm border-t border-slate-100 pt-3"><div><div class="text-xs text-slate-500">Avg Grade</div><div class="font-semibold">82.4</div></div><div><div class="text-xs text-slate-500">Attendance</div><div class="font-semibold">95.2%</div></div><div><div class="text-xs text-slate-500">At Risk</div><div class="font-semibold text-amber-600">1</div></div></div><div class="flex gap-2 mt-4"><button class="btn-secondary text-xs flex-1">Gradebook</button><button class="btn-secondary text-xs flex-1">Attendance</button><button class="btn-primary text-xs flex-1">Open</button></div></div>
-        <div class="card p-5"><div class="flex items-center justify-between mb-3"><div><h3 class="font-semibold text-slate-900">Mathematics — Grade 11 IPA-2</h3><p class="text-xs text-slate-500">Room 304 · Mon, Wed, Fri</p></div><span class="badge badge-blue">34 students</span></div><div class="grid grid-cols-3 gap-3 text-sm border-t border-slate-100 pt-3"><div><div class="text-xs text-slate-500">Avg Grade</div><div class="font-semibold">84.3</div></div><div><div class="text-xs text-slate-500">Attendance</div><div class="font-semibold">94.8%</div></div><div><div class="text-xs text-slate-500">At Risk</div><div class="font-semibold text-rose-600">2</div></div></div><div class="flex gap-2 mt-4"><button class="btn-secondary text-xs flex-1">Gradebook</button><button class="btn-secondary text-xs flex-1">Attendance</button><button class="btn-primary text-xs flex-1">Open</button></div></div>
-        <div class="card p-5"><div class="flex items-center justify-between mb-3"><div><h3 class="font-semibold text-slate-900">Mathematics — Grade 12 IPA-1</h3><p class="text-xs text-slate-500">Room 304 · Tue, Thu</p></div><span class="badge badge-blue">29 students</span></div><div class="grid grid-cols-3 gap-3 text-sm border-t border-slate-100 pt-3"><div><div class="text-xs text-slate-500">Avg Grade</div><div class="font-semibold">86.1</div></div><div><div class="text-xs text-slate-500">Attendance</div><div class="font-semibold">96.4%</div></div><div><div class="text-xs text-slate-500">At Risk</div><div class="font-semibold text-emerald-600">0</div></div></div><div class="flex gap-2 mt-4"><button class="btn-secondary text-xs flex-1">Gradebook</button><button class="btn-secondary text-xs flex-1">Attendance</button><button class="btn-primary text-xs flex-1">Open</button></div></div>
-        <div class="card p-5"><div class="flex items-center justify-between mb-3"><div><h3 class="font-semibold text-slate-900">IB HL Math — Grade 11</h3><p class="text-xs text-slate-500">Room 308 · Tue, Thu, Fri</p></div><span class="badge badge-purple">37 students</span></div><div class="grid grid-cols-3 gap-3 text-sm border-t border-slate-100 pt-3"><div><div class="text-xs text-slate-500">Avg Grade</div><div class="font-semibold">79.8</div></div><div><div class="text-xs text-slate-500">Attendance</div><div class="font-semibold">93.1%</div></div><div><div class="text-xs text-slate-500">At Risk</div><div class="font-semibold text-amber-600">3</div></div></div><div class="flex gap-2 mt-4"><button class="btn-secondary text-xs flex-1">Gradebook</button><button class="btn-secondary text-xs flex-1">Attendance</button><button class="btn-primary text-xs flex-1">Open</button></div></div>
-      </div>
-    </div>
-
-    <!-- TEACHER: GRADEBOOK -->
-    <div id="page-teacher-gradebook" class="page">
-      <div class="flex items-center justify-between mb-6"><div><h1 class="text-2xl font-bold text-slate-900">Gradebook</h1><p class="text-sm text-slate-500 mt-1">Mathematics · Grade 11 IPA-2 · 34 students</p></div><div class="flex gap-2"><button class="btn-secondary"><i data-lucide="download" class="w-4 h-4"></i>Export</button><button class="btn-primary"><i data-lucide="plus" class="w-4 h-4"></i>New assignment</button></div></div>
-      <div class="card overflow-x-auto"><table><thead><tr><th>Student</th><th>Quiz 1</th><th>HW Set 1</th><th>Quiz 2</th><th>Project</th><th>Mid-term</th><th>HW Set 2</th><th class="text-indigo-600">Avg</th></tr></thead><tbody id="gradeTable"></tbody></table></div>
-    </div>
-
-    <!-- TEACHER: ATTENDANCE -->
-    <div id="page-teacher-attendance" class="page">
-      <div class="flex items-center justify-between mb-6"><div><h1 class="text-2xl font-bold text-slate-900">Attendance</h1><p class="text-sm text-slate-500 mt-1">Mathematics · Grade 11 IPA-2 · Tuesday, May 12 2026</p></div><div class="flex gap-2"><button class="btn-secondary"><i data-lucide="check-square" class="w-4 h-4"></i>Mark all present</button><button class="btn-primary">Save attendance</button></div></div>
-      <div class="grid grid-cols-4 gap-4 mb-4">
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Present</div><div class="text-2xl font-bold text-emerald-600">31</div></div>
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Absent</div><div class="text-2xl font-bold text-rose-600">2</div></div>
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Late</div><div class="text-2xl font-bold text-amber-600">1</div></div>
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Excused</div><div class="text-2xl font-bold text-blue-600">0</div></div>
-      </div>
-      <div class="card overflow-hidden"><table><thead><tr><th>Student</th><th>Status</th><th>Attendance %</th><th>Notes</th></tr></thead><tbody id="attendanceTable"></tbody></table></div>
-    </div>
-
-    <!-- TEACHER: PARENT FEEDBACK -->
-    <div id="page-teacher-feedback" class="page">
-      <div class="flex items-center justify-between mb-6"><div><h1 class="text-2xl font-bold gradient-text">Parent Feedback Generator</h1><p class="text-sm text-slate-500 mt-1">Tailored AI-drafted updates · Review before sending</p></div><button class="btn-primary"><i data-lucide="sparkles" class="w-4 h-4"></i>Generate batch</button></div>
-      <div class="grid grid-cols-3 gap-4 mb-6">
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Drafts ready</div><div class="text-2xl font-bold">12</div><div class="text-xs text-slate-400 mt-1">For 11 IPA-2</div></div>
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Sent this term</div><div class="text-2xl font-bold">87</div><div class="text-xs text-emerald-600 mt-1">94% parent open rate</div></div>
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Time saved</div><div class="text-2xl font-bold">11.4h</div><div class="text-xs text-slate-400 mt-1">vs writing manually</div></div>
-      </div>
-      <div class="grid grid-cols-3 gap-4">
-        <div class="card p-4 col-span-1">
-          <h3 class="font-semibold text-slate-900 mb-3 text-sm">Drafts queue</h3>
-          <div class="space-y-2">
-            <div class="p-3 rounded-lg border border-indigo-200 bg-indigo-50 cursor-pointer"><div class="font-semibold text-sm">Aditya Pratama</div><div class="text-xs text-slate-500">11 IPA-2 · Strong performance</div></div>
-            <div class="p-3 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer"><div class="font-semibold text-sm">Bella Hartanto</div><div class="text-xs text-slate-500">11 IPA-2 · Improving</div></div>
-            <div class="p-3 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer"><div class="font-semibold text-sm">Dimas Hakim</div><div class="text-xs text-slate-500">11 IPA-2 · Needs support</div></div>
-            <div class="text-center text-xs text-slate-400 pt-2">+ 9 more</div>
-          </div>
-        </div>
-        <div class="card p-5 col-span-2">
-          <div class="flex items-center justify-between mb-4"><div><h3 class="font-semibold text-slate-900">Aditya Pratama — NIS 110234</h3><p class="text-xs text-slate-500">Parent: Bapak Hendri Pratama · hpratama@gmail.com</p></div><span class="badge badge-purple"><i data-lucide="sparkles" class="w-3 h-3"></i>AI draft</span></div>
-          <div class="grid grid-cols-3 gap-3 mb-4 p-3 bg-slate-50 rounded-lg"><div><div class="text-xs text-slate-500">Recent grade</div><div class="font-semibold text-emerald-600">91</div></div><div><div class="text-xs text-slate-500">Trend</div><div class="font-semibold">↑ +6 vs last</div></div><div><div class="text-xs text-slate-500">Attendance</div><div class="font-semibold">98%</div></div></div>
-          <div class="p-4 border border-slate-200 rounded-lg bg-white">
-            <div class="text-xs text-slate-500 mb-1"><b>Subject:</b> Update Pembelajaran Aditya — Pekan Ke-12</div>
-            <div class="border-t border-slate-100 mt-2 pt-3 text-sm text-slate-700 leading-relaxed">Yth. Bapak Hendri,<br><br>Saya ingin berbagi kabar baik mengenai perkembangan Aditya di kelas Matematika minggu ini. Aditya menunjukkan peningkatan yang luar biasa pada Quiz 2 dengan nilai <b>91</b> — naik 6 poin dari kuis sebelumnya.<br><br>Salam hangat,<br><b>Pak Budi Santoso</b><br>Guru Matematika · SMA Tunas Bangsa Bekasi</div>
-          </div>
-          <div class="flex items-center justify-between mt-4"><div class="flex gap-2"><button class="btn-secondary text-xs"><i data-lucide="refresh-cw" class="w-3 h-3"></i>Regenerate</button><button class="btn-secondary text-xs"><i data-lucide="edit-3" class="w-3 h-3"></i>Edit</button></div><div class="flex gap-2"><button class="btn-secondary text-xs">Skip</button><button class="btn-primary text-xs"><i data-lucide="send" class="w-3 h-3"></i>Approve & send</button></div></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TEACHER: EXAM GENERATOR -->
-    <div id="page-teacher-exam" class="page">
-      <div class="flex items-center justify-between mb-6"><div><h1 class="text-2xl font-bold gradient-text">AI Exam Generator</h1><p class="text-sm text-slate-500 mt-1">Generate curriculum-aligned questions in seconds</p></div></div>
-      <div class="grid grid-cols-3 gap-4">
-        <div class="card p-5 col-span-1">
-          <h3 class="font-semibold text-slate-900 mb-4">Configure</h3>
-          <div class="space-y-4">
-            <div><label class="text-xs font-semibold text-slate-600 uppercase">Subject</label><select class="input mt-1"><option>Mathematics</option><option>Physics</option><option>Chemistry</option></select></div>
-            <div><label class="text-xs font-semibold text-slate-600 uppercase">Curriculum</label><select class="input mt-1"><option>IB HL</option><option>Indonesian National (K13)</option></select></div>
-            <div><label class="text-xs font-semibold text-slate-600 uppercase">Grade Level</label><select class="input mt-1"><option>Grade 11</option><option>Grade 12</option></select></div>
-            <div><label class="text-xs font-semibold text-slate-600 uppercase">Topic</label><select class="input mt-1"><option>Differential Calculus</option><option>Integration</option></select></div>
-            <div><label class="text-xs font-semibold text-slate-600 uppercase">Difficulty</label><div class="flex gap-2 mt-1"><button class="flex-1 text-xs py-2 rounded border border-slate-200 hover:bg-slate-50">Easy</button><button class="flex-1 text-xs py-2 rounded bg-indigo-100 text-indigo-700 font-semibold border border-indigo-200">Medium</button><button class="flex-1 text-xs py-2 rounded border border-slate-200 hover:bg-slate-50">Hard</button></div></div>
-            <div><label class="text-xs font-semibold text-slate-600 uppercase">Number of questions</label><input type="number" value="10" class="input mt-1" /></div>
-            <button class="btn-primary w-full justify-center"><i data-lucide="sparkles" class="w-4 h-4"></i>Generate questions</button>
-          </div>
-        </div>
-        <div class="card p-5 col-span-2">
-          <div class="flex items-center justify-between mb-4"><h3 class="font-semibold text-slate-900">Generated questions <span class="badge badge-purple ml-2">10 questions</span></h3><div class="flex gap-2"><button class="btn-secondary text-xs"><i data-lucide="download" class="w-3 h-3"></i>Export PDF</button></div></div>
-          <div class="space-y-3">
-            <div class="p-4 border border-slate-200 rounded-lg"><div class="text-xs font-semibold text-slate-500 mb-2">Question 1 · Multiple Choice · Medium</div><p class="text-sm text-slate-900 mb-3">Find the derivative of <i>f(x) = 3x⁴ − 2x² + 5x − 7</i>.</p><div class="space-y-1.5 text-sm pl-2"><div class="text-slate-700">A. <i>12x³ − 4x + 5</i></div><div class="text-emerald-700 font-semibold">B. <i>12x³ − 4x + 5</i> ✓</div><div class="text-slate-700">C. <i>12x³ − 2x + 5</i></div><div class="text-slate-700">D. <i>3x³ − 4x + 5</i></div></div></div>
-            <div class="p-4 border border-slate-200 rounded-lg"><div class="text-xs font-semibold text-slate-500 mb-2">Question 2 · Short Answer · Medium</div><p class="text-sm text-slate-900 mb-2">A particle moves along a line with position <i>s(t) = t³ − 6t² + 9t</i> meters. Find the velocity at <i>t = 2</i>.</p><div class="text-xs text-slate-500"><b>Expected answer:</b> v(t) = 3t² − 12t + 9; v(2) = −3 m/s</div></div>
-            <div class="text-center text-sm text-slate-400 py-2">+ 8 more questions</div>
-          </div>
-          <div class="mt-4 pt-4 border-t border-slate-100 flex justify-end gap-2"><button class="btn-secondary text-sm">Save to bank</button><button class="btn-primary text-sm">Use for exam</button></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TEACHER: TEACHERPAL AI -->
-    <div id="page-teacher-teacherpal" class="page">
-      <div class="flex items-center justify-between mb-6"><div><h1 class="text-2xl font-bold gradient-text">TeacherPal AI</h1><p class="text-sm text-slate-500 mt-1">Per-student insights, KPIs, and recommended actions</p></div></div>
-      <div class="grid grid-cols-3 gap-4 mb-6">
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Class average</div><div class="text-2xl font-bold">84.3</div><div class="text-xs text-emerald-600 mt-1">↑ +2.1 this month</div></div>
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">On-track students</div><div class="text-2xl font-bold">31 / 34</div><div class="text-xs text-emerald-600 mt-1">91% on target</div></div>
-        <div class="kpi-card"><div class="text-xs text-slate-500 mb-1">Needs attention</div><div class="text-2xl font-bold text-rose-600">3</div><div class="text-xs text-slate-500 mt-1">See below</div></div>
-      </div>
-      <div class="grid grid-cols-2 gap-4">
-        <div class="card p-5"><div class="flex items-start justify-between mb-3"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center font-semibold">RA</div><div><div class="font-semibold">Raka Adi</div><div class="text-xs text-slate-500">11 IPA-2 · NIS 110823</div></div></div><span class="badge badge-red">Risk: 82</span></div><div class="grid grid-cols-3 gap-2 text-xs mb-3 p-3 bg-slate-50 rounded-lg"><div><div class="text-slate-500">Recent grade</div><div class="font-semibold text-rose-600">62</div></div><div><div class="text-slate-500">Trend</div><div class="font-semibold text-rose-600">↓ −25</div></div><div><div class="text-slate-500">Attendance</div><div class="font-semibold text-amber-600">87%</div></div></div><div class="text-sm text-slate-700 mb-3"><b>AI suggestion:</b> Raka's score dropped sharply on Quiz 2. Recommend a 1-on-1 check-in this week.</div><div class="flex gap-2"><button class="btn-secondary text-xs flex-1">View profile</button><button class="btn-primary text-xs flex-1">Schedule check-in</button></div></div>
-        <div class="card p-5"><div class="flex items-start justify-between mb-3"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center font-semibold">DH</div><div><div class="font-semibold">Dimas Hakim</div><div class="text-xs text-slate-500">11 IPA-2 · NIS 220145</div></div></div><span class="badge badge-yellow">Risk: 71</span></div><div class="grid grid-cols-3 gap-2 text-xs mb-3 p-3 bg-slate-50 rounded-lg"><div><div class="text-slate-500">Recent grade</div><div class="font-semibold text-amber-600">71</div></div><div><div class="text-slate-500">Trend</div><div class="font-semibold text-amber-600">↓ −8</div></div><div><div class="text-slate-500">Attendance</div><div class="font-semibold text-emerald-600">94%</div></div></div><div class="text-sm text-slate-700 mb-3"><b>AI suggestion:</b> Dimas is showing borderline understanding on differential calculus. Suggest a targeted review of chain rule.</div><div class="flex gap-2"><button class="btn-secondary text-xs flex-1">View profile</button><button class="btn-primary text-xs flex-1">Send tutoring resource</button></div></div>
-        <div class="card p-5"><div class="flex items-start justify-between mb-3"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center font-semibold">SP</div><div><div class="font-semibold">Siti Putri</div><div class="text-xs text-slate-500">11 IPA-2 · NIS 110934</div></div></div><span class="badge badge-yellow">Risk: 67</span></div><div class="grid grid-cols-3 gap-2 text-xs mb-3 p-3 bg-slate-50 rounded-lg"><div><div class="text-slate-500">Recent grade</div><div class="font-semibold text-amber-600">73</div></div><div><div class="text-slate-500">Trend</div><div class="font-semibold text-amber-600">→ flat</div></div><div><div class="text-slate-500">Attendance</div><div class="font-semibold text-emerald-600">96%</div></div></div><div class="text-sm text-slate-700 mb-3"><b>AI suggestion:</b> Siti would benefit from peer-tutoring rather than additional teacher time.</div><div class="flex gap-2"><button class="btn-secondary text-xs flex-1">View profile</button><button class="btn-primary text-xs flex-1">Pair with peer tutor</button></div></div>
-        <div class="card p-5 ai-card"><div class="flex items-center gap-2 mb-3"><i data-lucide="sparkles" class="w-5 h-5 text-indigo-600"></i><span class="font-semibold text-slate-900">Class-level insight</span></div><p class="text-sm text-slate-700 mb-3">Your class average climbed +2.1 this month. Students who used the optional weekly practice sets scored on average 6 points higher.</p><div class="space-y-2 text-xs text-slate-600"><div class="flex items-center gap-2"><i data-lucide="trending-up" class="w-3 h-3 text-emerald-600"></i>11 students improved by 5+ points</div><div class="flex items-center gap-2"><i data-lucide="minus" class="w-3 h-3 text-slate-400"></i>20 students stable</div><div class="flex items-center gap-2"><i data-lucide="trending-down" class="w-3 h-3 text-rose-500"></i>3 students declined</div></div></div>
-      </div>
-    </div>
-
-    <!-- TEACHER: MATERIALS -->
-    <div id="page-teacher-materials" class="page">
-      <div class="flex items-center justify-between mb-6"><div><h1 class="text-2xl font-bold text-slate-900">Materials Library</h1><p class="text-sm text-slate-500 mt-1">Digitized textbooks, lesson plans, and class resources</p></div><div class="flex gap-2"><button class="btn-secondary"><i data-lucide="upload" class="w-4 h-4"></i>Upload</button><button class="btn-primary"><i data-lucide="sparkles" class="w-4 h-4"></i>Digitize textbook</button></div></div>
-      <div class="grid grid-cols-4 gap-4">
-        <div class="card p-4"><div class="aspect-[3/4] rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 mb-3 flex items-center justify-center text-white"><i data-lucide="book" class="w-12 h-12"></i></div><div class="font-semibold text-sm">Matematika Wajib XI</div><div class="text-xs text-slate-500 mt-0.5">Grade 11 · K13 · 384 pages</div><div class="flex items-center gap-2 mt-2"><span class="badge badge-green">Digitized</span><span class="text-xs text-slate-500">142 students</span></div></div>
-        <div class="card p-4"><div class="aspect-[3/4] rounded-lg bg-gradient-to-br from-blue-500 to-cyan-600 mb-3 flex items-center justify-center text-white"><i data-lucide="book" class="w-12 h-12"></i></div><div class="font-semibold text-sm">IB Math HL Core Topics</div><div class="text-xs text-slate-500 mt-0.5">Grade 11-12 · IB · 512 pages</div><div class="flex items-center gap-2 mt-2"><span class="badge badge-green">Digitized</span><span class="text-xs text-slate-500">37 students</span></div></div>
-        <div class="card p-4"><div class="aspect-[3/4] rounded-lg bg-gradient-to-br from-emerald-500 to-teal-600 mb-3 flex items-center justify-center text-white"><i data-lucide="book" class="w-12 h-12"></i></div><div class="font-semibold text-sm">Calculus Workbook</div><div class="text-xs text-slate-500 mt-0.5">Grade 11 · Custom · 184 pages</div><div class="flex items-center gap-2 mt-2"><span class="badge badge-green">Digitized</span><span class="text-xs text-slate-500">66 students</span></div></div>
-        <div class="card p-4"><div class="aspect-[3/4] rounded-lg bg-gradient-to-br from-amber-500 to-orange-600 mb-3 flex items-center justify-center text-white"><i data-lucide="book" class="w-12 h-12"></i></div><div class="font-semibold text-sm">Matematika Peminatan XII</div><div class="text-xs text-slate-500 mt-0.5">Grade 12 · K13 · 412 pages</div><div class="flex items-center gap-2 mt-2"><span class="badge badge-blue">Processing 64%</span></div></div>
-      </div>
-    </div>
-
+  <main class="flex-1 p-8 max-w-[1600px]" id="pageContainer">
+  <!-- pages loaded dynamically via fetch -->
   </main>
+</div>
+
+<!-- Event Detail Modal -->
+<div id="eventDetailModal" class="modal-backdrop" onclick="if(event.target===this)closeModal('eventDetailModal')">
+  <div class="modal p-6" style="max-width:480px;">
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:#eef2ff;"><i data-lucide="calendar" class="w-5 h-5" style="color:#4f46e5;"></i></div>
+        <div>
+          <h2 id="evtDetailTitle" class="text-base font-bold text-slate-900">Event Title</h2>
+          <span id="evtDetailCat" class="text-xs font-semibold px-2 py-0.5 rounded-full" style="background:#eef2ff;color:#4f46e5;">Category</span>
+        </div>
+      </div>
+      <button onclick="closeModal('eventDetailModal')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
+    </div>
+    <div class="space-y-3 mb-5">
+      <div class="flex items-center gap-3 text-sm text-slate-700"><i data-lucide="calendar" class="w-4 h-4 text-slate-400 shrink-0"></i><span id="evtDetailDate">Date</span></div>
+      <div class="flex items-center gap-3 text-sm text-slate-700"><i data-lucide="clock" class="w-4 h-4 text-slate-400 shrink-0"></i><span id="evtDetailTime">Time</span></div>
+      <div class="flex items-center gap-3 text-sm text-slate-700"><i data-lucide="building" class="w-4 h-4 text-slate-400 shrink-0"></i><span>All Branches</span></div>
+      <div class="flex items-center gap-3 text-sm text-slate-700"><i data-lucide="users" class="w-4 h-4 text-slate-400 shrink-0"></i><span>All Students & Teachers</span></div>
+    </div>
+    <div class="flex justify-end gap-2 pt-4 border-t border-slate-100">
+      <button class="btn-secondary" onclick="closeModal('eventDetailModal')">Close</button>
+      <button class="btn-primary"><i data-lucide="edit-3" class="w-4 h-4"></i>Edit Event</button>
+    </div>
+  </div>
+</div>
+
+<!-- Create Event Modal -->
+<div id="createEventModal" class="modal-backdrop" onclick="if(event.target===this)closeModal('createEventModal')">
+  <div class="modal p-6" style="max-width:540px;">
+    <div class="flex items-center justify-between mb-5">
+      <h2 class="text-lg font-bold text-slate-900">New Calendar Event</h2>
+      <button onclick="closeModal('createEventModal')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
+    </div>
+    <div class="space-y-4">
+      <div><label class="text-xs font-semibold text-slate-600 uppercase">Event Title</label><input type="text" placeholder="e.g. Mid-Term Exam — Mathematics" class="input mt-1" /></div>
+      <div><label class="text-xs font-semibold text-slate-600 uppercase">Category</label>
+        <select class="input mt-1">
+          <option>Exam</option>
+          <option>Holiday</option>
+          <option>School Event</option>
+          <option>Teacher Meeting</option>
+          <option>Assignment Deadline</option>
+          <option>Student Activity</option>
+        </select>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div><label class="text-xs font-semibold text-slate-600 uppercase">Date</label><input type="date" value="2026-05-25" class="input mt-1" /></div>
+        <div><label class="text-xs font-semibold text-slate-600 uppercase">Time</label><input type="time" value="08:00" class="input mt-1" /></div>
+      </div>
+      <div><label class="text-xs font-semibold text-slate-600 uppercase">Audience</label>
+        <select class="input mt-1">
+          <option>All Students & Teachers</option>
+          <option>All Students</option>
+          <option>All Teachers</option>
+          <option>Specific Class</option>
+          <option>Specific Grade</option>
+        </select>
+      </div>
+      <div><label class="text-xs font-semibold text-slate-600 uppercase">Description (optional)</label><textarea class="input mt-1" rows="2" placeholder="Additional details about this event..."></textarea></div>
+      <div class="flex items-center gap-2 p-3 rounded-xl" style="background:#eef2ff;">
+        <i data-lucide="calendar-check" class="w-4 h-4 shrink-0" style="color:#4f46e5;"></i>
+        <span class="text-xs text-slate-700">This event will appear on all subscriber calendars and trigger push notifications.</span>
+      </div>
+    </div>
+    <div class="flex justify-end gap-2 mt-6 pt-4 border-t border-slate-100">
+      <button class="btn-secondary" onclick="closeModal('createEventModal')">Cancel</button>
+      <button class="btn-primary"><i data-lucide="plus" class="w-4 h-4"></i>Create Event</button>
+    </div>
+  </div>
+</div>
+
+<!-- Google Sync Modal -->
+<div id="googleSyncModal" class="modal-backdrop" onclick="if(event.target===this)closeModal('googleSyncModal')">
+  <div class="modal p-6" style="max-width:440px;">
+    <div class="flex items-center justify-between mb-5">
+      <h2 class="text-lg font-bold text-slate-900">Connect Google Calendar</h2>
+      <button onclick="closeModal('googleSyncModal')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
+    </div>
+    <div class="flex flex-col items-center text-center mb-6">
+      <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-4" style="background:#f8fafc;border:1px solid #e2e8f0;">
+        <svg class="w-9 h-9" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      </div>
+      <p class="text-sm text-slate-600 leading-relaxed">Sync Deltra's academic calendar with Google Calendar. Students and teachers can subscribe and receive real-time event updates.</p>
+    </div>
+    <div class="space-y-3 mb-6">
+      <div class="flex items-start gap-3 p-3 rounded-xl" style="background:#f8fafc;border:1px solid #f1f5f9;">
+        <i data-lucide="refresh-cw" class="w-4 h-4 text-blue-500 mt-0.5 shrink-0"></i>
+        <div class="text-xs text-slate-700"><span class="font-semibold">Two-way sync</span> — changes in Deltra update Google Calendar and vice versa.</div>
+      </div>
+      <div class="flex items-start gap-3 p-3 rounded-xl" style="background:#f8fafc;border:1px solid #f1f5f9;">
+        <i data-lucide="bell" class="w-4 h-4 text-indigo-500 mt-0.5 shrink-0"></i>
+        <div class="text-xs text-slate-700"><span class="font-semibold">Smart notifications</span> — receive reminders for exams, holidays, and meetings.</div>
+      </div>
+      <div class="flex items-start gap-3 p-3 rounded-xl" style="background:#f8fafc;border:1px solid #f1f5f9;">
+        <i data-lucide="share-2" class="w-4 h-4 text-emerald-500 mt-0.5 shrink-0"></i>
+        <div class="text-xs text-slate-700"><span class="font-semibold">Shareable link</span> — parents can subscribe to the school calendar directly.</div>
+      </div>
+    </div>
+    <button class="btn-primary w-full justify-center">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="white" opacity="0.9"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="white" opacity="0.9"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="white" opacity="0.9"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="white" opacity="0.9"/></svg>
+      Continue with Google
+    </button>
+    <p class="text-xs text-center text-slate-400 mt-3">OAuth 2.0 secured · Deltra only accesses your calendar</p>
+  </div>
+</div>
+
+<!-- Create Announcement Modal -->
+<div id="createAnnouncementModal" class="modal-backdrop" onclick="if(event.target===this)closeModal('createAnnouncementModal')">
+  <div class="modal p-6" style="max-width:580px;">
+    <div class="flex items-center justify-between mb-5">
+      <h2 class="text-lg font-bold text-slate-900">New Announcement</h2>
+      <button onclick="closeModal('createAnnouncementModal')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
+    </div>
+    <div class="space-y-4">
+      <div><label class="text-xs font-semibold text-slate-600 uppercase">Title</label><input type="text" placeholder="Announcement subject..." class="input mt-1" /></div>
+      <div><label class="text-xs font-semibold text-slate-600 uppercase">Message</label>
+        <div class="mt-1 border border-slate-200 rounded-lg overflow-hidden">
+          <div class="flex items-center gap-1 px-3 py-2 border-b border-slate-100 bg-slate-50">
+            <button class="p-1 rounded hover:bg-slate-200 text-slate-600 font-bold text-xs w-6 h-6 flex items-center justify-center">B</button>
+            <button class="p-1 rounded hover:bg-slate-200 text-slate-600 italic text-xs w-6 h-6 flex items-center justify-center">I</button>
+            <button class="p-1 rounded hover:bg-slate-200 text-slate-600 underline text-xs w-6 h-6 flex items-center justify-center">U</button>
+            <div class="w-px h-4 bg-slate-200 mx-1"></div>
+            <button class="p-1 rounded hover:bg-slate-200 text-slate-500"><i data-lucide="list" class="w-3.5 h-3.5"></i></button>
+            <button class="p-1 rounded hover:bg-slate-200 text-slate-500"><i data-lucide="link" class="w-3.5 h-3.5"></i></button>
+          </div>
+          <textarea class="w-full p-3 text-sm text-slate-700 outline-none resize-none" rows="4" placeholder="Write your announcement here..."></textarea>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div><label class="text-xs font-semibold text-slate-600 uppercase">Priority</label>
+          <select class="input mt-1">
+            <option>Normal</option>
+            <option>Important</option>
+            <option>Urgent</option>
+          </select>
+        </div>
+        <div><label class="text-xs font-semibold text-slate-600 uppercase">Target Audience</label>
+          <select class="input mt-1">
+            <option>All Students & Teachers</option>
+            <option>All Students</option>
+            <option>All Teachers</option>
+            <option>Specific Class</option>
+            <option>Specific Department</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div><label class="text-xs font-semibold text-slate-600 uppercase">Send Via</label>
+          <div class="flex gap-2 mt-1">
+            <label class="flex items-center gap-1.5 text-xs text-slate-700 cursor-pointer"><input type="checkbox" checked class="rounded" /> In-app</label>
+            <label class="flex items-center gap-1.5 text-xs text-slate-700 cursor-pointer"><input type="checkbox" checked class="rounded" /> Email</label>
+            <label class="flex items-center gap-1.5 text-xs text-slate-700 cursor-pointer"><input type="checkbox" class="rounded" /> Push</label>
+          </div>
+        </div>
+        <div><label class="text-xs font-semibold text-slate-600 uppercase">Schedule</label>
+          <input type="datetime-local" class="input mt-1 text-xs" />
+        </div>
+      </div>
+      <div><label class="text-xs font-semibold text-slate-600 uppercase">Attachments</label>
+        <div class="mt-1 border-2 border-dashed border-slate-200 rounded-xl p-4 text-center cursor-pointer hover:border-slate-300 hover:bg-slate-50 transition-colors">
+          <i data-lucide="upload" class="w-5 h-5 text-slate-400 mx-auto mb-1"></i>
+          <div class="text-xs text-slate-500">Drop PDF, images, or documents here · Max 10MB each</div>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-end gap-2 mt-6 pt-4 border-t border-slate-100">
+      <button class="btn-secondary" onclick="closeModal('createAnnouncementModal')">Save Draft</button>
+      <button class="btn-primary"><i data-lucide="send" class="w-4 h-4"></i>Send Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- Submit Assignment Modal -->
+<div id="submitAssignmentModal" class="modal-backdrop" onclick="if(event.target===this)closeModal('submitAssignmentModal')">
+  <div class="modal p-6" style="max-width:540px;">
+    <div class="flex items-center justify-between mb-5">
+      <h2 class="text-lg font-bold text-slate-900">Submit Assignment</h2>
+      <button onclick="closeModal('submitAssignmentModal')" class="text-slate-400 hover:text-slate-600"><i data-lucide="x" class="w-5 h-5"></i></button>
+    </div>
+    <div class="p-3 rounded-xl mb-4" style="background:#fff7ed;border:1px solid #fed7aa;">
+      <div class="font-semibold text-orange-900 text-sm">Physics Lab Report</div>
+      <div class="text-xs text-orange-700 mt-0.5">Due today · May 15, 2026 · 23:59 · Ms. Linda Hartono</div>
+    </div>
+    <div class="space-y-4">
+      <div>
+        <label class="text-xs font-semibold text-slate-600 uppercase">Upload File</label>
+        <div class="mt-1 border-2 border-dashed border-slate-200 rounded-xl p-6 text-center cursor-pointer hover:border-slate-300 hover:bg-slate-50 transition-colors">
+          <i data-lucide="upload-cloud" class="w-8 h-8 text-slate-400 mx-auto mb-2"></i>
+          <div class="text-sm font-medium text-slate-600">Drop file here or click to upload</div>
+          <div class="text-xs text-slate-400 mt-1">PDF, DOCX, JPG up to 20MB</div>
+        </div>
+      </div>
+      <div>
+        <label class="text-xs font-semibold text-slate-600 uppercase">Or Write Answer</label>
+        <div class="mt-1 border border-slate-200 rounded-lg overflow-hidden">
+          <div class="flex items-center gap-1 px-3 py-2 border-b border-slate-100 bg-slate-50">
+            <button class="p-1 rounded hover:bg-slate-200 text-slate-600 font-bold text-xs w-6 h-6 flex items-center justify-center">B</button>
+            <button class="p-1 rounded hover:bg-slate-200 text-slate-600 italic text-xs w-6 h-6 flex items-center justify-center">I</button>
+            <button class="p-1 rounded hover:bg-slate-200 text-slate-600 underline text-xs w-6 h-6 flex items-center justify-center">U</button>
+            <div class="w-px h-4 bg-slate-200 mx-1"></div>
+            <button class="p-1 rounded hover:bg-slate-200 text-slate-500"><i data-lucide="list" class="w-3.5 h-3.5"></i></button>
+          </div>
+          <textarea class="w-full p-3 text-sm text-slate-700 outline-none resize-none" rows="5" placeholder="Type your answer here..."></textarea>
+        </div>
+      </div>
+      <div>
+        <label class="text-xs font-semibold text-slate-600 uppercase">Note to teacher (optional)</label>
+        <input type="text" class="input mt-1 text-sm" placeholder="Any notes about your submission..." />
+      </div>
+    </div>
+    <div class="flex justify-end gap-2 mt-6 pt-4 border-t border-slate-100">
+      <button class="btn-secondary" onclick="closeModal('submitAssignmentModal')">Cancel</button>
+      <button class="btn-primary" onclick="closeModal('submitAssignmentModal')"><i data-lucide="send" class="w-4 h-4"></i>Submit Assignment</button>
+    </div>
+  </div>
+</div>
+
+<!-- CBT Practice Modal -->
+<div id="cbtPracticeModal" class="modal-backdrop" onclick="if(event.target===this)closeModal('cbtPracticeModal')">
+  <div class="modal" style="max-width:680px;">
+    <!-- CBT Header -->
+    <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100" style="background:#0f1c2e;border-radius:14px 14px 0 0;">
+      <div class="flex items-center gap-3">
+        <i data-lucide="monitor" class="w-5 h-5" style="color:#1ecfad;"></i>
+        <div><div class="font-bold text-white text-sm">Mathematics CBT — Practice Mode</div><div class="text-xs" style="color:rgba(255,255,255,0.5);">Gr.11 IPA-2 · 10 sample questions</div></div>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg" style="background:rgba(239,68,68,0.15);"><i data-lucide="timer" class="w-4 h-4 text-rose-400"></i><span class="text-sm font-bold text-rose-300">14:52</span></div>
+        <button onclick="closeModal('cbtPracticeModal')" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+    </div>
+    <div class="p-6">
+      <!-- Progress -->
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex gap-1.5">
+          <div class="w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center" style="background:#1ecfad;color:white;">1</div>
+          <div class="w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center bg-slate-100 text-slate-600 cursor-pointer hover:bg-slate-200">2</div>
+          <div class="w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center bg-slate-100 text-slate-600 cursor-pointer hover:bg-slate-200">3</div>
+          <div class="w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center bg-slate-100 text-slate-600 cursor-pointer hover:bg-slate-200">4</div>
+          <div class="w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center bg-slate-100 text-slate-600 cursor-pointer hover:bg-slate-200">5</div>
+          <div class="w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center bg-indigo-100 text-indigo-600 cursor-pointer">...</div>
+          <div class="w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center bg-slate-100 text-slate-600 cursor-pointer hover:bg-slate-200">10</div>
+        </div>
+        <span class="text-xs text-slate-500">Question 1 of 10 · Auto-saved</span>
+      </div>
+      <!-- Question -->
+      <div class="card p-5 mb-4">
+        <div class="flex items-center gap-2 mb-3"><span class="badge badge-purple">Multiple Choice</span><span class="text-xs text-slate-400">Definite Integrals</span></div>
+        <p class="font-semibold text-slate-900 mb-4">If f(x) = 2x³ − 3x + 1, what is the value of <span class="font-bold text-indigo-700">∫₀² f(x) dx</span> ?</p>
+        <div class="space-y-2">
+          <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 cursor-pointer hover:bg-slate-50 transition-colors">
+            <input type="radio" name="q1" class="accent-indigo-600" />
+            <span class="text-sm text-slate-700">A. &nbsp;<strong>6</strong></span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-colors" style="border-color:#1ecfad;background:#f0fdf9;">
+            <input type="radio" name="q1" class="accent-indigo-600" checked />
+            <span class="text-sm font-medium text-slate-700">B. &nbsp;<strong>8</strong></span>
+            <span class="ml-auto text-xs font-semibold" style="color:#0ea88a;">Selected</span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 cursor-pointer hover:bg-slate-50 transition-colors">
+            <input type="radio" name="q1" class="accent-indigo-600" />
+            <span class="text-sm text-slate-700">C. &nbsp;<strong>10</strong></span>
+          </label>
+          <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 cursor-pointer hover:bg-slate-50 transition-colors">
+            <input type="radio" name="q1" class="accent-indigo-600" />
+            <span class="text-sm text-slate-700">D. &nbsp;<strong>12</strong></span>
+          </label>
+        </div>
+      </div>
+      <!-- AI hint box -->
+      <div class="flex items-start gap-2 p-3 rounded-xl mb-4" style="background:#eef2ff;border:1px solid #e0e7ff;">
+        <i data-lucide="sparkles" class="w-4 h-4 text-indigo-500 mt-0.5 shrink-0"></i>
+        <div class="text-xs text-indigo-700"><span class="font-semibold">Practice hint:</span> Apply the power rule ∫xⁿdx = xⁿ⁺¹/(n+1) to each term, then evaluate at x=2 minus x=0.</div>
+      </div>
+      <div class="flex items-center justify-between">
+        <button class="btn-secondary text-xs py-2 px-4"><i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>Previous</button>
+        <div class="flex gap-2">
+          <button class="btn-secondary text-xs py-2 px-4">Flag question</button>
+          <button class="btn-primary text-xs py-2 px-4" onclick="closeModal('cbtPracticeModal')">Next question <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Contract modal -->
@@ -894,40 +725,96 @@
   }
 
   let currentRole = 'admin';
+
+  const pagePostLoad = {
+    'admin-dashboard':    () => { setTimeout(initCharts, 50); },
+    'admin-students':     () => { renderStudents(); lucide.createIcons(); },
+    'admin-staff':        () => { renderStaff(); lucide.createIcons(); },
+    'admin-calendar':     () => { renderCalendar('calGrid','upcomingEvents'); lucide.createIcons(); },
+    'admin-announcements':() => { renderAnnouncements('announcementFeed'); lucide.createIcons(); },
+    'teacher-dashboard':  () => { setTimeout(initCharts, 50); },
+    'teacher-gradebook':  () => { renderGradebook(); lucide.createIcons(); },
+    'teacher-attendance': () => { renderAttendance(); lucide.createIcons(); },
+    'teacher-calendar':   () => { renderCalendar('teacherCalGrid','teacherUpcomingEvents'); lucide.createIcons(); },
+    'teacher-announcements':() => { renderAnnouncements('teacherAnnouncementFeed'); lucide.createIcons(); },
+    'parent-announcements':() => { renderAnnouncements('parentAnnouncementFeed'); lucide.createIcons(); },
+    'student-dashboard':  () => { setTimeout(initCharts, 50); },
+    'student-grades':     () => { setTimeout(initCharts, 50); },
+    'student-calendar':   () => { renderCalendar('studentCalGrid','studentUpcomingEvents'); lucide.createIcons(); },
+    'student-announcements':() => { renderAnnouncements('studentAnnouncementFeed'); lucide.createIcons(); },
+  };
+
   function switchRole(role) {
     currentRole = role;
     document.getElementById('roleAdmin').classList.toggle('active', role==='admin');
     document.getElementById('roleTeacher').classList.toggle('active', role==='teacher');
+    document.getElementById('roleParent').classList.toggle('active', role==='parent');
+    document.getElementById('roleStudent').classList.toggle('active', role==='student');
     document.getElementById('adminNav').style.display = role==='admin' ? '' : 'none';
     document.getElementById('teacherNav').style.display = role==='teacher' ? '' : 'none';
-    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById('parentNav').style.display = role==='parent' ? '' : 'none';
+    document.getElementById('studentNav').style.display = role==='student' ? '' : 'none';
     if(role==='admin') {
-      document.getElementById('page-admin-dashboard').classList.add('active');
       document.querySelectorAll('#adminNav .nav-item').forEach((n,i)=>n.classList.toggle('active',i===0));
       document.getElementById('userName').textContent='Dr. Sari Wijaya';
       document.getElementById('userRole').textContent='Head of Operations';
       document.getElementById('branchSelector').style.display='flex';
-    } else {
-      document.getElementById('page-teacher-dashboard').classList.add('active');
+      goToPage('admin-dashboard', null);
+    } else if(role==='teacher') {
       document.querySelectorAll('#teacherNav .nav-item').forEach((n,i)=>n.classList.toggle('active',i===0));
       document.getElementById('userName').textContent='Pak Budi Santoso';
       document.getElementById('userRole').textContent='Math Teacher · Bekasi';
       document.getElementById('branchSelector').style.display='none';
+      goToPage('teacher-dashboard', null);
+    } else if(role==='parent') {
+      document.querySelectorAll('#parentNav .nav-item').forEach((n,i)=>n.classList.toggle('active',i===0));
+      document.getElementById('userName').textContent='Ibu Ratna Pratama';
+      document.getElementById('userRole').textContent='Parent · Aditya Pratama';
+      document.getElementById('branchSelector').style.display='none';
+      goToPage('parent-dashboard', null);
+    } else {
+      document.querySelectorAll('#studentNav .nav-item').forEach((n,i)=>n.classList.toggle('active',i===0));
+      document.getElementById('userName').textContent='Aditya Pratama';
+      document.getElementById('userRole').textContent='Student · Grade 11 IPA-2 · Bekasi';
+      document.getElementById('branchSelector').style.display='none';
+      goToPage('student-dashboard', null);
     }
-    initCharts();
   }
-  function goToPage(pageId, navEl) {
-    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-    document.getElementById('page-'+pageId).classList.add('active');
-    const navContainer = currentRole==='admin' ? '#adminNav' : '#teacherNav';
+  const pageCache = {};
+
+  async function goToPage(pageId, navEl) {
+    const navMap = {admin:'#adminNav', teacher:'#teacherNav', parent:'#parentNav', student:'#studentNav'};
+    const navContainer = navMap[currentRole] || '#adminNav';
     document.querySelectorAll(navContainer+' .nav-item').forEach(n=>n.classList.remove('active'));
     if(navEl) navEl.classList.add('active');
-    setTimeout(initCharts, 50);
+
+    const container = document.getElementById('pageContainer');
+
+    if(!pageCache[pageId]) {
+      const [role, ...rest] = pageId.split('-');
+      const pageName = rest.join('-');
+      container.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:200px;"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#1ecfad\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"animation:spin 1s linear infinite;\"><path d=\"M21 12a9 9 0 1 1-6.219-8.56\"/></svg></div>';
+      try {
+        const res = await fetch(`pages/${role}/${pageName}.html`);
+        if(!res.ok) throw new Error('Not found');
+        pageCache[pageId] = await res.text();
+      } catch(e) {
+        container.innerHTML = '<div class=\"p-8 text-slate-400 text-sm\">Page content unavailable.</div>';
+        return;
+      }
+    }
+
+    container.innerHTML = pageCache[pageId];
+    lucide.createIcons();
+
+    const postLoad = pagePostLoad[pageId];
+    if(postLoad) postLoad();
+    else setTimeout(initCharts, 50);
   }
   function openModal(id) { document.getElementById(id).classList.add('active'); }
   function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
-  let enrollChartInstance, riskChartInstance;
+  let enrollChartInstance, riskChartInstance, studentProgressChartInstance, studentRadarChartInstance;
   function initCharts() {
     const enrollEl = document.getElementById('enrollChart');
     if(enrollEl && !enrollChartInstance) {
@@ -952,15 +839,162 @@
         options:{responsive:true,maintainAspectRatio:false,animation:{duration:0},plugins:{legend:{position:'bottom',labels:{font:{size:11}}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:'#f1f5f9'},ticks:{font:{size:10}}}}}
       });
     }
+    const spEl = document.getElementById('studentProgressChart');
+    if(spEl && !studentProgressChartInstance) {
+      studentProgressChartInstance = new Chart(spEl, {
+        type:'line',
+        data:{labels:['Jan','Feb','Mar','Apr','May'],datasets:[{
+          label:'Avg Grade',
+          data:[88.5,89.2,90.1,90.8,91.2],
+          borderColor:'#1ecfad',backgroundColor:'rgba(30,207,173,0.1)',tension:0.4,fill:true,pointRadius:4,borderWidth:2,pointBackgroundColor:'#1ecfad'
+        },{
+          label:'Class Avg',
+          data:[76.2,76.8,77.1,77.5,77.9],
+          borderColor:'#94a3b8',backgroundColor:'transparent',tension:0.4,fill:false,pointRadius:3,borderWidth:1.5,borderDash:[4,4],pointBackgroundColor:'#94a3b8'
+        }]},
+        options:{responsive:true,maintainAspectRatio:false,animation:{duration:0},plugins:{legend:{position:'bottom',labels:{font:{size:10}}}},scales:{y:{min:70,max:100,grid:{color:'#f1f5f9'},ticks:{font:{size:10}}},x:{grid:{display:false},ticks:{font:{size:10}}}}}
+      });
+    }
+    const srEl = document.getElementById('studentRadarChart');
+    if(srEl && !studentRadarChartInstance) {
+      studentRadarChartInstance = new Chart(srEl, {
+        type:'radar',
+        data:{
+          labels:['Math','Physics','Biology','Chemistry','English','Bahasa'],
+          datasets:[{
+            label:'Aditya',data:[90.5,86.5,94.5,90.5,88,83],
+            borderColor:'#1ecfad',backgroundColor:'rgba(30,207,173,0.15)',borderWidth:2,pointBackgroundColor:'#1ecfad'
+          },{
+            label:'Class avg',data:[78,74,81,77,75,76],
+            borderColor:'#cbd5e1',backgroundColor:'rgba(203,213,225,0.08)',borderWidth:1.5,pointBackgroundColor:'#94a3b8'
+          }]
+        },
+        options:{responsive:true,maintainAspectRatio:false,animation:{duration:0},plugins:{legend:{position:'bottom',labels:{font:{size:10}}}},scales:{r:{min:60,max:100,ticks:{font:{size:9},stepSize:10,display:false},grid:{color:'#f1f5f9'},pointLabels:{font:{size:10}}}}}
+      });
+    }
   }
 
-  document.addEventListener('DOMContentLoaded', ()=>{
+  // ── Calendar data (May 2026, starts Friday = index 5) ───────────────────────
+  const calEvents = [
+    {day:1,  cat:'holiday',  title:'Hari Buruh Nasional',        time:'All day',     bg:'#fffbeb', color:'#b45309'},
+    {day:5,  cat:'exam',     title:'Mid-Term Exam · Math Gr.11', time:'08:00–10:00', bg:'#fef2f2', color:'#dc2626'},
+    {day:6,  cat:'exam',     title:'Mid-Term Exam · Math Gr.12', time:'08:00–10:00', bg:'#fef2f2', color:'#dc2626'},
+    {day:8,  cat:'meeting',  title:'Teacher Meeting',            time:'14:00–16:00', bg:'#eff6ff', color:'#2563eb'},
+    {day:12, cat:'school',   title:'Science Fair 2026',          time:'08:00–15:00', bg:'#eef2ff', color:'#4f46e5'},
+    {day:15, cat:'deadline', title:'Physics Assignment Deadline', time:'23:59',       bg:'#fff7ed', color:'#ea580c'},
+    {day:19, cat:'school',   title:'Flag Ceremony',              time:'07:00–08:00', bg:'#eef2ff', color:'#4f46e5'},
+    {day:20, cat:'exam',     title:'English Exam Gr.9-12',       time:'08:00–10:00', bg:'#fef2f2', color:'#dc2626'},
+    {day:21, cat:'activity', title:'Chemistry Lab Day',          time:'10:00–13:00', bg:'#ecfdf5', color:'#059669'},
+    {day:26, cat:'holiday',  title:'Kenaikan Isa Almasih',       time:'All day',     bg:'#fffbeb', color:'#b45309'},
+    {day:28, cat:'meeting',  title:'Parent-Teacher Conference',  time:'13:00–17:00', bg:'#eff6ff', color:'#2563eb'},
+    {day:30, cat:'deadline', title:'Data Audit Deadline',        time:'17:00',       bg:'#fff7ed', color:'#ea580c'},
+  ];
+
+  const announcementsData = [
+    {id:1, pinned:true,  priority:'urgent',    title:'Mid-Term Exam Schedule Released',          body:'The mid-term examination schedule for all grades has been finalized. Please inform students to review the attached timetable and plan study sessions accordingly.',    author:'Dr. Sari Wijaya',   role:'Head of Operations',  time:'2 hours ago',   audience:'All Students & Teachers', read:true,  attachments:['exam-schedule-may2026.pdf']},
+    {id:2, pinned:true,  priority:'important', title:'Flag Ceremony — Mandatory Attendance May 19', body:'All students and teachers are reminded that the Flag Ceremony on May 19 is mandatory. Please arrive by 06:45. White school uniform is required.',                       author:'Dr. Sari Wijaya',   role:'Head of Operations',  time:'Yesterday',     audience:'All Students & Teachers', read:true,  attachments:[]},
+    {id:3, pinned:false, priority:'normal',    title:'Science Fair 2026 Registration Open',      body:'Students interested in participating must register their project by May 8. Full guidelines and registration form are attached below. Maximum 3 students per group.',      author:'Ms. Linda Hartono', role:'Science Department',   time:'2 days ago',    audience:'Grade 10–12 Students',    read:false, attachments:['science-fair-guidelines.pdf','registration-form.docx']},
+    {id:4, pinned:false, priority:'urgent',    title:'Parent-Teacher Conference — Action Required',  body:'All teachers must confirm their availability for the Parent-Teacher Conference on May 28 by submitting preferred time slots before May 20. Slots are first-come.',  author:'Mr. Andi Kurniawan', role:'Vice Principal',      time:'3 days ago',    audience:'All Teachers',            read:false, attachments:[]},
+    {id:5, pinned:false, priority:'normal',    title:'Library Extended Hours — Exam Period',      body:'The school library will be open 07:00–20:00 from May 4–22 to support students during mid-term preparation. Quiet zones are available on the 2nd floor.',              author:'Library Staff',     role:'Administration',      time:'1 week ago',    audience:'All Students',            read:true,  attachments:[]},
+  ];
+
+  function renderCalendar(gridId, upcomingId) {
+    const grid = document.getElementById(gridId);
+    if (!grid) return;
+    const TODAY = 15; // May 15, 2026
+    const START_DAY = 5; // May 1 = Friday
+    const DAYS = 31;
+    let html = '';
+    for (let i = START_DAY - 1; i >= 0; i--) {
+      html += `<div class="cal-day other-month"><div class="day-num" style="color:#cbd5e1;">${30 - i}</div></div>`;
+    }
+    for (let d = 1; d <= DAYS; d++) {
+      const evts = calEvents.filter(e => e.day === d);
+      const isToday = d === TODAY;
+      html += `<div class="cal-day">
+        <div class="day-num${isToday ? ' today-num' : ''}">${d}</div>
+        ${evts.map(e => `<div class="cal-event" data-idx="${calEvents.indexOf(e)}" style="background:${e.bg};color:${e.color};">${e.title}</div>`).join('')}
+      </div>`;
+    }
+    const totalCells = Math.ceil((START_DAY + DAYS) / 7) * 7;
+    for (let d = 1; d <= totalCells - START_DAY - DAYS; d++) {
+      html += `<div class="cal-day other-month"><div class="day-num" style="color:#cbd5e1;">${d}</div></div>`;
+    }
+    grid.innerHTML = html;
+    grid.querySelectorAll('.cal-event').forEach(el => {
+      el.addEventListener('click', ev => {
+        ev.stopPropagation();
+        showCalEvent(parseInt(el.dataset.idx));
+      });
+    });
+    const upcoming = document.getElementById(upcomingId);
+    if (upcoming) {
+      const future = calEvents.filter(e => e.day >= TODAY);
+      upcoming.innerHTML = future.slice(0, 6).map(e =>
+        `<div class="flex items-start gap-2 cursor-pointer hover:bg-slate-50 p-1.5 rounded-lg -mx-1.5" data-cal-idx="${calEvents.indexOf(e)}">
+          <div class="w-2 h-2 rounded-full mt-1.5 shrink-0" style="background:${e.color};"></div>
+          <div><div class="text-xs font-semibold text-slate-800">${e.title}</div><div class="text-xs text-slate-500">May ${e.day} · ${e.time}</div></div>
+        </div>`
+      ).join('');
+      upcoming.querySelectorAll('[data-cal-idx]').forEach(item => {
+        item.addEventListener('click', () => showCalEvent(parseInt(item.dataset.calIdx)));
+      });
+    }
     lucide.createIcons();
-    renderStudents();
-    renderStaff();
-    renderGradebook();
-    renderAttendance();
-    initCharts();
+  }
+
+  function showCalEvent(idx) {
+    const evt = calEvents[idx];
+    if (!evt) return;
+    const catNames = {holiday:'Holiday', exam:'Exam', meeting:'Teacher Meeting', school:'School Event', deadline:'Deadline', activity:'Student Activity'};
+    document.getElementById('evtDetailTitle').textContent = evt.title;
+    document.getElementById('evtDetailDate').textContent = `May ${evt.day}, 2026`;
+    document.getElementById('evtDetailTime').textContent = evt.time;
+    const catEl = document.getElementById('evtDetailCat');
+    catEl.textContent = catNames[evt.cat] || evt.cat;
+    catEl.style.background = evt.bg;
+    catEl.style.color = evt.color;
+    openModal('eventDetailModal');
+  }
+
+  function renderAnnouncements(feedId) {
+    const feed = document.getElementById(feedId);
+    if (!feed) return;
+    const priorityCfg = {
+      urgent:    {label:'Urgent',    bg:'#fee2e2', color:'#991b1b'},
+      important: {label:'Important', bg:'#fef3c7', color:'#92400e'},
+      normal:    {label:'Normal',    bg:'#f1f5f9', color:'#475569'},
+    };
+    feed.innerHTML = announcementsData.map(a => {
+      const p = priorityCfg[a.priority];
+      const initials = a.author.split(' ').map(w => w[0]).join('').slice(0, 2);
+      return `<div class="announcement-card${a.pinned ? ' pinned' : ''}">
+        <div class="flex items-start justify-between gap-3 mb-2">
+          <div class="flex items-center gap-2 flex-wrap">
+            ${a.pinned ? `<span class="badge" style="background:#e8f5f1;color:#0ea88a;"><i data-lucide="pin" class="w-3 h-3 inline-block -mt-0.5 mr-0.5"></i>Pinned</span>` : ''}
+            <span class="badge" style="background:${p.bg};color:${p.color};">${p.label}</span>
+            ${!a.read ? `<span class="w-2 h-2 rounded-full inline-block" style="background:#3b82f6;margin-top:4px;"></span>` : ''}
+          </div>
+          <span class="text-xs text-slate-400 whitespace-nowrap shrink-0">${a.time}</span>
+        </div>
+        <h3 class="font-semibold text-slate-900 text-sm mb-1.5">${a.title}</h3>
+        <p class="text-sm text-slate-600 mb-3 leading-relaxed">${a.body}</p>
+        ${a.attachments.length ? `<div class="flex gap-2 flex-wrap mb-3">${a.attachments.map(f => `<div class="flex items-center gap-1.5 text-xs font-medium px-2.5 py-1.5 rounded-lg cursor-pointer" style="background:#f1f5f9;color:#475569;"><i data-lucide="paperclip" class="w-3 h-3 inline-block -mt-0.5 mr-0.5"></i>${f}</div>`).join('')}</div>` : ''}
+        <div class="flex items-center justify-between pt-2 border-t border-slate-100">
+          <div class="flex items-center gap-2">
+            <div class="w-6 h-6 rounded-full bg-indigo-100 flex items-center justify-center text-xs font-semibold text-indigo-700">${initials}</div>
+            <div><div class="text-xs font-semibold text-slate-700">${a.author}</div><div class="text-xs text-slate-500">${a.role}</div></div>
+          </div>
+          <span class="text-xs text-slate-400">${a.audience}</span>
+        </div>
+      </div>`;
+    }).join('');
+    lucide.createIcons();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    lucide.createIcons();
+    goToPage('admin-dashboard', document.querySelector('#adminNav .nav-item'));
   });
 </script>
 </body>

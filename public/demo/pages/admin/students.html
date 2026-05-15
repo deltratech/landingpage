@@ -1,0 +1,25 @@
+<div class="flex items-center justify-between mb-6">
+        <div><h1 class="text-2xl font-bold text-slate-900">Students</h1><p class="text-sm text-slate-500 mt-1">2,847 enrolled across 3 branches</p></div>
+        <div class="flex gap-2"><button class="btn-secondary"><i data-lucide="upload" class="w-4 h-4"></i>Import CSV</button><button class="btn-primary"><i data-lucide="user-plus" class="w-4 h-4"></i>Add student</button></div>
+      </div>
+      <div class="card mb-4 p-4 flex items-center gap-3 flex-wrap">
+        <div class="relative flex-1 min-w-[250px]"><input type="text" placeholder="Search by name, NIS, or class..." class="input pl-9" /><i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i></div>
+        <select class="input w-auto"><option>All grades</option><option>Grade 7-9</option><option>Grade 10-12</option></select>
+        <select class="input w-auto"><option>All branches</option><option>Bekasi</option><option>Duren Sawit</option><option>Bogor</option></select>
+        <select class="input w-auto"><option>All status</option><option>Active</option><option>At risk</option><option>Honors</option></select>
+      </div>
+      <div class="card overflow-hidden">
+        <table>
+          <thead><tr><th><input type="checkbox" /></th><th>NIS</th><th>Student</th><th>Grade / Class</th><th>Branch</th><th>Avg Grade</th><th>Attendance</th><th>Status</th><th></th></tr></thead>
+          <tbody id="studentsTable"></tbody>
+        </table>
+        <div class="px-4 py-3 flex items-center justify-between border-t border-slate-100 bg-slate-50">
+          <span class="text-xs text-slate-500">Showing 1–10 of 2,847</span>
+          <div class="flex gap-1">
+            <button class="btn-secondary text-xs">Previous</button>
+            <button class="btn-secondary text-xs" style="background:#e8f5f1;color:#0ea88a;">1</button>
+            <button class="btn-secondary text-xs">2</button>
+            <button class="btn-secondary text-xs">Next</button>
+          </div>
+        </div>
+      </div>

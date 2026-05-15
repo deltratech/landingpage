@@ -1,0 +1,73 @@
+<div class="flex items-center justify-between mb-6">
+        <div><h1 class="text-2xl font-bold text-slate-900">Messages</h1><p class="text-sm text-slate-500 mt-1">Direct messages · Class discussions</p></div>
+        <button class="btn-primary"><i data-lucide="edit-3" class="w-4 h-4"></i>New message</button>
+      </div>
+      <!-- Tab bar -->
+      <div class="flex items-center gap-0.5 bg-slate-100 rounded-lg p-1 mb-5 w-fit">
+        <button class="text-xs font-semibold px-3 py-1.5 rounded-md bg-white shadow-sm text-slate-800">Direct Messages</button>
+        <button class="text-xs font-semibold px-3 py-1.5 rounded-md text-slate-500 hover:text-slate-700">Class Discussion</button>
+        <button class="text-xs font-semibold px-3 py-1.5 rounded-md text-slate-500 hover:text-slate-700">Group Chats</button>
+      </div>
+      <div class="flex gap-4" style="height:520px;">
+        <!-- Message list -->
+        <div class="w-72 shrink-0 flex flex-col card overflow-hidden">
+          <div class="p-3 border-b border-slate-100"><div class="relative"><input type="text" placeholder="Search conversations..." class="input text-xs pl-8" /><i data-lucide="search" class="w-3.5 h-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400"></i></div></div>
+          <div class="flex-1 overflow-y-auto">
+            <div class="flex items-center gap-3 p-3 cursor-pointer hover:bg-slate-50 border-l-2" style="border-color:#3b82f6;background:#eff6ff;">
+              <div class="w-9 h-9 rounded-full bg-rose-100 flex items-center justify-center font-semibold text-sm text-rose-700 shrink-0">LH</div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between"><span class="text-sm font-semibold text-slate-900">Ms. Linda Hartono</span><span class="text-xs text-slate-400">Now</span></div>
+                <div class="text-xs text-slate-500 truncate">Your lab report is due today at 23:59...</div>
+              </div>
+              <div class="w-2 h-2 rounded-full bg-blue-500 shrink-0"></div>
+            </div>
+            <div class="flex items-center gap-3 p-3 cursor-pointer hover:bg-slate-50">
+              <div class="w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center font-semibold text-sm text-indigo-700 shrink-0">BS</div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between"><span class="text-sm font-semibold text-slate-900">Pak Budi Santoso</span><span class="text-xs text-slate-400">2d ago</span></div>
+                <div class="text-xs text-slate-500 truncate">Excellent work on the mid-term!</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-3 cursor-pointer hover:bg-slate-50">
+              <div class="w-9 h-9 rounded-full bg-emerald-100 flex items-center justify-center font-semibold text-sm text-emerald-700 shrink-0">DS</div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between"><span class="text-sm font-semibold text-slate-900">Ms. Dewi Sari</span><span class="text-xs text-slate-400">1w ago</span></div>
+                <div class="text-xs text-slate-500 truncate">Don't forget Science Fair registration!</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 p-3 cursor-pointer hover:bg-slate-50">
+              <div class="w-9 h-9 rounded-full bg-amber-100 flex items-center justify-center font-semibold text-sm text-amber-700 shrink-0">SK</div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between"><span class="text-sm font-semibold text-slate-900">Ms. Sari Kusuma</span><span class="text-xs text-slate-400">2w ago</span></div>
+                <div class="text-xs text-slate-500 truncate">Quiz results are now available</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Active conversation -->
+        <div class="flex-1 card flex flex-col overflow-hidden">
+          <div class="flex items-center gap-3 p-4 border-b border-slate-100">
+            <div class="w-9 h-9 rounded-full bg-rose-100 flex items-center justify-center font-semibold text-sm text-rose-700">LH</div>
+            <div>
+              <div class="font-semibold text-slate-900">Ms. Linda Hartono</div>
+              <div class="text-xs text-slate-500">Physics Teacher · Bekasi Campus</div>
+            </div>
+            <div class="ml-auto flex gap-2">
+              <button class="p-2 rounded-lg hover:bg-slate-100"><i data-lucide="phone" class="w-4 h-4 text-slate-500"></i></button>
+              <button class="p-2 rounded-lg hover:bg-slate-100"><i data-lucide="more-horizontal" class="w-4 h-4 text-slate-500"></i></button>
+            </div>
+          </div>
+          <div class="flex-1 overflow-y-auto p-4 space-y-4">
+            <div class="flex justify-start"><div class="max-w-xs p-3 rounded-2xl rounded-tl-sm text-sm" style="background:#f1f5f9;color:#0f172a;"><div class="text-xs font-semibold text-rose-600 mb-1">Ms. Linda Hartono</div>Hi Aditya! I noticed you haven't submitted the physics lab report yet. It's due today at 23:59 — please don't miss it!<div class="text-xs text-slate-400 mt-1 text-right">10:30 AM</div></div></div>
+            <div class="flex justify-end"><div class="max-w-xs p-3 rounded-2xl rounded-tr-sm text-sm text-white" style="background:#1ecfad;">Yes Ms. Linda, I'm working on the conclusion section now. Will submit before the deadline!<div class="text-xs mt-1 text-right opacity-70">10:45 AM · Seen ✓</div></div></div>
+            <div class="flex justify-start"><div class="max-w-xs p-3 rounded-2xl rounded-tl-sm text-sm" style="background:#f1f5f9;color:#0f172a;">Great! Remember to include the error analysis section too. Good luck! 👍<div class="text-xs text-slate-400 mt-1 text-right">10:47 AM</div></div></div>
+          </div>
+          <div class="p-3 border-t border-slate-100">
+            <div class="flex items-center gap-2">
+              <button class="p-2 rounded-lg hover:bg-slate-100"><i data-lucide="paperclip" class="w-4 h-4 text-slate-400"></i></button>
+              <input type="text" placeholder="Type a message..." class="input flex-1 text-sm" />
+              <button class="btn-primary py-2 px-3"><i data-lucide="send" class="w-4 h-4"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>

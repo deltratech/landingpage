@@ -1,0 +1,55 @@
+<div class="flex items-center justify-between mb-6">
+        <div><h1 class="text-2xl font-bold text-slate-900">Exams & CBT</h1><p class="text-sm text-slate-500 mt-1">Upcoming exams, past results & computer-based tests</p></div>
+        <div class="flex gap-2"><button class="btn-secondary"><i data-lucide="history" class="w-4 h-4"></i>Exam history</button><button class="btn-primary" onclick="openModal('cbtPracticeModal')"><i data-lucide="monitor" class="w-4 h-4"></i>Practice CBT</button></div>
+      </div>
+      <div class="grid grid-cols-2 gap-4 mb-5">
+        <div class="card p-5">
+          <h3 class="font-semibold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="calendar" class="w-4 h-4 text-rose-500"></i>Upcoming Exams</h3>
+          <div class="space-y-3">
+            <div class="flex gap-4 p-4 rounded-xl" style="background:#fef2f2;border:1.5px solid #fecaca;">
+              <div class="text-center shrink-0 w-12"><div class="text-2xl font-bold text-rose-600">20</div><div class="text-xs text-rose-500 font-semibold">MAY</div></div>
+              <div class="flex-1"><div class="font-semibold text-slate-900">English Mid-Term Exam</div><div class="text-xs text-slate-500 mt-0.5">08:00–10:00 · Room 08 · 120 min</div><div class="text-xs text-slate-500">Scope: Reading comprehension, grammar, writing</div><div class="flex gap-2 mt-2"><span class="badge badge-blue">Written</span><span class="badge badge-gray">Ms. Rina</span></div></div>
+              <div class="text-right shrink-0"><div class="text-xs font-bold text-rose-600">5 days</div><button class="text-xs text-indigo-600 font-semibold mt-1 block hover:underline">Study guide</button></div>
+            </div>
+            <div class="flex gap-4 p-4 rounded-xl border border-slate-100">
+              <div class="text-center shrink-0 w-12"><div class="text-2xl font-bold text-slate-700">22</div><div class="text-xs text-slate-500 font-semibold">MAY</div></div>
+              <div class="flex-1"><div class="font-semibold text-slate-900">Chemistry Mid-Term Exam</div><div class="text-xs text-slate-500 mt-0.5">08:00–09:30 · Lab · 90 min</div><div class="text-xs text-slate-500">Equilibrium, acids & bases, thermodynamics</div><div class="flex gap-2 mt-2"><span class="badge badge-blue">Written</span><span class="badge badge-gray">Ms. Sari</span></div></div>
+              <div class="text-right shrink-0"><div class="text-xs font-semibold text-slate-500">7 days</div></div>
+            </div>
+            <div class="flex gap-4 p-4 rounded-xl border border-slate-100">
+              <div class="text-center shrink-0 w-12"><div class="text-2xl font-bold text-slate-700">28</div><div class="text-xs text-slate-500 font-semibold">MAY</div></div>
+              <div class="flex-1"><div class="font-semibold text-slate-900">Mathematics CBT — Final</div><div class="text-xs text-slate-500 mt-0.5">08:00–10:30 · Computer Lab · 150 min</div><div class="text-xs text-slate-500">Integral calculus, trigonometry, statistics</div><div class="flex gap-2 mt-2"><span class="badge badge-purple">CBT</span><span class="badge badge-gray">Pak Budi</span></div></div>
+              <div class="text-right shrink-0"><button class="text-xs text-indigo-600 font-semibold hover:underline" onclick="openModal('cbtPracticeModal')">Practice →</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="card p-5">
+          <h3 class="font-semibold text-slate-900 mb-4 flex items-center gap-2"><i data-lucide="trophy" class="w-4 h-4 text-amber-500"></i>Past Exam Results</h3>
+          <div class="space-y-3">
+            <div class="flex items-center justify-between p-3 rounded-xl border border-slate-100 hover:bg-slate-50 cursor-pointer"><div><div class="font-semibold text-sm text-slate-900">Mathematics Mid-Term</div><div class="text-xs text-slate-400">May 5, 2026</div></div><div class="text-right"><div class="text-2xl font-bold text-emerald-600">92</div><div class="text-xs text-slate-400">Class avg: 78 · Top 10%</div></div></div>
+            <div class="flex items-center justify-between p-3 rounded-xl border border-slate-100 hover:bg-slate-50 cursor-pointer"><div><div class="font-semibold text-sm text-slate-900">Biology Quiz — Cell Division</div><div class="text-xs text-slate-400">Apr 29, 2026</div></div><div class="text-right"><div class="text-2xl font-bold text-emerald-600">95</div><div class="text-xs text-slate-400">Class avg: 81 · Top 5%</div></div></div>
+            <div class="flex items-center justify-between p-3 rounded-xl border border-slate-100 hover:bg-slate-50 cursor-pointer"><div><div class="font-semibold text-sm text-slate-900">Physics Lab Practical</div><div class="text-xs text-slate-400">Apr 22, 2026</div></div><div class="text-right"><div class="text-2xl font-bold text-slate-700">88</div><div class="text-xs text-slate-400">Class avg: 74</div></div></div>
+            <div class="flex items-center justify-between p-3 rounded-xl border border-slate-100 hover:bg-slate-50 cursor-pointer"><div><div class="font-semibold text-sm text-slate-900">Chemistry Semester 1 Final</div><div class="text-xs text-slate-400">Dec 12, 2025</div></div><div class="text-right"><div class="text-2xl font-bold text-emerald-600">91</div><div class="text-xs text-slate-400">Class avg: 77</div></div></div>
+          </div>
+        </div>
+      </div>
+      <!-- CBT practice strip -->
+      <div class="card p-5 mb-4" style="background:linear-gradient(135deg,#0f1c2e,#1e3a5f);border:none;">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-2xl flex items-center justify-center" style="background:rgba(30,207,173,0.2);"><i data-lucide="monitor" class="w-6 h-6" style="color:#1ecfad;"></i></div>
+            <div><div class="font-bold text-white text-lg">Computer-Based Testing (CBT)</div><div class="text-sm" style="color:rgba(255,255,255,0.6);">Next CBT: Mathematics Final · May 28 · 08:00 · Computer Lab</div></div>
+          </div>
+          <div class="flex gap-3">
+            <button class="text-sm font-semibold py-2.5 px-5 rounded-xl" style="background:rgba(255,255,255,0.1);color:white;">View scope</button>
+            <button class="font-bold text-sm py-2.5 px-6 rounded-xl" style="background:#1ecfad;color:#0f1c2e;" onclick="openModal('cbtPracticeModal')">Enter Practice Mode →</button>
+          </div>
+        </div>
+      </div>
+      <!-- Anti-cheat & features info -->
+      <div class="grid grid-cols-4 gap-3">
+        <div class="card p-4 text-center"><i data-lucide="timer" class="w-5 h-5 text-rose-500 mx-auto mb-2"></i><div class="text-xs font-semibold text-slate-700">Auto-timed</div><div class="text-xs text-slate-400 mt-0.5">Countdown with warnings</div></div>
+        <div class="card p-4 text-center"><i data-lucide="save" class="w-5 h-5 text-indigo-500 mx-auto mb-2"></i><div class="text-xs font-semibold text-slate-700">Auto-save</div><div class="text-xs text-slate-400 mt-0.5">Every 30 seconds</div></div>
+        <div class="card p-4 text-center"><i data-lucide="shield" class="w-5 h-5 text-amber-500 mx-auto mb-2"></i><div class="text-xs font-semibold text-slate-700">Anti-cheat</div><div class="text-xs text-slate-400 mt-0.5">Focus lock + monitoring</div></div>
+        <div class="card p-4 text-center"><i data-lucide="zap" class="w-5 h-5 text-emerald-500 mx-auto mb-2"></i><div class="text-xs font-semibold text-slate-700">Instant results</div><div class="text-xs text-slate-400 mt-0.5">Auto-graded MCQ</div></div>
+      </div>
